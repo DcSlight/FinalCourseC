@@ -91,7 +91,7 @@ int checkTime(char* time, Time* pTime)
 
 void printDateTime(const DateTime* pDateTime)
 {
-	printf("Date: %u%c%u%c%u\t\tTime: %u%c%02u\n", pDateTime->theDate.day, SPECIAL_DATE_TAV, pDateTime->theDate.month,
+	printf("Date: %u%c%u%c%u\tTime: %02u%c%02u\n", pDateTime->theDate.day, SPECIAL_DATE_TAV, pDateTime->theDate.month,
 		SPECIAL_DATE_TAV, pDateTime->theDate.year, pDateTime->theTime.hour, SPECIAL_TIME_TAV, pDateTime->theTime.min);
 }
 

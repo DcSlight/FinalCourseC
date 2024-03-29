@@ -128,12 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bottle.c" />
     <ClCompile Include="DateTime.c" />
     <ClCompile Include="Employee.c" />
     <ClCompile Include="General.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bottle.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="General.h" />
