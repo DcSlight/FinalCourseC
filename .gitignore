@@ -1,3 +1,3 @@
-*.vsidx
-*.opendb
-*.vs
+.vsidx
+.opendb
+.vs

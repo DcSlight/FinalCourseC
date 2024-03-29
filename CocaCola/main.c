@@ -2,5 +2,5 @@
 
 int main()
 {
-	printf("hello sapir3");
+	printf("hello idan2");
 }
