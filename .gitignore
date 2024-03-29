@@ -1,4 +1,4 @@
 *.vsidx
 *.opendb
-x64/Debug/
+CocaCola/x64/
 *.vs
