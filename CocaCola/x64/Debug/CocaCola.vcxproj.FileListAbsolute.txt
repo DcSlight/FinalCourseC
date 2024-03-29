@@ -1,1 +1,2 @@
 C:\Users\עידן\Documents\GitHub\FinalCourseC\CocaCola\x64\Debug\CocaCola.exe
+C:\Users\sapir\VisualStudioProjects\Year2SemesterA\Maarachot\finalC\CocaCola\x64\Debug\CocaCola.exe
