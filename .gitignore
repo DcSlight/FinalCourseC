@@ -1,4 +1,4 @@
 *.vsidx
 *.opendb
-x64
+x64/
 *.vs
