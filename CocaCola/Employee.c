@@ -1,20 +1,32 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "Employee.h"
-#include "General.h"
 
-void initEmployee(Employee* pEmp)
+Employee* newEmployee(const char* pName, const int age, const eEmployeeType type, int seniority)
 {
-	pEmp->name = getStrExactName("Enter employee name:");
-	printf("Enter employee age:\t");
-	scanf("%d", &pEmp->age);
-	printf("\n");
+	Employee* pObj = NULL;
+	//allocating memory
+	pObj = (Employee*)malloc(sizeof(Employee));
+	if (pObj == NULL)
+	{
+		return NULL;
+	}
+	pObj->pDerivedObj = NULL;// pObj; //pointing to itself
+	pObj->name = malloc(sizeof(char) * (strlen(pName) + 1));
+	if (pObj->name)
+		strcpy(pObj->name, pName);
+	pObj->age = age;
+	pObj->type = type;
+	pObj->seniority = seniority;
+
+	//Initializing interface for access to functions
+	pObj->print = printEmployee;
+	pObj->delete = freeEmployee;//destructor pointing to destructor of itself
+	return pObj;
 }
 
 void printEmployee(const Employee* pEmp)
 {
 	printf("Name: %s \tAge: %d\n", pEmp->name, pEmp->age);
+	printf("Seniority: %d\n", pEmp->seniority);
 }
 
 void freeEmployee(Employee* pEmp)

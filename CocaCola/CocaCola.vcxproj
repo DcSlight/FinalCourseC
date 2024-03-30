@@ -132,8 +132,10 @@
     <ClCompile Include="Bottle.c" />
     <ClCompile Include="BottlePacking.c" />
     <ClCompile Include="DateTime.c" />
+    <ClCompile Include="DriverEmployee.c" />
     <ClCompile Include="Employee.c" />
     <ClCompile Include="General.c" />
+    <ClCompile Include="GuideEmployee.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Supplier.c" />
   </ItemGroup>
@@ -142,8 +144,10 @@
     <ClInclude Include="Bottle.h" />
     <ClInclude Include="BottlePacking.h" />
     <ClInclude Include="DateTime.h" />
+    <ClInclude Include="DriverEmployee.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="General.h" />
+    <ClInclude Include="GuideEmployee.h" />
     <ClInclude Include="Supplier.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
