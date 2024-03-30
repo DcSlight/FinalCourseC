@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="Address.c" />
     <ClCompile Include="Bottle.c" />
+    <ClCompile Include="BottlePacking.c" />
     <ClCompile Include="DateTime.c" />
     <ClCompile Include="Employee.c" />
     <ClCompile Include="General.c" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Address.h" />
     <ClInclude Include="Bottle.h" />
+    <ClInclude Include="BottlePacking.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="General.h" />
