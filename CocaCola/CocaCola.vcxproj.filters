@@ -30,6 +30,9 @@
     <ClCompile Include="Bottle.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Address.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DateTime.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bottle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Address.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
