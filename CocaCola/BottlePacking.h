@@ -10,6 +10,6 @@ typedef struct
 } BottlePacking;
 
 void initBottlePacking(BottlePacking* pBottlePack);
-void printBottlePacking(BottlePacking* pBottlePack);
+void printBottlePacking(const BottlePacking* pBottlePack);
 
 #endif /* __BOTTLE_PACKING__ */

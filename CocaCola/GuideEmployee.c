@@ -10,10 +10,22 @@ void initEmployeeGuide(Employee** pEmp)
 	int age, seniority;
 	eEducationLevel educationLevel;
 	name = getStrExactName("Enter employee name:");
-	printf("Enter employee age:\t");
-	scanf("%d", &age);
+	printf("Enter employee age - minimum %d:\t", MIN_AGE);
+	do {
+		scanf("%d", &age);
+		if (age < MIN_AGE)
+		{
+			printf("Not a valid age, Try again\n");
+		}
+	} while (age < MIN_AGE);
 	printf("Enter employee seniority:\t");
-	scanf("%d", &seniority);
+	do {
+		scanf("%d", &seniority);
+		if (seniority > age - MIN_AGE)
+		{
+			printf("Not a valid seniority years, Try again\n");
+		}
+	} while (seniority > age - MIN_AGE);
 	printf("\n");
 	educationLevel = getEducationLevel();
 	*pEmp = newEmployeeGuide(name, age, eGuide, seniority, educationLevel);

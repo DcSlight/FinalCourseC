@@ -12,6 +12,8 @@ typedef enum {
 
 static const char* EmployeeStr[eNofEmployeeTypes];
 
+#define MIN_AGE 16
+
 typedef struct _Employee Employee;
 
 typedef void	(*fptrPrintEmployee)(Employee*);

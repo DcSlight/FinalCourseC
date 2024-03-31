@@ -25,7 +25,7 @@ Employee* newEmployee(const char* pName, const int age, const eEmployeeType type
 
 void printEmployee(const Employee* pEmp)
 {
-	printf("Name: %s \tAge: %d\n", pEmp->name, pEmp->age);
+	printf("Name: %s \nAge: %d\n", pEmp->name, pEmp->age);
 	printf("Seniority: %d\n", pEmp->seniority);
 }
 

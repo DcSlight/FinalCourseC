@@ -10,7 +10,7 @@ void initBottlePacking(BottlePacking* pBottlePack)
 	printf("\n");
 }
 
-void printBottlePacking(BottlePacking* pBottlePack)
+void printBottlePacking(const BottlePacking* pBottlePack)
 {
 	printf("In the pack there are %d bottles\n", pBottlePack->quantity);
 	printBottle(&pBottlePack->bottle);
