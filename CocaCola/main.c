@@ -12,10 +12,11 @@
 
 int main()
 {
-	FILE* fp = fopen("try.txt", "wb");
+	FILE* fp = fopen("try.txt", "r");
 	HistoricalEvent e;
-	initHistoricalEvent(&e);
-	printHistoricalEvent(&e);
-	writeEventToTxtFile(fp, &e);
+	//initHistoricalEvent(&e);
+	readEventFromTxtFile(fp, &e);
+	//writeEventToTxtFile(fp, &e);
 	fclose(fp);
+	printHistoricalEvent(&e);
 }

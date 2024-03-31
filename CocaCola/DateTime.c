@@ -139,8 +139,23 @@ int writeDateTimeToTxtFile(FILE* fp, const DateTime* pDateTime)
 {
 	if (!pDateTime)
 		return 0;
-	fprintf(fp, "%02d/%02d/%d ", pDateTime->theDate.day, pDateTime->theDate.month, pDateTime->theDate.year);
+	fprintf(fp, "%02u/%02u/%u ", pDateTime->theDate.day, pDateTime->theDate.month, pDateTime->theDate.year);
 	fprintf(fp, "%02u:%02u\n", pDateTime->theTime.hour, pDateTime->theTime.min);
+	return 1;
+}
+
+int readDateTimeFromTxtFile(FILE* fp, DateTime* pDateTime)
+{
+	if (!pDateTime)
+		return 0;
+	unsigned day, month, year, hour, min;
+	if (fscanf(fp, "%02u/%02u/%u %02u:%02u", &day, &month, &year, &hour, &min) != 5)
+		return 0;
+	pDateTime->theDate.day = day;
+	pDateTime->theDate.month = month;
+	pDateTime->theDate.year = year;
+	pDateTime->theTime.hour = hour;
+	pDateTime->theTime.min = min;
 	return 1;
 }
 

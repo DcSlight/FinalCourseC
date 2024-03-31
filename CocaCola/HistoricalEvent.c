@@ -42,4 +42,15 @@ int writeEventToTxtFile(FILE* fp, const HistoricalEvent* pHistory)
 	return 1;
 }
 
+int readEventFromTxtFile(FILE* fp, HistoricalEvent* pHistory)
+{
+	char temp[MAX_STR_LEN];
+	if (!pHistory)
+		return 0;
+
+	readDateTimeFromTxtFile(fp, &pHistory->eventDate);
+	myGets(temp, MAX_STR_LEN, fp);
+	pHistory->description = getDynStr(temp);
+}
+
 
