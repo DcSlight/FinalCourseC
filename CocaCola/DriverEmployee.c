@@ -19,12 +19,13 @@ void initEmployeeDriver(Employee** pEmp)
 		scanf("%d", &seniority);
 		if (seniority > age - MIN_AGE)
 		{
-			printf("Not a valid seniority years, Try again\n");
+			printf("Not a valid seniority years, Try again - maximum %d\n" , age - MIN_AGE);
 		}
 	} while (seniority > age - MIN_AGE);
-	getchar();//clean buffer
+	while ((getchar()) != '\n');// Clean the buffer
 	printf("Enter License:\t");
 	scanf("%c", &license);
+	while ((getchar()) != '\n');// Clean the buffer
 	printf("\n");
 	*pEmp = newEmployeeDriver(name,age,eDriver,seniority,license);
 }

@@ -32,4 +32,7 @@ int	compareDateTimebyDate(const void* d1, const void* d2);
 int	compareDateTimebyTime(const void* t1, const void* t2);
 
 
+int writeDateTimeToBFile(FILE* fp, const DateTime* pDateTime);
+int writeDateTimeToTxtFile(FILE* fp, const DateTime* pDateTime);
+
 #endif /* DATETIME_H_ */

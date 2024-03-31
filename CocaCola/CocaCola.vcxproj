@@ -134,8 +134,10 @@
     <ClCompile Include="DateTime.c" />
     <ClCompile Include="DriverEmployee.c" />
     <ClCompile Include="Employee.c" />
+    <ClCompile Include="FileHelper.c" />
     <ClCompile Include="General.c" />
     <ClCompile Include="GuideEmployee.c" />
+    <ClCompile Include="HistoricalEvent.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Supplier.c" />
     <ClCompile Include="Truck.c" />
@@ -147,8 +149,10 @@
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="DriverEmployee.h" />
     <ClInclude Include="Employee.h" />
+    <ClInclude Include="FileHelper.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="GuideEmployee.h" />
+    <ClInclude Include="HistoricalEvent.h" />
     <ClInclude Include="Supplier.h" />
     <ClInclude Include="Truck.h" />
   </ItemGroup>

@@ -8,17 +8,14 @@
 #include "Supplier.h"
 #include "BottlePacking.h"
 #include "Truck.h"
+#include "HistoricalEvent.h"
 
 int main()
 {
-	Truck t;
-	if (!initTruck(&t))
-	{
-		printf("error\n");
-		return 0;
-	}
-	printTruck(&t);
-	addPack(&t);
-	printTruckContent(&t);
-	freeTruck(&t);
+	FILE* fp = fopen("try.txt", "wb");
+	HistoricalEvent e;
+	initHistoricalEvent(&e);
+	printHistoricalEvent(&e);
+	writeEventToTxtFile(fp, &e);
+	fclose(fp);
 }

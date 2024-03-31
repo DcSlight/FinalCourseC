@@ -23,7 +23,7 @@ void initEmployeeGuide(Employee** pEmp)
 		scanf("%d", &seniority);
 		if (seniority > age - MIN_AGE)
 		{
-			printf("Not a valid seniority years, Try again\n");
+			printf("Not a valid seniority years, Try again - maximum %d\t", age - MIN_AGE);
 		}
 	} while (seniority > age - MIN_AGE);
 	printf("\n");

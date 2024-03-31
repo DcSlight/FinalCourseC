@@ -135,4 +135,13 @@ int	compareDateTimebyTime(const void* t1, const void* t2)
 	return 0;
 }
 
+int writeDateTimeToTxtFile(FILE* fp, const DateTime* pDateTime)
+{
+	if (!pDateTime)
+		return 0;
+	fprintf(fp, "%02d/%02d/%d ", pDateTime->theDate.day, pDateTime->theDate.month, pDateTime->theDate.year);
+	fprintf(fp, "%02u:%02u\n", pDateTime->theTime.hour, pDateTime->theTime.min);
+	return 1;
+}
+
 
