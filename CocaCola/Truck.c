@@ -10,7 +10,7 @@ int initTruck(Truck* pTruck)
 	}
 	getLicenseCode(pTruck->truckLicenseCode);
 	printf("\n");
-	initEmployeeDriver(&pTruck->driver);
+	initEmployeeDriver(&pTruck->driver); //TODO: need to get from array
 	initSupplier(pSupplier);
 	pTruck->destSupplier = pSupplier;
 	pTruck->packAmount = 0;

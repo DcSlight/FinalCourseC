@@ -14,9 +14,10 @@ void printHistoricalEvent(const HistoricalEvent* pHistory)
 	printf("Description: %s\n",pHistory->description);
 }
 
-void freeHistoricalEvent(HistoricalEvent* pHistory)
+void freeHistoricalEvent(void* val)
 {
-	free(pHistory->description);
+	HistoricalEvent* e = (HistoricalEvent*)val;
+	free(e);
 }
 
 int writeEventToBFile(FILE* fp,const HistoricalEvent* pHistory)
