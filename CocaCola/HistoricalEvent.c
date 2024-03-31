@@ -14,7 +14,7 @@ void printHistoricalEvent(const HistoricalEvent* pHistory)
 	printf("Description: %s\n",pHistory->description);
 }
 
-void freeHistoricalEvent(void* val)
+void freeHistoricalEvent(const void* val)
 {
 	HistoricalEvent* e = (HistoricalEvent*)val;
 	free(e);
@@ -52,6 +52,7 @@ int readEventFromTxtFile(FILE* fp, HistoricalEvent* pHistory)
 	readDateTimeFromTxtFile(fp, &pHistory->eventDate);
 	myGets(temp, MAX_STR_LEN, fp);
 	pHistory->description = getDynStr(temp);
+	return 1;
 }
 
 

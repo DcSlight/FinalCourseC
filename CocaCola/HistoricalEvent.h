@@ -16,7 +16,7 @@ typedef struct
 
 void initHistoricalEvent(HistoricalEvent* pHistory);
 void printHistoricalEvent(const HistoricalEvent* pHistory);
-void freeHistoricalEvent(void* val);
+void freeHistoricalEvent(const void* val);
 
 int writeEventToBFile(FILE* fp, const HistoricalEvent* pHistory);
 int writeEventToTxtFile(FILE* fp, const HistoricalEvent* pHistory);

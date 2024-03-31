@@ -131,6 +131,7 @@
     <ClCompile Include="Address.c" />
     <ClCompile Include="Bottle.c" />
     <ClCompile Include="BottlePacking.c" />
+    <ClCompile Include="CocaColaTour.c" />
     <ClCompile Include="DateTime.c" />
     <ClCompile Include="DriverEmployee.c" />
     <ClCompile Include="Employee.c" />
@@ -138,6 +139,7 @@
     <ClCompile Include="General.c" />
     <ClCompile Include="GuideEmployee.c" />
     <ClCompile Include="HistoricalEvent.c" />
+    <ClCompile Include="List.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Supplier.c" />
     <ClCompile Include="Truck.c" />
@@ -146,6 +148,7 @@
     <ClInclude Include="Address.h" />
     <ClInclude Include="Bottle.h" />
     <ClInclude Include="BottlePacking.h" />
+    <ClInclude Include="CocaColaTour.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="DriverEmployee.h" />
     <ClInclude Include="Employee.h" />
@@ -153,6 +156,7 @@
     <ClInclude Include="General.h" />
     <ClInclude Include="GuideEmployee.h" />
     <ClInclude Include="HistoricalEvent.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Supplier.h" />
     <ClInclude Include="Truck.h" />
   </ItemGroup>
