@@ -16,6 +16,8 @@ int main()
 {
     srand((unsigned)time(NULL));
     CocaColaTour pTour;
-    addRandomEvent("try.bin", 5, &pTour);
+    initCocaColaTour(&pTour,"try.bin");
+    fillEvents(&pTour, "try.bin");
+    L_print(&pTour.events, printHistoricalEvent);
     return 0;
 }

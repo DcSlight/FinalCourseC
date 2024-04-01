@@ -10,6 +10,9 @@
 #include "GuideEmployee.h"
 #include "DateTime.h"
 
+
+#define EVENT_TIME 10
+
 typedef struct
 {
 	DateTime dateTime;
@@ -19,13 +22,15 @@ typedef struct
 	unsigned visitorAmount;
 } CocaColaTour;
 
-int initCocaColaTour(CocaColaTour* pTour);
+int initCocaColaTour(CocaColaTour* pTour, char* fileName);
+int getMaxDuration(char* fileName);
+int getDuration(CocaColaTour* pTour, char* fileName);
 void freeCocaColaTour(CocaColaTour* pTour);
 void printCocaColaTour(const CocaColaTour* pTour);
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent);
-int addRandomEvent(char* fileName, int length, CocaColaTour* pTour);
-
-int	compareTourbyDuration(const void* t1, const void* t2);
-int	compareTourbyDateTime(const void* t1, const void* t2);
+int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour);
+int fillEvents(CocaColaTour* pTour, char* fileName);
+int	compareTourByDuration(const void* t1, const void* t2);
+int	compareTourByDateTime(const void* t1, const void* t2);
 
 #endif

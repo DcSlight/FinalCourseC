@@ -72,4 +72,19 @@ int readEventFromTxtFile(FILE* fp, HistoricalEvent* pHistory)
 	return 1;
 }
 
+int compareEventByDateTime(const void* e1, const void* e2)
+{
+	const HistoricalEvent* pEvent1 = (const HistoricalEvent*)e1;
+	const HistoricalEvent* pEvent2 = (const HistoricalEvent*)e2;
+	return compareDateTime(&pEvent1->eventDate, &pEvent2->eventDate);
+}
+
+
+int compareEventByDescription(const void* e1, const void* e2)
+{
+	const HistoricalEvent* pEvent1 = (const HistoricalEvent*)e1;
+	const HistoricalEvent* pEvent2 = (const HistoricalEvent*)e2;
+	return strcmp(pEvent1->description, pEvent2->description);
+}
+
 

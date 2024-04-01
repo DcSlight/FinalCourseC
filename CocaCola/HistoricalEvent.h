@@ -24,4 +24,7 @@ int writeEventToTxtFile(FILE* fp, const HistoricalEvent* pHistory);
 int readEventFromBFile(FILE* fp, HistoricalEvent* pHistory);
 int readEventFromTxtFile(FILE* fp, HistoricalEvent* pHistory);
 
+
+int compareEventByDateTime(const void* e1, const void* e2);
+int compareEventByDescription(const void* e1, const void* e2);
 #endif

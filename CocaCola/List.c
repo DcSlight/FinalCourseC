@@ -140,3 +140,32 @@ int L_print(const LIST* pList, void(*print)(const void*))
 	printf("\n");
 	return c;
 }
+
+NODE* L_insert_sorted(LIST* pList, DATA Value, int(*compare)(const void*, const void*))
+{
+	NODE* pNode = &pList->head;
+	if (!pNode->next)
+	{
+		pNode = L_insert(pNode, Value);
+	}
+	else {
+		while (pNode->next) {
+			if (compare(Value, pNode->next->key) <= 0)
+			{
+				pNode = L_insert(pNode, Value);//insert inside the list
+				if (!pNode)
+				{
+					return NULL;
+				}
+				return pNode;
+			}
+			pNode = pNode->next;
+		}
+		pNode = L_insert(pNode, Value);//insert after the last node
+	}
+	if (!pNode)
+	{
+		return NULL;
+	}
+	return pNode;
+}
