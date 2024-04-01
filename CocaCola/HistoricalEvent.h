@@ -21,6 +21,7 @@ void freeHistoricalEvent(const void* val);
 int writeEventToBFile(FILE* fp, const HistoricalEvent* pHistory);
 int writeEventToTxtFile(FILE* fp, const HistoricalEvent* pHistory);
 
+int readEventFromBFile(FILE* fp, HistoricalEvent* pHistory);
 int readEventFromTxtFile(FILE* fp, HistoricalEvent* pHistory);
 
 #endif

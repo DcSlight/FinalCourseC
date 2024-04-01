@@ -31,10 +31,14 @@ void printDateTime(const DateTime* pDateTime);
 int	compareDateTimebyDate(const void* d1, const void* d2);
 int	compareDateTimebyTime(const void* t1, const void* t2);
 
-
+int writeDateToBFile(FILE* fp, const Date* pDate);
+int writeTimeToBFile(FILE* fp, const Time* pTime);
 int writeDateTimeToBFile(FILE* fp, const DateTime* pDateTime);
 int writeDateTimeToTxtFile(FILE* fp, const DateTime* pDateTime);
 
+int readDateFromBFile(FILE* fp, Date* pDate);
+int readTimeFromBFile(FILE* fp, Time* pTime);
+int readDateTimeFromBFile(FILE* fp, DateTime* pDateTime);
 int readDateTimeFromTxtFile(FILE* fp, DateTime* pDateTime);
 
 #endif /* DATETIME_H_ */

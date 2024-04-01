@@ -135,12 +135,70 @@ int	compareDateTimebyTime(const void* t1, const void* t2)
 	return 0;
 }
 
+int writeDateToBFile(FILE* fp, const Date* pDate)
+{
+	if (fwrite(pDate, sizeof(Date), 1, fp) != 1)
+	{
+		printf("Error write date\n");
+		return 0;
+	}
+	return 1;
+}
+
+int writeTimeToBFile(FILE* fp, const Time* pTime)
+{
+	if (fwrite(pTime, sizeof(Time), 1, fp) != 1)
+	{
+		printf("Error write time\n");
+		return 0;
+	}
+	return 1;
+}
+
+int writeDateTimeToBFile(FILE* fp, const DateTime* pDateTime)
+{
+	if (!writeDateToBFile(fp, &pDateTime->theDate))
+		return 0;
+	if (!writeTimeToBFile(fp, &pDateTime->theTime))
+		return 0;
+	return 1;
+}
+
 int writeDateTimeToTxtFile(FILE* fp, const DateTime* pDateTime)
 {
 	if (!pDateTime)
 		return 0;
 	fprintf(fp, "%02u/%02u/%u ", pDateTime->theDate.day, pDateTime->theDate.month, pDateTime->theDate.year);
 	fprintf(fp, "%02u:%02u\n", pDateTime->theTime.hour, pDateTime->theTime.min);
+	return 1;
+}
+
+int readDateFromBFile(FILE* fp, Date* pDate)
+{
+	if (fread(pDate, sizeof(Date), 1, fp) != 1)
+	{
+		printf("Error read date\n");
+		return 0;
+	}
+	return 1;
+}
+
+int readTimeFromBFile(FILE* fp, Time* pTime)
+{
+	if (fread(pTime, sizeof(Time), 1, fp) != 1)
+	{
+		printf("Error read time\n");
+		return 0;
+	}
+	return 1;
+}
+
+int readDateTimeFromBFile(FILE* fp, DateTime* pDateTime)
+{
+	if (!readDateFromBFile(fp, &pDateTime->theDate))
+		return 0;
+	if (!readTimeFromBFile(fp, &pDateTime->theTime))
+		return 0;
 	return 1;
 }
 
