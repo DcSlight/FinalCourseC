@@ -23,4 +23,7 @@ int initCocaColaTour(CocaColaTour* pTour);
 void freeCocaColaTour(const CocaColaTour* pTour);
 void printCocaColaTour(const CocaColaTour* pTour);
 
+int	compareTourbyDuration(const void* t1, const void* t2);
+int	compareTourbyDateTime(const void* t1, const void* t2);
+
 #endif

@@ -135,6 +135,16 @@ int	compareDateTimebyTime(const void* t1, const void* t2)
 	return 0;
 }
 
+int compareDateTime(const void* dt1, const void* dt2)
+{
+	const DateTime* pDateTime1 = (const DateTime*)dt1;
+	const DateTime* pDateTime2 = (const DateTime*)dt2;
+	int dateComparation = compareDateTimebyDate(&pDateTime1->theDate, &pDateTime2->theDate);
+	if (dateComparation != 0)
+		return dateComparation;
+	return compareDateTimebyTime(&pDateTime1->theTime, &pDateTime2->theTime);
+}
+
 int writeDateToBFile(FILE* fp, const Date* pDate)
 {
 	if (fwrite(pDate, sizeof(Date), 1, fp) != 1)

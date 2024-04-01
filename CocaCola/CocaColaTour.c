@@ -30,3 +30,21 @@ void printCocaColaTour(const CocaColaTour* pTour)
 	printf("Visitor Amount: %u\n", pTour->visitorAmount);
 	//TODO: tell guide event
 }
+
+int compareTourbyDuration(const void* t1, const void* t2)
+{
+	const CocaColaTour* pTour1 = (const CocaColaTour*)t1;
+	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
+	if (pTour1->duration > pTour2->duration)
+		return 1;
+	if (pTour1->duration < pTour2->duration)
+		return -1;
+	return 0;
+}
+
+int compareTourbyDateTime(const void* t1, const void* t2)
+{
+	const CocaColaTour* pTour1 = (const CocaColaTour*)t1;
+	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
+	return compareDateTime(&pTour1->dateTime, &pTour2->dateTime);
+}
