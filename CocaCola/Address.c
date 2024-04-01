@@ -34,6 +34,11 @@ int writeAddressToTxtFile(FILE* fp, const Address* pAddress)
 	return 1;
 }
 
+int writeAddressToBFile(FILE* fp, const Address* pAddress)
+{
+	return 0;
+}
+
 int readAddressFromTxtFile(FILE* fp, Address* pAddress)
 {
 	char temp[MAX_STR_LEN];
