@@ -12,5 +12,9 @@ void initAddress(Address* pAddress);
 void printAddress(const Address* pAddress);
 void freeAddress(Address* pAddress);
 
+int writeAddressToTxtFile(FILE* fp, const Address* pAddress);
+
+int readAddressFromTxtFile(FILE* fp, Address* pAddress);
+
 
 #endif /* __ADDRESS__ */
