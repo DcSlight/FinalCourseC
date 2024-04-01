@@ -30,6 +30,7 @@ void printCocaColaTour(const CocaColaTour* pTour);
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent);
 int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour);
 int fillEvents(CocaColaTour* pTour, char* fileName);
+void startTour(CocaColaTour* pTour);
 int	compareTourByDuration(const void* t1, const void* t2);
 int	compareTourByDateTime(const void* t1, const void* t2);
 

@@ -60,7 +60,6 @@ void printCocaColaTour(const CocaColaTour* pTour)
 	printEmployeeGuide(pTour->guide);
 	printf("Duration: %u\n", pTour->duration);
 	printf("Visitor Amount: %u\n", pTour->visitorAmount);
-	//TODO: tell guide event
 }
 
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent)
@@ -132,6 +131,23 @@ int fillEvents(CocaColaTour* pTour,char* fileName)
 	}
 	fclose(fp);
 	return 1;
+}
+
+void startTour(CocaColaTour* pTour)
+{
+	printf("Welcome to Coca Cola Tour\n");
+	printf("The Tour Guide is:\n");
+	pTour->guide->print(pTour->guide);
+	NODE* pNode = pTour->events.head.next;
+	EmployeeGuide* pEmpGuideObj;
+	pEmpGuideObj = pTour->guide->pDerivedObj;
+	printf("The tour duration is: %d\n", pTour->duration);
+	while (pNode)
+	{
+		pEmpGuideObj->tellFact(pTour->guide,pNode->key);
+		pNode = pNode->next;
+	}
+	printf("Thank you for listening.\n");
 }
 
 int compareTourByDuration(const void* t1, const void* t2)

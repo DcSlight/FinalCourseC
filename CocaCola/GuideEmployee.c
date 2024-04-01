@@ -79,7 +79,7 @@ void printEmployeeGuide(Employee* const pEmployeeObj)
 	printf("Education Level: %s\n", EducationLevelStr[pEmpGuideObj->educationLevel]);
 }
 
-void tellFact(Employee* const pEmployeeObj)
+void tellFact(Employee* const pEmployeeObj,HistoricalEvent* pEvent)
 {
-	printf("hello world!\n");
+	printHistoricalEvent(pEvent);
 }

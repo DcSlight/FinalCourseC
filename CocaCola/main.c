@@ -18,6 +18,6 @@ int main()
     CocaColaTour pTour;
     initCocaColaTour(&pTour,"try.bin");
     fillEvents(&pTour, "try.bin");
-    L_print(&pTour.events, printHistoricalEvent);
+    startTour(&pTour);
     return 0;
 }

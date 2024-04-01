@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "HistoricalEvent.h"
 #include "Employee.h"
 
 typedef enum {
@@ -14,7 +14,7 @@ static const char* EducationLevelStr[eNofEducationLevel];
 
 typedef struct _EmployeeGuide EmployeeGuide;
 
-typedef void (*fptrTellFact)(Employee*);
+typedef void (*fptrTellFact)(Employee*, HistoricalEvent*);
 
 typedef struct _EmployeeGuide
 {
@@ -29,6 +29,6 @@ eEducationLevel getEducationLevel();
 Employee* newEmployeeGuide(const char* pName, const int age, const eEmployeeType type, int seniority, eEducationLevel educationLevel);//constructor
 void deleteEmployeeGuide(Employee* const pEmployeeObj);	//destructor
 void printEmployeeGuide(Employee* const pEmployeeObj);
-void tellFact(Employee* const pEmployeeObj);
+void tellFact(Employee* const pEmployeeObj, HistoricalEvent* pEvent);
 
 #endif /* __EMPLOYEE_GUIDE__ */
