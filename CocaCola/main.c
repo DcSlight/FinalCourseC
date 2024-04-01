@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "DateTime.h"
 #include "Employee.h"
 #include "GuideEmployee.h"
@@ -9,8 +10,12 @@
 #include "BottlePacking.h"
 #include "Truck.h"
 #include "HistoricalEvent.h"
+#include "CocaColaTour.h"
 
 int main()
 {
-
+    srand((unsigned)time(NULL));
+    CocaColaTour pTour;
+    addRandomEvent("try.bin", 5, &pTour);
+    return 0;
 }

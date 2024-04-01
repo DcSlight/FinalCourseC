@@ -20,8 +20,10 @@ typedef struct
 } CocaColaTour;
 
 int initCocaColaTour(CocaColaTour* pTour);
-void freeCocaColaTour(const CocaColaTour* pTour);
+void freeCocaColaTour(CocaColaTour* pTour);
 void printCocaColaTour(const CocaColaTour* pTour);
+int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent);
+int addRandomEvent(char* fileName, int length, CocaColaTour* pTour);
 
 int	compareTourbyDuration(const void* t1, const void* t2);
 int	compareTourbyDateTime(const void* t1, const void* t2);

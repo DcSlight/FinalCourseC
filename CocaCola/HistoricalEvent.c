@@ -20,7 +20,7 @@ void freeHistoricalEvent(const void* val)
 	free(e);
 }
 
-int writeEventToBFile(FILE* fp,const HistoricalEvent* pHistory)
+int writeEventToBFile(FILE* fp, const HistoricalEvent* pHistory)
 {
 	if (!writeDateTimeToBFile(fp, &pHistory->eventDate))
 	{

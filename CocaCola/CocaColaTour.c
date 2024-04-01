@@ -15,7 +15,7 @@ int initCocaColaTour(CocaColaTour* pTour)
 	return 1;
 }
 
-void freeCocaColaTour(const CocaColaTour* pTour)
+void freeCocaColaTour(CocaColaTour* pTour)
 {
 	L_free(&pTour->events, freeHistoricalEvent);
 	pTour->guide->delete(pTour->guide);
@@ -29,6 +29,49 @@ void printCocaColaTour(const CocaColaTour* pTour)
 	printf("Duration: %u\n", pTour->duration);
 	printf("Visitor Amount: %u\n", pTour->visitorAmount);
 	//TODO: tell guide event
+}
+
+int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent)
+{
+	long offset = sizeof(int);//firstInt
+	int stringLength;
+	for (int i = 0; i < index; i++)
+	{
+		offset += sizeof(Time) + sizeof(Date);//jump over DateTime
+		fseek(fp, offset, SEEK_SET);
+		if (!readIntFromFile(&stringLength, fp, "error")) //read description length
+			return 0;
+		offset += sizeof(int) + stringLength * sizeof(char); //jump over the description event
+	}
+	fseek(fp, offset, SEEK_SET);
+	if (!readEventFromBFile(fp,pEvent))
+		return 0;
+	return 1;
+}
+
+int addRandomEvent(char* fileName, int length, CocaColaTour* pTour)
+{
+	// Set the upper bound for random numbers 
+	int upper_bound = length-1;
+	// Set the lower bound for random numbers 
+	int lower_bound = 0;
+	int index = rand() % (upper_bound - lower_bound + 1) + lower_bound;
+	printf("index=%d\n", index);
+	FILE* fp = fopen(fileName, "rb"); // Open in binary read mode
+	if (!fp)
+	{
+		perror("Error opening file");
+		return 1;
+	}
+	HistoricalEvent event;
+	if (!getEventFromFileBySeek(fp,index,&event))
+	{
+		fclose(fp);
+		return 0;
+	}
+	printHistoricalEvent(&event);
+	fclose(fp);
+	return 1;
 }
 
 int compareTourbyDuration(const void* t1, const void* t2)
