@@ -171,6 +171,7 @@ int fillEventsFromFactory(CocaColaTour* pTour,const LIST allEvents)
 			i++;
 		}
 	}
+	return 1;
 }
 
 
