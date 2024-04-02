@@ -11,7 +11,7 @@ int initTruck(Truck* pTruck)
 	getLicenseCode(pTruck->truckLicenseCode);
 	printf("\n");
 	initEmployeeDriver(&pTruck->driver); //TODO: need to get from array
-	initSupplier(pSupplier);
+	initSupplier(pSupplier);//TODO : need to pick from array
 	pTruck->destSupplier = pSupplier;
 	pTruck->packAmount = 0;
 	return 1;

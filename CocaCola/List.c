@@ -93,6 +93,34 @@ const NODE* L_find(const NODE* pNode, DATA Value, int compare(const void*, const
 	return NULL;
 }
 
+const NODE* L_find_By_Index(const NODE* pNode, int index)
+{
+	const NODE* tmp = pNode;
+	int counter = 0;
+	while (tmp != NULL)
+	{
+		if (counter == index)
+			return tmp;
+		tmp = tmp->next;
+		counter++;
+	}
+
+	return NULL;
+}
+
+int L_length(const LIST* pList)
+{
+	const NODE* tmp = pList->head.next;
+	int counter = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		counter++;
+	}
+
+	return counter;
+}
+
 
 ////////////////////////////////////////////////
 // Free (additional function)

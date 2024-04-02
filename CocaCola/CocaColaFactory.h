@@ -17,6 +17,17 @@ typedef enum {
 
 static const char* TourStr[eNofTourTypes];
 
+
+#define ERROR 0
+#define FROM_B_FILE 1
+#define FROM_T_FILE 2
+#define FROM_USER 3
+
+#define FACTORY_B_FILE "CocaColaFactory.bin"
+#define FACTORY_T_FILE "CocaColaFactory.txt"
+
+#define FACTORY_EVENTS_FILE_B "CocaColaEvents.bin"
+
 typedef struct
 {
 	Employee** employees;
@@ -33,5 +44,10 @@ typedef struct
 
 int initFactory(CocaColaFactory* pFactory);
 int addEventToFactory(CocaColaFactory* pFactory);
+int addSupplier(CocaColaFactory* pFactory);
+int addTruck(CocaColaFactory* pFactory);
+void printTrucksArr(CocaColaFactory* pFactory);//TODO: print void*
+void printSuppliersArr(CocaColaFactory* pFactory);//TODO: print void*
+int addTour(CocaColaFactory* pFactory);
 
-#endif
+#endif /* __COCA_COLA_FACTORY__ */

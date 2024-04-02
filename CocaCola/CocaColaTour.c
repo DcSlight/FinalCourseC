@@ -87,38 +87,52 @@ int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent)
 */
 int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour, LIST allEvents)
 {
+	const NODE* pNodeFactory;
 	int upper_bound = length-1;
 	int lower_bound = 0;
 	int index = rand() % (upper_bound - lower_bound + 1) + lower_bound;	
 	HistoricalEvent* event = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));
 	if (!event)
 		return 0;
-	if (!getEventFromFileBySeek(fp, index, event))
+	if (fp)//from Binary file - using SEEK
 	{
-		freeHistoricalEvent(event);
-		return 0;
+		if (!getEventFromFileBySeek(fp, index, event))
+		{
+			freeHistoricalEvent(event);
+			return 0;
+		}
+		pNodeFactory = L_find(allEvents.head.next, event, compareEventByDescription);
+		if (!pNodeFactory)//check if exist in Factory events
+		{
+			freeHistoricalEvent(event);
+			return 0;
+		}
+	}
+	else
+	{//from Factory event List
+		pNodeFactory = L_find_By_Index(allEvents.head.next, index);
+		if (!pNodeFactory)
+		{
+			freeHistoricalEvent(event);
+			return 0;
+		}
 	}
 
 	const NODE* pNodeTour = L_find(pTour->events.head.next, event, compareEventByDescription);
-	if (pNodeTour)//exist
+	if (pNodeTour)//check if exist in Tour
 	{
 		freeHistoricalEvent(event);
 		return 0;
 	}
 
-	const NODE* pNodeFactory = L_find(allEvents.head.next, event, compareEventByDescription);
-	if (!pNodeFactory)
-	{
-		freeHistoricalEvent(event);
-		return 0;
-	}
 	freeHistoricalEvent(event);
 	if(!L_insert_sorted(&pTour->events, pNodeFactory->key,compareEventByDateTime))//add event by dateTime
 		return 0;
 	return 1;
 }
 
-int fillEvents(CocaColaTour* pTour,char* fileName, LIST allEvents)
+
+int fillEventsFromBFile(CocaColaTour* pTour,char* fileName, LIST allEvents)
 {
 	int eventsAmount = pTour->duration / EVENT_TIME;
 	int i = 0;
@@ -144,6 +158,21 @@ int fillEvents(CocaColaTour* pTour,char* fileName, LIST allEvents)
 	fclose(fp);
 	return 1;
 }
+
+int fillEventsFromFactory(CocaColaTour* pTour,const LIST allEvents)
+{
+	int eventsAmount = pTour->duration / EVENT_TIME;
+	int i = 0;
+	int maxEvents = L_length(&allEvents);
+	while (i < eventsAmount)
+	{
+		if (addRandomEvent(NULL, maxEvents, pTour, allEvents))
+		{
+			i++;
+		}
+	}
+}
+
 
 void startTour(CocaColaTour* pTour)
 {

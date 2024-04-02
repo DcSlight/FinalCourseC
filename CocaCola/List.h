@@ -42,6 +42,12 @@ BOOL L_delete(NODE* pNode, void freeFunc(void*));
 // return a pointer to the node 
 const NODE* L_find(const NODE* pNode, DATA Value, int compare(const void*, const void*));
 
+// return a pointer to the node by index 
+const NODE* L_find_By_Index(const NODE* pNode, int index);
+
+// return List length
+int L_length(const LIST* pList);
+
 // free list memory
 BOOL L_free(LIST* pList, void freeFunc(void*));
 
