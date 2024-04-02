@@ -1,6 +1,6 @@
 #include "Employee.h"
 
-Employee* newEmployee(const char* pName, const int age, const eEmployeeType type, int seniority)
+Employee* newEmployee(const char* pName,const int id, const int age, const eEmployeeType type, int seniority)
 {
 	Employee* pObj = NULL;
 	//allocating memory
@@ -13,6 +13,7 @@ Employee* newEmployee(const char* pName, const int age, const eEmployeeType type
 	pObj->name = malloc(sizeof(char) * (strlen(pName) + 1));
 	if (pObj->name)
 		strcpy(pObj->name, pName);
+	pObj->id = id;
 	pObj->age = age;
 	pObj->type = type;
 	pObj->seniority = seniority;
@@ -23,8 +24,9 @@ Employee* newEmployee(const char* pName, const int age, const eEmployeeType type
 	return pObj;
 }
 
-void printEmployee(const Employee* pEmp)
+void printEmployee(Employee* const pEmp)
 {
+	printf("ID:%d\n", pEmp->id);
 	printf("Name: %s \nAge: %d\n", pEmp->name, pEmp->age);
 	printf("Seniority: %d\n", pEmp->seniority);
 }

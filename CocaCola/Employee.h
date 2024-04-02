@@ -21,6 +21,7 @@ typedef void	(*fptrFree)(Employee*);
 
 typedef struct _Employee
 {
+	int id;
 	void* pDerivedObj;
 	char* name;
 	int age;
@@ -31,7 +32,7 @@ typedef struct _Employee
 	fptrFree delete;
 }Employee;
 
-Employee* newEmployee(const char* pName, const int age, const eEmployeeType type, int seniority);	//constructor
+Employee* newEmployee(const char* pName, const int id, const int age, const eEmployeeType type, int seniority);	//constructor
 void freeEmployee(Employee* const pEmployeeObj);	//destructor
 void printEmployee(Employee* const pEmployeeObj);
 

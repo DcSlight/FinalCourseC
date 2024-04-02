@@ -26,7 +26,7 @@ typedef struct _EmployeeGuide
 
 void initEmployeeGuide(Employee** pEmp);
 eEducationLevel getEducationLevel();
-Employee* newEmployeeGuide(const char* pName, const int age, const eEmployeeType type, int seniority, eEducationLevel educationLevel);//constructor
+Employee* newEmployeeGuide(const char* pName, const int id, const int age, const eEmployeeType type, int seniority, eEducationLevel educationLevel);//constructor
 void deleteEmployeeGuide(Employee* const pEmployeeObj);	//destructor
 void printEmployeeGuide(Employee* const pEmployeeObj);
 void tellFact(Employee* const pEmployeeObj, HistoricalEvent* pEvent);

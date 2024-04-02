@@ -6,6 +6,8 @@
 
 void initSupplier(Supplier* pSupplier)
 {
+	printf("Enter supplier id:\t");
+	scanf("%d", &pSupplier->id);
 	pSupplier->name = getStrExactName("Enter supplier name:");
 	printf("Enter a phone number:\t");
 	scanf("%s", pSupplier->phoneNo);
@@ -14,6 +16,7 @@ void initSupplier(Supplier* pSupplier)
 
 void printSupplier(const Supplier* pSupplier)
 {
+	printf("ID: %d\n", pSupplier->id);
 	printf("Supplier: %s\n", pSupplier->name);
 	printf("Phone No: %s\n", pSupplier->phoneNo);
 	printAddress(&pSupplier->address);

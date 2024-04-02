@@ -7,8 +7,10 @@ static const char* EducationLevelStr[eNofEducationLevel]
 void initEmployeeGuide(Employee** pEmp)
 {
 	char* name;
-	int age, seniority;
+	int age, seniority,id;
 	eEducationLevel educationLevel;
+	printf("Enter employee id:\t");
+	scanf("%d", &id);
 	name = getStrExactName("Enter employee name:");
 	printf("Enter employee age - minimum %d:\t", MIN_AGE);
 	do {
@@ -28,7 +30,7 @@ void initEmployeeGuide(Employee** pEmp)
 	} while (seniority > age - MIN_AGE);
 	printf("\n");
 	educationLevel = getEducationLevel();
-	*pEmp = newEmployeeGuide(name, age, eGuide, seniority, educationLevel);
+	*pEmp = newEmployeeGuide(name,id, age, eGuide, seniority, educationLevel);
 }
 
 eEducationLevel getEducationLevel()
@@ -44,11 +46,11 @@ eEducationLevel getEducationLevel()
 	return (eEducationLevel)option;
 }
 
-Employee* newEmployeeGuide(const char* pName, const int age, const eEmployeeType type, int seniority, eEducationLevel educationLevel)
+Employee* newEmployeeGuide(const char* pName,const int id, const int age, const eEmployeeType type, int seniority, eEducationLevel educationLevel)
 {
 	EmployeeGuide* pEmpObj;
 	Employee* pObj;
-	pObj = newEmployee(pName, age, type, seniority);	//calling base class constructor
+	pObj = newEmployee(pName,id, age, type, seniority);	//calling base class constructor
 	//allocating memory
 	pEmpObj = malloc(sizeof(EmployeeGuide));
 	if (pEmpObj == NULL)

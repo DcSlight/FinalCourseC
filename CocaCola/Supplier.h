@@ -7,6 +7,7 @@
 
 typedef struct
 {
+	int id;
 	char* name;
 	char phoneNo[PHONE_LEN];
 	Address address;

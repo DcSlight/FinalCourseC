@@ -1,10 +1,15 @@
 #include "DriverEmployee.h"
 
+static const char* licenseStr[eNofLicenseTypes]
+= { "B", "C1", "C", "E" };
+
 void initEmployeeDriver(Employee** pEmp)
 {
 	char* name;
-	int age, seniority;
-	char license;
+	int age, seniority,id;
+	eLicenseType license;
+	printf("Enter employee id:\t");
+	scanf("%d", &id);
 	name = getStrExactName("Enter employee name:");
 	printf("Enter employee age - minimum %d:\t", MIN_AGE);
 	do {
@@ -23,18 +28,29 @@ void initEmployeeDriver(Employee** pEmp)
 		}
 	} while (seniority > age - MIN_AGE);
 	while ((getchar()) != '\n');// Clean the buffer
-	printf("Enter License:\t");
-	scanf("%c", &license);
-	while ((getchar()) != '\n');// Clean the buffer
+	license = getLicenseType();
 	printf("\n");
-	*pEmp = newEmployeeDriver(name,age,eDriver,seniority,license);
+	*pEmp = newEmployeeDriver(name,id,age,eDriver,seniority,license);
 }
 
-Employee* newEmployeeDriver(const char* pName, const int age, const eEmployeeType type, int seniority, char license)
+eLicenseType getLicenseType()
+{
+	int option;
+	do {
+		printf("Please enter one of the following types\n");
+		for (int i = 0; i < eNofLicenseTypes; i++)
+			printf("%d for %s\n", i, licenseStr[i]);
+		scanf("%d", &option);
+	} while (option < 0 || option >= eNofLicenseTypes);
+	getchar();
+	return (eLicenseType)option;
+}
+
+Employee* newEmployeeDriver(const char* pName,const int id, const int age, const eEmployeeType type, int seniority, eLicenseType license)
 {
 	EmployeeDriver* pEmpObj;
 	Employee* pObj;
-	pObj = newEmployee(pName,age,type,seniority);	//calling base class construtor
+	pObj = newEmployee(pName,id,age,type,seniority);	//calling base class construtor
 	//allocating memory
 	pEmpObj = malloc(sizeof(EmployeeDriver));
 	if (pEmpObj == NULL)
@@ -44,7 +60,7 @@ Employee* newEmployeeDriver(const char* pName, const int age, const eEmployeeTyp
 	}
 	pObj->pDerivedObj = pEmpObj; //pointing to derived object
 	//initialising derived class members
-	pEmpObj->license = license;
+	pEmpObj->licenseType = license;
 	//Changing base class interface to access derived class functions
 	pObj->delete = deleteEmployeeDriver;
 	pObj->print = printEmployeeDriver;
@@ -62,5 +78,5 @@ void printEmployeeDriver(Employee* const pEmployeeObj)
 	printf("Type: Driver\t");
 	EmployeeDriver* pEmpDriverObj;
 	pEmpDriverObj = pEmployeeObj->pDerivedObj;
-	printf("License: %c\n", pEmpDriverObj->license);
+	printf("License: %c\n", pEmpDriverObj->licenseType);
 }
