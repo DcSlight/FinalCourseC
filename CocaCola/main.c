@@ -5,17 +5,6 @@
 
 int main()
 {
-    //int x = 1;
-    //switch (x)
-    //{
-    //case 1:
-    //    #define B_FILE 1
-    //    break;
-    //default:
-    //    break;
-    //}
-
-
     srand((unsigned)time(NULL));
     printLOGO();
     cocaColaLinkWebsite();

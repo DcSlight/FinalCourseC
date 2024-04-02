@@ -56,7 +56,7 @@ int addSupplier(CocaColaFactory* pFactory)
 	Supplier* pSupplier = (Supplier*)malloc(sizeof(Supplier));
 	if (!pSupplier)
 		return 0;
-	initSupplier(pSupplier);
+	initSupplier(pSupplier,pFactory->suppliers,pFactory->suppliersCount);
 	pFactory->suppliers = (Supplier**)realloc(pFactory->suppliers, (pFactory->suppliersCount + 1) * sizeof(Supplier*));
 	if (!pFactory->suppliers)
 	{
@@ -74,7 +74,7 @@ int addTruck(CocaColaFactory* pFactory)
 	if (!pFactory->trucks)
 		return 0;
 	Truck t;
-	initTruck(&t);
+	initTruck(&t,pFactory->employees,pFactory->employeesCount,pFactory->suppliers,pFactory->suppliersCount);
 	pFactory->trucks[pFactory->trucksCount] = t;
 	pFactory->trucksCount++;
 	return 1;

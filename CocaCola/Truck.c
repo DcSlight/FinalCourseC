@@ -1,6 +1,6 @@
 #include "Truck.h"
 
-int initTruck(Truck* pTruck)
+int initTruck(Truck* pTruck,Employee** employees,int employeesCount, Supplier** suppliers , int suppliersCount)
 {
 	Supplier* pSupplier = (Supplier*)malloc(sizeof(Supplier));
 	if (!pSupplier)
@@ -11,9 +11,17 @@ int initTruck(Truck* pTruck)
 	getLicenseCode(pTruck->truckLicenseCode);
 	printf("\n");
 	initEmployeeDriver(&pTruck->driver); //TODO: need to get from array
-	initSupplier(pSupplier);//TODO : need to pick from array
+	//initSupplier(pSupplier);//TODO : need to pick from array
 	pTruck->destSupplier = pSupplier;
 	pTruck->packAmount = 0;
+	return 1;
+}
+
+int getSupplier(Truck* pTruck,Supplier** suppliers, int suppliersCount)
+{
+	//if (!suppliersCount)
+	//	return 0;
+	//int id;
 	return 1;
 }
 

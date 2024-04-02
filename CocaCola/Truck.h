@@ -21,7 +21,8 @@ typedef struct
 	int packAmount;
 } Truck;
 
-int initTruck(Truck* pTruck);
+int initTruck(Truck* pTruck, Employee** employees, int employeesCount, Supplier** suppliers, int suppliersCount);
+int getSupplier(Truck* pTruck, Supplier** suppliers, int suppliersCount);
 void getLicenseCode(char* code);
 int addPack(Truck* pTruck);
 void printTruck(const Truck* pTruck);

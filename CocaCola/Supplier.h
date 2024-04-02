@@ -13,7 +13,8 @@ typedef struct
 	Address address;
 } Supplier;
 
-void initSupplier(Supplier* pSupplier);
+void initSupplier(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCount);
+void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCount);
 void printSupplier(const Supplier* pSupplier);
 void freeSupplier(Supplier* pSupplier);
 
