@@ -18,6 +18,22 @@ int initFactory(CocaColaFactory* pFactory)
 	return 1;
 }
 
+int addEmployee(CocaColaFactory* pFactory)
+{
+	eEmployeeType employeeType= getEmployeeType();
+	pFactory->employees = (Employee**)realloc(pFactory->employees, (pFactory->employeesCount + 1) * sizeof(Employee*));
+	if (employeeType == eDriver)
+	{
+		initEmployeeDriver(&pFactory->employees[pFactory->employeesCount]);
+	}
+	else
+	{//Guide
+		initEmployeeGuide(&pFactory->employees[pFactory->employeesCount]);
+	}
+	pFactory->employeesCount++;
+	return 1;
+}
+
 int addEventToFactory(CocaColaFactory* pFactory)
 {
 	HistoricalEvent* event = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));
@@ -79,6 +95,14 @@ void printSuppliersArr(CocaColaFactory* pFactory)
 	{
 		printSupplier(pFactory->suppliers[i]);
 		printf("\n");
+	}
+}
+
+void printEmployeesArr(CocaColaFactory* pFactory)
+{
+	for (int i = 0; i < pFactory->employeesCount; i++)
+	{
+		pFactory->employees[i]->print(pFactory->employees[i]);
 	}
 }
 

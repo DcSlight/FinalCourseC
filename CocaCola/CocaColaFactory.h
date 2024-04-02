@@ -43,11 +43,13 @@ typedef struct
 }CocaColaFactory;
 
 int initFactory(CocaColaFactory* pFactory);
+int addEmployee(CocaColaFactory* pFactory);
 int addEventToFactory(CocaColaFactory* pFactory);
 int addSupplier(CocaColaFactory* pFactory);
 int addTruck(CocaColaFactory* pFactory);
 void printTrucksArr(CocaColaFactory* pFactory);//TODO: print void*
 void printSuppliersArr(CocaColaFactory* pFactory);//TODO: print void*
+void printEmployeesArr(CocaColaFactory* pFactory);
 int addTour(CocaColaFactory* pFactory);
 
 #endif /* __COCA_COLA_FACTORY__ */

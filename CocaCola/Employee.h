@@ -7,7 +7,7 @@
 #include "General.h"
 
 typedef enum {
-	eDriver, eFactory, eGuide, eNofEmployeeTypes
+	eDriver, eGuide, eNofEmployeeTypes
 } eEmployeeType;
 
 static const char* EmployeeStr[eNofEmployeeTypes];
@@ -33,6 +33,7 @@ typedef struct _Employee
 }Employee;
 
 Employee* newEmployee(const char* pName, const int id, const int age, const eEmployeeType type, int seniority);	//constructor
+eEmployeeType getEmployeeType();
 void freeEmployee(Employee* const pEmployeeObj);	//destructor
 void printEmployee(Employee* const pEmployeeObj);
 

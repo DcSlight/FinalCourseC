@@ -1,5 +1,8 @@
 #include "Employee.h"
 
+static const char* EmployeeStr[eNofEmployeeTypes]
+= { "Driver", "Guide" };
+
 Employee* newEmployee(const char* pName,const int id, const int age, const eEmployeeType type, int seniority)
 {
 	Employee* pObj = NULL;
@@ -22,6 +25,19 @@ Employee* newEmployee(const char* pName,const int id, const int age, const eEmpl
 	pObj->print = printEmployee;
 	pObj->delete = freeEmployee;//destructor pointing to destructor of itself
 	return pObj;
+}
+
+eEmployeeType getEmployeeType()
+{
+	int option;
+	do {
+		printf("Please enter one of the following types\n");
+		for (int i = 0; i < eNofEmployeeTypes; i++)
+			printf("%d for %s\n", i, EmployeeStr[i]);
+		scanf("%d", &option);
+	} while (option < 0 || option >= eNofEmployeeTypes);
+	getchar();
+	return (eEmployeeType)option;
 }
 
 void printEmployee(Employee* const pEmp)

@@ -18,9 +18,10 @@ int main()
     srand((unsigned)time(NULL));
     CocaColaFactory factory;
     initFactory(&factory);
-    addTruck(&factory);
-    addTruck(&factory);
-    printTrucksArr(&factory);
+    addEmployee(&factory);
+    addEmployee(&factory);
+    addEmployee(&factory);
+    printEmployeesArr(&factory);
 
 
   //  addTour(&factory);

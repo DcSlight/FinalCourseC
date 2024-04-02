@@ -78,5 +78,5 @@ void printEmployeeDriver(Employee* const pEmployeeObj)
 	printf("Type: Driver\t");
 	EmployeeDriver* pEmpDriverObj;
 	pEmpDriverObj = pEmployeeObj->pDerivedObj;
-	printf("License: %c\n", pEmpDriverObj->licenseType);
+	printf("\nLicense: %s\n", licenseStr[pEmpDriverObj->licenseType]);
 }
