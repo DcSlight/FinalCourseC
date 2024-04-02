@@ -39,6 +39,30 @@
     <ClCompile Include="BottlePacking.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CocaColaTour.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverEmployee.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHelper.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideEmployee.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistoricalEvent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="List.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Truck.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CocaColaFactory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DateTime.h">
@@ -60,6 +84,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BottlePacking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CocaColaTour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DriverEmployee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideEmployee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistoricalEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Truck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CocaColaFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

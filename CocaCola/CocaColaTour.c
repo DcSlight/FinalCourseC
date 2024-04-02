@@ -49,7 +49,7 @@ int getMaxDuration(char* fileName)
 
 void freeCocaColaTour(CocaColaTour* pTour)
 {
-	L_free(&pTour->events, freeHistoricalEvent);
+	L_free(&pTour->events,NULL);//free only the NODES, we don't want to free Factory data
 	pTour->guide->delete(pTour->guide);
 }
 
@@ -80,7 +80,12 @@ int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent)
 	return 1;
 }
 
-int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour)
+/*
+* This function will random event from the bin file.
+* We ensure that there is no duplication of the same event.
+* The Tour have the same key pointer as the Factory to specific event.
+*/
+int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour, LIST allEvents)
 {
 	int upper_bound = length-1;
 	int lower_bound = 0;
@@ -88,25 +93,32 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour)
 	HistoricalEvent* event = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));
 	if (!event)
 		return 0;
-	if (!getEventFromFileBySeek(fp,index,event))
+	if (!getEventFromFileBySeek(fp, index, event))
+	{
+		freeHistoricalEvent(event);
 		return 0;
+	}
 
-	const NODE* pNode = L_find(pTour->events.head.next, event, compareEventByDescription);
-	if (pNode)//exist
+	const NODE* pNodeTour = L_find(pTour->events.head.next, event, compareEventByDescription);
+	if (pNodeTour)//exist
+	{
+		freeHistoricalEvent(event);
 		return 0;
+	}
 
-	//TODO: need to free the malloc and add the pointer of event to the tour
-	//1. find the event in factory.
-	//2. insert the pointer key to the factory to the tour
-	//3. free the malloc
-
-	pNode=L_insert_sorted(&pTour->events, event,compareEventByDateTime);//add event by dateTime
-	if (!pNode)
+	const NODE* pNodeFactory = L_find(allEvents.head.next, event, compareEventByDescription);
+	if (!pNodeFactory)
+	{
+		freeHistoricalEvent(event);
+		return 0;
+	}
+	freeHistoricalEvent(event);
+	if(!L_insert_sorted(&pTour->events, pNodeFactory->key,compareEventByDateTime))//add event by dateTime
 		return 0;
 	return 1;
 }
 
-int fillEvents(CocaColaTour* pTour,char* fileName)
+int fillEvents(CocaColaTour* pTour,char* fileName, LIST allEvents)
 {
 	int eventsAmount = pTour->duration / EVENT_TIME;
 	int i = 0;
@@ -124,7 +136,7 @@ int fillEvents(CocaColaTour* pTour,char* fileName)
 	}
 	while (i < eventsAmount)
 	{
-		if (addRandomEvent(fp, maxEvents, pTour))
+		if (addRandomEvent(fp, maxEvents, pTour, allEvents))
 		{
 			i++;
 		}

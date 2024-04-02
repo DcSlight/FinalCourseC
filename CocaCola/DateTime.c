@@ -91,11 +91,11 @@ int checkTime(char* time, Time* pTime)
 
 void printDateTime(const DateTime* pDateTime)
 {
-	printf("Date: %u%c%u%c%u\tTime: %02u%c%02u\n", pDateTime->theDate.day, SPECIAL_DATE_TAV, pDateTime->theDate.month,
+	printf("Date: %02u%c%02u%c%u\tTime: %02u%c%02u\n", pDateTime->theDate.day, SPECIAL_DATE_TAV, pDateTime->theDate.month,
 		SPECIAL_DATE_TAV, pDateTime->theDate.year, pDateTime->theTime.hour, SPECIAL_TIME_TAV, pDateTime->theTime.min);
 }
 
-int	compareDateTimebyDate(const void* d1, const void* d2)
+int	compareDateTimeByDate(const void* d1, const void* d2)
 {
 	const Date* pDate1 = (const Date*)d1;
 	const Date* pDate2 = (const Date*)d2;
@@ -119,7 +119,7 @@ int	compareDateTimebyDate(const void* d1, const void* d2)
 	return 0;
 }
 
-int	compareDateTimebyTime(const void* t1, const void* t2)
+int	compareDateTimeByTime(const void* t1, const void* t2)
 {
 	const Time* pTime1 = (const Time*)t1;
 	const Time* pTime2 = (const Time*)t2;
@@ -139,10 +139,10 @@ int compareDateTime(const void* dt1, const void* dt2)
 {
 	const DateTime* pDateTime1 = (const DateTime*)dt1;
 	const DateTime* pDateTime2 = (const DateTime*)dt2;
-	int dateComparation = compareDateTimebyDate(&pDateTime1->theDate, &pDateTime2->theDate);
+	int dateComparation = compareDateTimeByDate(&pDateTime1->theDate, &pDateTime2->theDate);
 	if (dateComparation != 0)
 		return dateComparation;
-	return compareDateTimebyTime(&pDateTime1->theTime, &pDateTime2->theTime);
+	return compareDateTimeByTime(&pDateTime1->theTime, &pDateTime2->theTime);
 }
 
 int writeDateToBFile(FILE* fp, const Date* pDate)

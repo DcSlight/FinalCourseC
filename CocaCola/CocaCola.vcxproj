@@ -131,6 +131,7 @@
     <ClCompile Include="Address.c" />
     <ClCompile Include="Bottle.c" />
     <ClCompile Include="BottlePacking.c" />
+    <ClCompile Include="CocaColaFactory.c" />
     <ClCompile Include="CocaColaTour.c" />
     <ClCompile Include="DateTime.c" />
     <ClCompile Include="DriverEmployee.c" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Address.h" />
     <ClInclude Include="Bottle.h" />
     <ClInclude Include="BottlePacking.h" />
+    <ClInclude Include="CocaColaFactory.h" />
     <ClInclude Include="CocaColaTour.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="DriverEmployee.h" />

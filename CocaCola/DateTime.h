@@ -28,8 +28,8 @@ int	 checkDate(char* date, Date* pDate);
 void getCorrectTime(Time* pTime);
 int	checkTime(char* time, Time* pTime);
 void printDateTime(const DateTime* pDateTime);
-int	compareDateTimebyDate(const void* d1, const void* d2);
-int	compareDateTimebyTime(const void* t1, const void* t2);
+int	compareDateTimeByDate(const void* d1, const void* d2);
+int	compareDateTimeByTime(const void* t1, const void* t2);
 int compareDateTime(const void* dt1, const void* dt2);
 
 int writeDateToBFile(FILE* fp, const Date* pDate);
