@@ -9,6 +9,7 @@ void initEmployeeGuide(Employee** pEmp)
 	char* name;
 	int age, seniority,id;
 	eEducationLevel educationLevel;
+	printf("Guide:\n");
 	printf("Enter employee id:\t");
 	scanf("%d", &id);
 	name = getStrExactName("Enter employee name:");

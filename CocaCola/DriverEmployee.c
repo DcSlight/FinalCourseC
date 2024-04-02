@@ -8,6 +8,7 @@ void initEmployeeDriver(Employee** pEmp)
 	char* name;
 	int age, seniority,id;
 	eLicenseType license;
+	printf("Driver:\n");
 	printf("Enter employee id:\t");
 	scanf("%d", &id);
 	name = getStrExactName("Enter employee name:");

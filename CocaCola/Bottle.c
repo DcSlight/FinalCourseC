@@ -15,7 +15,7 @@ void initBottle(Bottle* pBottle)
 	pBottle->flavor = getFlavorType();
 	pBottle->type = getBottleType();
 	printf("Enter expiration date and time of the bottle\n");
-	initDateTime(&pBottle->expDate);
+	initDateTime(&pBottle->expDate,0);
 	printf("Enter sugar, calories and ml\n");
 	scanf("%d%d%d", &pBottle->sugar, &pBottle->calories, &pBottle->ml);
 }

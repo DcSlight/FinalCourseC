@@ -51,5 +51,7 @@ void printTrucksArr(CocaColaFactory* pFactory);//TODO: print void*
 void printSuppliersArr(CocaColaFactory* pFactory);//TODO: print void*
 void printEmployeesArr(CocaColaFactory* pFactory);
 int addTour(CocaColaFactory* pFactory);
+void EnterTour(CocaColaFactory* pFactory);
+void printTours(CocaColaFactory* pFactory);
 
 #endif /* __COCA_COLA_FACTORY__ */

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "CocaColaFactory.h"
+#include "CocaColaFunctions.h"
 
 int main()
 {
@@ -16,12 +17,18 @@ int main()
 
 
     srand((unsigned)time(NULL));
+    printLOGO();
+    cocaColaLinkWebsite();
     CocaColaFactory factory;
     initFactory(&factory);
-    addEmployee(&factory);
-    addEmployee(&factory);
-    addEmployee(&factory);
-    printEmployeesArr(&factory);
+    printf("------------------------\n");
+    addTour(&factory);
+    addEventToFactory(&factory);
+    printf("------------------------\n");
+    addTour(&factory);
+    addEventToFactory(&factory);
+    printf("------------------------\n");
+    EnterTour(&factory);
 
 
   //  addTour(&factory);
@@ -39,8 +46,8 @@ int main()
 
 
   //  CocaColaTour pTour;
-  //  initCocaColaTour(&pTour,"try.bin");
-  ////  fillEventsFromBFile(&pTour, "try.bin",factory.allEvents);
+   // initCocaColaTour(&pTour,"try.bin");
+  //  fillEventsFromBFile(&pTour, "try.bin",factory.allEvents);
   //  startTour(&pTour);
   //  printf("\n_____\n");
   //  L_print(&factory.allEvents, printHistoricalEvent);

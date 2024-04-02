@@ -24,10 +24,12 @@ int addEmployee(CocaColaFactory* pFactory)
 	pFactory->employees = (Employee**)realloc(pFactory->employees, (pFactory->employeesCount + 1) * sizeof(Employee*));
 	if (employeeType == eDriver)
 	{
+		printf("Driver:\n");
 		initEmployeeDriver(&pFactory->employees[pFactory->employeesCount]);
 	}
 	else
 	{//Guide
+		printf("Guide:\n");
 		initEmployeeGuide(&pFactory->employees[pFactory->employeesCount]);
 	}
 	pFactory->employeesCount++;
@@ -108,16 +110,36 @@ void printEmployeesArr(CocaColaFactory* pFactory)
 
 int addTour(CocaColaFactory* pFactory)
 {
-	/*CocaColaTour* pTour = (CocaColaTour*)malloc(sizeof(CocaColaTour));
+	CocaColaTour* pTour = (CocaColaTour*)malloc(sizeof(CocaColaTour));
 	if (!pTour)
 		return 0;
-	#ifdef B_FILE
-	initCocaColaTour(pTour, FACTORY_B_FILE);
-	#elif defined(T_FILE)
-	initCocaColaTour(pTour, FACTORY_T_FILE);
-	#else
-	initCocaColaTour(pTour, NULL);
-	#endif	*/
+	if (!initCocaColaTour(pTour, NULL, &pFactory->allEvents))
+		return 0;
+	pFactory->tours = (CocaColaTour**)realloc(pFactory->tours,(pFactory->toursCount + 1) * sizeof(CocaColaTour*));
+	if (!pFactory->tours)
+		return 0;
+	pFactory->tours[pFactory->toursCount] = pTour;
+	pFactory->toursCount++;
 	return 1;
+}
+
+void EnterTour(CocaColaFactory* pFactory)
+{
+	int index;
+	printf("There are %d tours\n", pFactory->toursCount);
+	do
+	{
+		printf("Pick a tour to start\n");
+		scanf("%d", &index);
+	} while (index <= 0 || index > pFactory->toursCount);
+	startTour(pFactory->tours[index - 1]);
+}
+
+void printTours(CocaColaFactory* pFactory)
+{
+	for (int i = 0; i < pFactory->toursCount; i++)
+	{
+		printCocaColaTour(pFactory->tours[i]);
+	}
 }
 

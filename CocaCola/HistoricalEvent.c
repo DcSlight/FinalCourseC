@@ -3,7 +3,7 @@
 void initHistoricalEvent(HistoricalEvent* pHistory)
 {
 	printf("Enter historical event\n");
-	initDateTime(&pHistory->eventDate);
+	initDateTime(&pHistory->eventDate,MIN_HISTORY_YEAR);
 	pHistory->description = getStrExactName("Enter a description:");
 }
 

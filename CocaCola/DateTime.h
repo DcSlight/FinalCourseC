@@ -22,9 +22,9 @@ typedef struct
 	Date theDate;
 } DateTime;
 
-void initDateTime(DateTime* pDateTime);
-void getCorrectDate(Date* pDate);
-int	 checkDate(char* date, Date* pDate);
+void initDateTime(DateTime* pDateTime, unsigned minYear);
+void getCorrectDate(Date* pDate, unsigned minYear);
+int	 checkDate(char* date, Date* pDate, unsigned minYear);
 void getCorrectTime(Time* pTime);
 int	checkTime(char* time, Time* pTime);
 void printDateTime(const DateTime* pDateTime);

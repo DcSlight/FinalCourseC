@@ -9,33 +9,33 @@ const unsigned DAY_MONTHS[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 #define SPECIAL_DATE_TAV '/'
 #define SPECIAL_TIME_TAV ':'
 
-void initDateTime(DateTime* pDateTime)
+void initDateTime(DateTime* pDateTime, unsigned minYear)
 {
 	Date pDate;
 	Time pTime;
-	getCorrectDate(&pDate);
+	getCorrectDate(&pDate,minYear);
 	getCorrectTime(&pTime);
 	pDateTime->theDate = pDate;
 	pDateTime->theTime = pTime;
 }
 
-void getCorrectDate(Date* pDate)
+void getCorrectDate(Date* pDate, unsigned minYear)
 {
 	char date[MAX_STR_LEN];
 	int ok = 1;
-
+	minYear=minYear ? minYear : MIN_YEAR;
 	do {
 		printf("Enter a date in the format dd%cmm%cyyyy and minimum year %d\t",
-			SPECIAL_DATE_TAV, SPECIAL_DATE_TAV, MIN_YEAR);
+			SPECIAL_DATE_TAV, SPECIAL_DATE_TAV, minYear);
 		myGets(date, MAX_STR_LEN, stdin);
-		ok = checkDate(date, pDate);
+		ok = checkDate(date, pDate,minYear);
 		if (!ok)
 			printf("Error try again\n");
 	} while (!ok);
 }
 
 
-int	 checkDate(char* date, Date* pDate)
+int	 checkDate(char* date, Date* pDate,unsigned minYear)
 {
 	unsigned day, month, year;
 	if (strlen(date) != 10)
@@ -43,7 +43,7 @@ int	 checkDate(char* date, Date* pDate)
 	if ((date[2] != SPECIAL_DATE_TAV) || (date[5] != SPECIAL_DATE_TAV))
 		return 0;
 	sscanf(date, "%u%*c%u%*c%u", &day, &month, &year);
-	if (day < 1 || month < 1 || month > 12 || year < MIN_YEAR)
+	if (day < 1 || month < 1 || month > 12 || year < minYear)
 		return 0;
 
 	if (day > DAY_MONTHS[month - 1])

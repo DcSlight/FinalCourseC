@@ -7,6 +7,8 @@
 #include "General.h"
 #include "FileHelper.h"
 
+#define MIN_HISTORY_YEAR 1892 //date of founding CocaCola Company
+
 typedef struct
 {
 	DateTime eventDate;

@@ -1,13 +1,34 @@
 #include "CocaColaTour.h"
 
-int initCocaColaTour(CocaColaTour* pTour,char* fileName)
+int initCocaColaTour(CocaColaTour* pTour,char* fileName,const LIST* allEvents)
 {
+	int length = L_length(allEvents);
+	if (!length)
+	{
+		printf("There is no events to present in the tour.\n");
+		return 0;
+	}
 	printf("Initial a Tour:\n");
 	if (!L_init(&pTour->events))
 		return 0;
-	initDateTime(&pTour->dateTime);
-	if (!getDuration(pTour, fileName))
-		return 0;
+	initDateTime(&pTour->dateTime,0);
+	int maxDuration;
+	if (fileName)
+	{
+		maxDuration = getMaxDurationFromBFile(fileName);
+		if (!maxDuration)
+			return 0;
+		getDuration(maxDuration, pTour);
+		if (!fillEventsFromBFile(pTour, fileName, allEvents))//assumption: events are only in binary file.
+			return 0;
+	}
+	else
+	{
+		maxDuration = length * EVENT_TIME;
+		getDuration(maxDuration, pTour);
+		if (!fillEventsFromFactory(pTour, allEvents))
+			return 0;
+	}
 	printf("\nEnter visitor amount:\t");
 	scanf("%u", &pTour->visitorAmount);
 	printf("\n");
@@ -15,14 +36,8 @@ int initCocaColaTour(CocaColaTour* pTour,char* fileName)
 	return 1;
 }
 
-int getDuration(CocaColaTour* pTour, char* fileName)
+void getDuration(int maxDuration, CocaColaTour* pTour)
 {
-	int maxDuration = getMaxDuration(fileName);
-	if (!maxDuration)
-	{
-		freeCocaColaTour(pTour);
-		return 0;
-	}
 	int duration;
 	do
 	{
@@ -30,10 +45,9 @@ int getDuration(CocaColaTour* pTour, char* fileName)
 		scanf("%u", &duration);
 	} while (duration < EVENT_TIME || duration > maxDuration);
 	pTour->duration = duration;
-	return 1;
 }
 
-int getMaxDuration(char* fileName)
+int getMaxDurationFromBFile(char* fileName)
 {
 	FILE* fp = fopen(fileName, "rb");
 	if (!fp)
@@ -85,7 +99,7 @@ int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent)
 * We ensure that there is no duplication of the same event.
 * The Tour have the same key pointer as the Factory to specific event.
 */
-int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour, LIST allEvents)
+int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEvents)
 {
 	const NODE* pNodeFactory;
 	int upper_bound = length-1;
@@ -101,7 +115,7 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour, LIST allEvents)
 			freeHistoricalEvent(event);
 			return 0;
 		}
-		pNodeFactory = L_find(allEvents.head.next, event, compareEventByDescription);
+		pNodeFactory = L_find(allEvents->head.next, event, compareEventByDescription);
 		if (!pNodeFactory)//check if exist in Factory events
 		{
 			freeHistoricalEvent(event);
@@ -110,7 +124,7 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour, LIST allEvents)
 	}
 	else
 	{//from Factory event List
-		pNodeFactory = L_find_By_Index(allEvents.head.next, index);
+		pNodeFactory = L_find_By_Index(allEvents->head.next, index);
 		if (!pNodeFactory)
 		{
 			freeHistoricalEvent(event);
@@ -132,7 +146,7 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour, LIST allEvents)
 }
 
 
-int fillEventsFromBFile(CocaColaTour* pTour,char* fileName, LIST allEvents)
+int fillEventsFromBFile(CocaColaTour* pTour,char* fileName,const LIST* allEvents)
 {
 	int eventsAmount = pTour->duration / EVENT_TIME;
 	int i = 0;
@@ -159,11 +173,11 @@ int fillEventsFromBFile(CocaColaTour* pTour,char* fileName, LIST allEvents)
 	return 1;
 }
 
-int fillEventsFromFactory(CocaColaTour* pTour,const LIST allEvents)
+int fillEventsFromFactory(CocaColaTour* pTour,const LIST* allEvents)
 {
 	int eventsAmount = pTour->duration / EVENT_TIME;
 	int i = 0;
-	int maxEvents = L_length(&allEvents);
+	int maxEvents = L_length(allEvents);
 	while (i < eventsAmount)
 	{
 		if (addRandomEvent(NULL, maxEvents, pTour, allEvents))
@@ -177,19 +191,23 @@ int fillEventsFromFactory(CocaColaTour* pTour,const LIST allEvents)
 
 void startTour(CocaColaTour* pTour)
 {
+	printf(ANSI_COLOR_YELLOW "\n-----------------------------------\n" ANSI_COLOR_RESET);
 	printf("Welcome to Coca Cola Tour\n");
+	printf(ANSI_COLOR_YELLOW "-----------------------------------\n" ANSI_COLOR_RESET);
 	printf("The Tour Guide is:\n");
 	pTour->guide->print(pTour->guide);
 	NODE* pNode = pTour->events.head.next;
 	EmployeeGuide* pEmpGuideObj;
 	pEmpGuideObj = pTour->guide->pDerivedObj;
 	printf("The tour duration is: %d\n", pTour->duration);
+	printf(ANSI_COLOR_YELLOW "-----------------------------------\n" ANSI_COLOR_RESET);
 	while (pNode)
 	{
 		pEmpGuideObj->tellFact(pTour->guide,pNode->key);
 		pNode = pNode->next;
 	}
 	printf("Thank you for listening.\n");
+	printf(ANSI_COLOR_YELLOW "-----------------------------------\n" ANSI_COLOR_RESET);
 }
 
 int compareTourByDuration(const void* t1, const void* t2)
