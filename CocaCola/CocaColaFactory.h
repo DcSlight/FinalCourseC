@@ -50,7 +50,7 @@ int addTruck(CocaColaFactory* pFactory);
 Supplier* getSupplier(CocaColaFactory* pFactory);
 Supplier* findSupplierById(Supplier** allSuppliers, int supplierCount, int id);
 int countEmployeesByType(Employee** allEmployees, int employeeCount, eEmployeeType type);
-Employee* getEmployee(CocaColaFactory* pFactory);
+Employee* getEmployee(CocaColaFactory* pFactory, eEmployeeType type);
 Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, eEmployeeType type);
 void printTrucksArr(CocaColaFactory* pFactory);//TODO: print void*
 void printSuppliersArr(CocaColaFactory* pFactory);//TODO: print void*

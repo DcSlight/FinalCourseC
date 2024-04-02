@@ -11,8 +11,8 @@ int main()
     CocaColaFactory factory;
     initFactory(&factory);
     addEmployee(&factory);
-    addSupplier(&factory);
-    addTruck(&factory);
+    addEventToFactory(&factory);
+    addTour(&factory);
 
 
     /*printf("------------------------\n");

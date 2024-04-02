@@ -79,7 +79,7 @@ int addTruck(CocaColaFactory* pFactory)
 		return 0;
 	}
 	Supplier* pSupplier = getSupplier(pFactory);
-	Employee* pEmployee = getEmployee(pFactory);
+	Employee* pEmployee = getEmployee(pFactory, eDriver);
 	pFactory->trucks = (Truck*)realloc(pFactory->trucks, (pFactory->trucksCount + 1) * sizeof(Truck));
 	if (!pFactory->trucks)
 		return 0;
@@ -127,15 +127,15 @@ int countEmployeesByType(Employee** allEmployees, int employeeCount, eEmployeeTy
 	return counter;
 }
 
-Employee* getEmployee(CocaColaFactory* pFactory)
+Employee* getEmployee(CocaColaFactory* pFactory, eEmployeeType type)
 {
 	Employee* pEmployee;
 	int id;
-	printf("Choose a driver employee from list, type its id\n");
+	printf("Choose a %s employee from list, type its id\n", EmployeeStr[type]);
 	printEmployeesArr(pFactory);
 	do {
 		scanf("%d", &id);
-		pEmployee = findEmployeeById(pFactory->employees, pFactory->employeesCount, id, eDriver);
+		pEmployee = findEmployeeById(pFactory->employees, pFactory->employeesCount, id, type);
 		if (!pEmployee)
 			printf("No employee with that id! Try again!\n");
 	} while (pEmployee == NULL);
@@ -184,10 +184,17 @@ void printEmployeesArr(CocaColaFactory* pFactory)
 
 int addTour(CocaColaFactory* pFactory)
 {
+	Employee* pGuide;
+	if (countEmployeesByType(pFactory->employees, pFactory->employeesCount, eGuide) == 0)
+	{
+		printf("There is no guide employees in company\n");
+		return 0;
+	}
+	pGuide = getEmployee(pFactory, eGuide);
 	CocaColaTour* pTour = (CocaColaTour*)malloc(sizeof(CocaColaTour));
 	if (!pTour)
 		return 0;
-	if (!initCocaColaTour(pTour, NULL, &pFactory->allEvents))
+	if (!initCocaColaTour(pTour, pGuide, NULL, &pFactory->allEvents))
 		return 0;
 	pFactory->tours = (CocaColaTour**)realloc(pFactory->tours,(pFactory->toursCount + 1) * sizeof(CocaColaTour*));
 	if (!pFactory->tours)

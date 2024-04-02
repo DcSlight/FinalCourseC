@@ -23,7 +23,7 @@ typedef struct
 	unsigned visitorAmount;
 } CocaColaTour;
 
-int initCocaColaTour(CocaColaTour* pTour, char* fileName,const LIST* allEvents);
+int initCocaColaTour(CocaColaTour* pTour, Employee* theGuide, char* fileName,const LIST* allEvents);
 int getMaxDurationFromBFile(char* fileName);
 void getDuration(int maxDuration, CocaColaTour* pTour);
 void freeCocaColaTour(CocaColaTour* pTour);

@@ -1,6 +1,6 @@
 #include "CocaColaTour.h"
 
-int initCocaColaTour(CocaColaTour* pTour,char* fileName,const LIST* allEvents)
+int initCocaColaTour(CocaColaTour* pTour, Employee* theGuide, char* fileName, const LIST* allEvents)
 {
 	int length = L_length(allEvents);
 	if (!length)
@@ -32,7 +32,7 @@ int initCocaColaTour(CocaColaTour* pTour,char* fileName,const LIST* allEvents)
 	printf("\nEnter visitor amount:\t");
 	scanf("%u", &pTour->visitorAmount);
 	printf("\n");
-	initEmployeeGuide(&pTour->guide); //TODO: need to get from array
+	pTour->guide = theGuide;
 	return 1;
 }
 

@@ -1,7 +1,6 @@
 #include "Employee.h"
 
-static const char* EmployeeStr[eNofEmployeeTypes]
-= { "Driver", "Guide" };
+
 
 Employee* newEmployee(const char* pName,const int id, const int age, const eEmployeeType type, int seniority)
 {

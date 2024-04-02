@@ -10,8 +10,7 @@ typedef enum {
 	eDriver, eGuide, eNofEmployeeTypes
 } eEmployeeType;
 
-static const char* EmployeeStr[eNofEmployeeTypes];
-
+static const char* EmployeeStr[eNofEmployeeTypes] = { "Driver", "Guide" };
 #define MIN_AGE 16
 
 typedef struct _Employee Employee;
