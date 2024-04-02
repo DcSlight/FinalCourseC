@@ -16,6 +16,7 @@ void initSupplier(Supplier* pSupplier, Supplier** allSuppliers,int suppliersCoun
 void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCount)
 {
 	int id;
+	int flag = 1;
 	do
 	{
 		printf("Enter unique Id:\t");
@@ -23,12 +24,11 @@ void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCo
 		for (int i = 0; i < suppliersCount; i++)
 		{
 			if (allSuppliers[i]->id == id)
-			{
-				pSupplier->id = id;
-				return;
-			}
+				flag = 0;
 		}
-	} while (1);
+	} while (!flag);
+
+	pSupplier->id = id;
 }
 
 void printSupplier(const Supplier* pSupplier)

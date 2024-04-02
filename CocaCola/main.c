@@ -10,14 +10,19 @@ int main()
     cocaColaLinkWebsite();
     CocaColaFactory factory;
     initFactory(&factory);
-    printf("------------------------\n");
+    addEmployee(&factory);
+    addSupplier(&factory);
+    addTruck(&factory);
+
+
+    /*printf("------------------------\n");
     addTour(&factory);
     addEventToFactory(&factory);
     printf("------------------------\n");
     addTour(&factory);
     addEventToFactory(&factory);
     printf("------------------------\n");
-    EnterTour(&factory);
+    EnterTour(&factory);*/
 
 
   //  addTour(&factory);

@@ -23,13 +23,11 @@ int addEmployee(CocaColaFactory* pFactory)
 	eEmployeeType employeeType= getEmployeeType();
 	pFactory->employees = (Employee**)realloc(pFactory->employees, (pFactory->employeesCount + 1) * sizeof(Employee*));
 	if (employeeType == eDriver)
-	{
-		printf("Driver:\n");
+	{// Driver
 		initEmployeeDriver(&pFactory->employees[pFactory->employeesCount]);
 	}
 	else
-	{//Guide
-		printf("Guide:\n");
+	{// Guide
 		initEmployeeGuide(&pFactory->employees[pFactory->employeesCount]);
 	}
 	pFactory->employeesCount++;
@@ -70,14 +68,90 @@ int addSupplier(CocaColaFactory* pFactory)
 
 int addTruck(CocaColaFactory* pFactory)
 {
+	if (pFactory->suppliersCount == 0)
+	{
+		printf("There is no suppliers in company\n");
+		return 0;
+	}
+	if (countEmployeesByType(pFactory->employees, pFactory->employeesCount, eDriver) == 0)
+	{
+		printf("There is no driver employees in company\n");
+		return 0;
+	}
+	Supplier* pSupplier = getSupplier(pFactory);
+	Employee* pEmployee = getEmployee(pFactory);
 	pFactory->trucks = (Truck*)realloc(pFactory->trucks, (pFactory->trucksCount + 1) * sizeof(Truck));
 	if (!pFactory->trucks)
 		return 0;
 	Truck t;
-	initTruck(&t,pFactory->employees,pFactory->employeesCount,pFactory->suppliers,pFactory->suppliersCount);
+	initTruck(&t, pSupplier, pEmployee);
 	pFactory->trucks[pFactory->trucksCount] = t;
 	pFactory->trucksCount++;
 	return 1;
+}
+
+Supplier* getSupplier(CocaColaFactory* pFactory)
+{
+	Supplier* pSupplier;
+	int id;
+	printf("Choose a supplier from list, type its id\n");
+	printSuppliersArr(pFactory);
+	do {
+		scanf("%d", &id);
+		pSupplier = findSupplierById(pFactory->suppliers, pFactory->suppliersCount, id);
+		if (!pSupplier)
+			printf("No supplier with that id! Try again!\n");
+	} while (pSupplier == NULL);
+
+	return pSupplier;
+}
+
+Supplier* findSupplierById(Supplier** allSuppliers, int supplierCount, int id)
+{
+	for (int i = 0; i < supplierCount; i++)
+	{
+		if (allSuppliers[i]->id == id)
+			return allSuppliers[i];
+	}
+	return NULL;
+}
+
+int countEmployeesByType(Employee** allEmployees, int employeeCount, eEmployeeType type)
+{
+	int counter = 0;
+	for (int i = 0; i < employeeCount; i++)
+	{
+		if (allEmployees[i]->type == type)
+			counter++;
+	}
+	return counter;
+}
+
+Employee* getEmployee(CocaColaFactory* pFactory)
+{
+	Employee* pEmployee;
+	int id;
+	printf("Choose a driver employee from list, type its id\n");
+	printEmployeesArr(pFactory);
+	do {
+		scanf("%d", &id);
+		pEmployee = findEmployeeById(pFactory->employees, pFactory->employeesCount, id, eDriver);
+		if (!pEmployee)
+			printf("No employee with that id! Try again!\n");
+	} while (pEmployee == NULL);
+
+	return pEmployee;
+}
+
+Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, eEmployeeType type)
+{
+	for (int i = 0; i < employeeCount; i++)
+	{
+		if (allEmployees[i]->type == type)
+			if (allEmployees[i]->id == id)
+				return allEmployees[i];
+	}
+	return NULL;
 }
 
 void printTrucksArr(CocaColaFactory* pFactory)
