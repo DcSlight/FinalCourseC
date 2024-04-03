@@ -10,9 +10,9 @@ int main()
     printLOGO();
     cocaColaLinkWebsite();
     CocaColaFactory f;
-    initFactoryFromBFile(&f, "fac.bin");
-    
-   /* initFactory(&f);
+     initFactoryFromBFile(&f, "fac.bin");
+    printFactory(&f); 
+    /*   initFactory(&f);
     addEmployee(&f);
     addEmployee(&f);
     addSupplier(&f);

@@ -159,8 +159,13 @@ Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, e
 
 void printFactory(const CocaColaFactory* pFactory)
 {
-	printf(ANSI_COLOR_RED "Coca Cola Factory" ANSI_COLOR_RESET);
-	
+	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "\t\tCoca Cola Factory\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printEmployeesArr(pFactory->employees, pFactory->employeesCount);
+	printSuppliersArr(pFactory->suppliers, pFactory->suppliersCount);
+	printTrucksArr(pFactory->trucks, pFactory->trucksCount);
+	printTours(pFactory->tours, pFactory->toursCount);
 }
 
 void printTrucksArr(const Truck* trucksArr, int trucksCount)

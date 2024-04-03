@@ -19,8 +19,18 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName)
 		fclose(fp);
 		return 0;
 	}
-	//TODO: create employees arr (allocating memory)
-	//TODO: read employees arr from b file
+	if(!createEmployeesArr(pFactory))
+	{
+		fclose(fp);//TODO: freeArr
+		return 0;
+	}
+	if (!readEmployeesArrFromBFile(pFactory, fp))
+	{
+		//TODO: free employees arr
+		free(pFactory->employees);
+		fclose(fp);
+		return 0;
+	}
 	
 	//-----------------------init all Suppliers-----------------------------------------
 	pFactory->suppliers = NULL;
@@ -102,10 +112,35 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName)
 		return 0;
 	}
 	
-	
-	//TODO: eSort = eNone
+	pFactory->sortTour = -1;//not sorted
 	
 	fclose(fp);
+	return 1;
+}
+
+int createEmployeesArr(CocaColaFactory* pFactory)
+{
+	if (pFactory->employeesCount > 0)
+	{
+		pFactory->employees = (Employee**)malloc(pFactory->employeesCount * sizeof(Employee*));
+		if (!pFactory->employees)
+		{
+			printf("Alocation error\n");
+			return 0;
+		}
+	}
+	else
+		pFactory->employees = NULL;
+
+	//for (int i = 0; i < pFactory->employeesCount; i++)
+	//{
+	//	pFactory->employees[i] = (Employee*)calloc(1, sizeof(Employee));
+	//	if (!pFactory->employees[i])
+	//	{
+	//		printf("Alocation error\n");
+	//		return 0;
+	//	}
+	//}
 	return 1;
 }
 
@@ -145,12 +180,36 @@ int readSuppliersArrFromBFile(CocaColaFactory* pFactory, FILE* fp)
 	return 1;
 }
 
+int readEmployeesArrFromBFile(CocaColaFactory* pFactory, FILE* fp)
+{
+	int type;
+	for (int i = 0; i < pFactory->employeesCount; i++)
+	{
+		if(!readIntFromFile(&type, fp, "Error reading Employee Type\n"))
+			return 0;
+		switch (type) {
+		case eDriver:
+			if (!readDriverFromBFile(fp, &pFactory->employees[i]))
+				return 0;
+			break;
+		case eGuide:
+			if (!readGuideFromBFile(fp, &pFactory->employees[i]))
+				return 0;
+			break;
+		default:
+			printf("Error type value");
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int createTruckArr(CocaColaFactory* pFactory)
 {
 	pFactory->trucks = (Truck*)malloc(pFactory->trucksCount * sizeof(Truck));
 	if (!pFactory->trucks)
 	{
-		printf("Alocation error\n");
+		printf("Allocation error\n");
 		return 0;
 	}
 	return 1;

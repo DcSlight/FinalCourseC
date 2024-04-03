@@ -19,9 +19,7 @@ typedef struct _Employee Employee;
 typedef void	(*fptrPrintEmployee)(Employee*);
 typedef void	(*fptrFree)(Employee*);
 typedef int	(*fptrWriteBFile)(FILE*,Employee* const);
-typedef int	(*fptrReadBFile)(FILE*,Employee*);
 typedef int	(*fptrWriteTFile)(FILE*,Employee* const);
-typedef int	(*fptrReadTFile)(FILE*,Employee*);
 
 typedef struct _Employee
 {
@@ -35,9 +33,7 @@ typedef struct _Employee
 	fptrPrintEmployee print;
 	fptrFree delete;
 	fptrWriteBFile writeBFile;
-	fptrReadBFile readBFile;
 	fptrWriteTFile writeTFile;
-	fptrReadTFile readTFile;
 }Employee;
 
 Employee* newEmployee(const char* pName, const int id, const int age, const eEmployeeType type, int seniority);	//constructor
@@ -45,7 +41,7 @@ eEmployeeType getEmployeeType();
 void freeEmployee(Employee* const pEmployeeObj);	//destructor
 void printEmployee(Employee* const pEmployeeObj);
 int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj);
-int readEmployeeFromBFile(FILE* fp, Employee* pEmployeeObj);
+int readEmployeeFromBFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type);
 int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj);
 int readEmployeeFromTxtFile(FILE* fp, Employee* pEmployeeObj);
 

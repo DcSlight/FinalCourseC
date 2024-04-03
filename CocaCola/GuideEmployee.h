@@ -32,7 +32,7 @@ void printEmployeeGuide(Employee* const pEmployeeObj);
 void tellFact(Employee* const pEmployeeObj, HistoricalEvent* pEvent);
 
 int writeGuideToBFile(FILE* fp, Employee* const pEmployeeObj);
-int readGuideFromBFile(FILE* fp, Employee* pEmployeeObj);
+int readGuideFromBFile(FILE* fp, Employee** pEmployeeObj);
 int writeGuideToTxtFile(FILE* fp, Employee* const pEmployeeObj);
 int readGuideFromTxtFile(FILE* fp, Employee* pEmployeeObj);
 

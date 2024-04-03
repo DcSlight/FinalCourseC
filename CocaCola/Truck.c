@@ -81,7 +81,7 @@ void freeTruck(Truck* pTruck)
 
 int writeTruckToBFile(FILE* fp, const Truck* pTruck)
 {
-	if (!writeCharsToFile(pTruck->truckLicenseCode, LICENSE_LEN, fp, "Error Writing Truck License\n"))
+	if (!writeCharsToFile(pTruck->truckLicenseCode, LICENSE_LEN+1, fp, "Error Writing Truck License\n"))
 		return 0;
 	if (!writeIntToFile(pTruck->destSupplier->id, fp, "Error Writing Supplier Id\n"))
 		return 0;
@@ -99,7 +99,7 @@ int writeTruckToBFile(FILE* fp, const Truck* pTruck)
 
 int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
 {
-	if (!readCharsFromFile(pTruck->truckLicenseCode, LICENSE_LEN, fp, "Error reading truck license\n"))
+	if (!readCharsFromFile(pTruck->truckLicenseCode, LICENSE_LEN+1, fp, "Error reading truck license\n"))
 		return 0;
 	if (!readIntFromFile(supplierId, fp, "Error reading supplier id\n"))
 		return 0;

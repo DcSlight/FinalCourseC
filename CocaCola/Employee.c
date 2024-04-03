@@ -24,9 +24,7 @@ Employee* newEmployee(const char* pName,const int id, const int age, const eEmpl
 	pObj->print = printEmployee;
 	pObj->delete = freeEmployee;//destructor pointing to destructor of itself
 	pObj->writeBFile = writeEmployeeToBFile;
-	pObj->readBFile = readEmployeeFromBFile;
 	pObj->writeTFile = writeEmployeeToTxtFile;
-	pObj->readTFile = readEmployeeFromTxtFile;
 	return pObj;
 }
 
@@ -52,41 +50,33 @@ void printEmployee(Employee* const pEmp)
 
 int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj)
 {
+	if (!writeIntToFile(pEmployeeObj->type, fp, "Error Writing Employee Type\n"))
+		return 0;
 	if (!writeIntToFile(pEmployeeObj->id, fp, "Error Writing Employee Id\n"))
 		return 0;
 	if (!writeStringToFile(pEmployeeObj->name, fp, "Error Writing Employee Name\n"))
 		return 0;
 	if (!writeIntToFile(pEmployeeObj->age, fp, "Error Writing Employee Age\n"))
 		return 0;
-	if (!writeIntToFile(pEmployeeObj->type, fp, "Error Writing Employee Type\n"))
-		return 0;
 	if (!writeIntToFile(pEmployeeObj->seniority, fp, "Error Writing Employee Seniority\n"))
 		return 0;
 	return 1;
 }
 
-int readEmployeeFromBFile(FILE* fp, Employee* pEmployeeObj)
+int readEmployeeFromBFile(FILE* fp, Employee** pEmployeeObj,eEmployeeType type)
 {
-	if (!readIntFromFile(&pEmployeeObj->id, fp, "Error reading Employee id\n"))
+	int id, age, seniority;
+	char* name;
+	if (!readIntFromFile(&id, fp, "Error reading Employee id\n"))
 		return 0;
-	pEmployeeObj->name = readStringFromFile(fp, "Error reading Employee name\n");
-	if (!pEmployeeObj->name)
+	name = readStringFromFile(fp, "Error reading Employee name\n");
+	if (!name)
 		return 0;
-	if (!readIntFromFile(&pEmployeeObj->age, fp, "Error reading Employee Age\n"))
+	if (!readIntFromFile(&age, fp, "Error reading Employee Age\n"))
 		return 0;
-	int temp;
-	if (!readIntFromFile(&temp, fp, "Error reading Employee Type\n"))
+	if (!readIntFromFile(&seniority, fp, "Error reading Employee Seniority\n"))
 		return 0;
-	pEmployeeObj->type = temp;
-	if (!readIntFromFile(&pEmployeeObj->seniority, fp, "Error reading Employee Seniority\n"))
-		return 0;
-	pEmployeeObj->pDerivedObj = NULL;
-	pEmployeeObj->print = printEmployee;
-	pEmployeeObj->delete = freeEmployee;
-	pEmployeeObj->writeBFile = writeEmployeeToBFile;
-	pEmployeeObj->readBFile = readEmployeeFromBFile;
-	pEmployeeObj->writeTFile = writeEmployeeToTxtFile;
-	pEmployeeObj->readTFile = readEmployeeFromTxtFile;
+	*pEmployeeObj = newEmployee(name, id, age, type, seniority);
 	return 1;
 }
 
@@ -131,9 +121,7 @@ int readEmployeeFromTxtFile(FILE* fp, Employee* pEmployeeObj)
 	pEmployeeObj->print = printEmployee;
 	pEmployeeObj->delete = freeEmployee;
 	pEmployeeObj->writeBFile = writeEmployeeToBFile;
-	pEmployeeObj->readBFile = readEmployeeFromBFile;
 	pEmployeeObj->writeTFile = writeEmployeeToTxtFile;
-	pEmployeeObj->readTFile = readEmployeeFromTxtFile;
 	return 1;
 }
 

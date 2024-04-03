@@ -3,7 +3,7 @@
 static const char* licenseStr[eNofLicenseTypes]
 = { "B", "C1", "C", "E" };
 
-void initEmployeeDriver(Employee** pEmp)
+void initEmployeeDriver(Employee** pEmp) //TODO: modify to pObj
 {
 	char* name;
 	int age, seniority,id;
@@ -66,9 +66,7 @@ Employee* newEmployeeDriver(const char* pName,const int id, const int age, const
 	pObj->delete = deleteEmployeeDriver;
 	pObj->print = printEmployeeDriver;
 	pObj->writeBFile = writeDriverToBFile;
-	pObj->readBFile = readDriverFromBFile;
 	pObj->writeTFile = writeDriverToTxtFile;
-	pObj->readTFile = readDriverFromTxtFile;
 	return pObj;
 }
 
@@ -97,30 +95,19 @@ int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj)
 	return 1;
 }
 
-int readDriverFromBFile(FILE* fp, Employee* pEmployeeObj)
+int readDriverFromBFile(FILE* fp, Employee** pEmployeeObj)
 {
-	if (!readEmployeeFromBFile(fp, pEmployeeObj))
+	if (!pEmployeeObj)
 		return 0;
-	EmployeeDriver* pEmpDriverObj;
-	pEmpDriverObj = malloc(sizeof(EmployeeDriver));
-	if (pEmpDriverObj == NULL)
-	{
-		pEmployeeObj->delete(pEmployeeObj);
+	int license;
+	if (!readEmployeeFromBFile(fp, pEmployeeObj,eDriver))
 		return 0;
-	}
-	int tmp;
-	if (!readIntFromFile(&tmp, fp, "Error reading Driver License Type\n"))
+	if (!readIntFromFile(&license, fp, "Error reading Driver License Type\n"))
 		return 0;
-
-	pEmployeeObj->pDerivedObj = pEmpDriverObj;
-	pEmpDriverObj->licenseType = tmp;
-	//Changing base class interface to access derived class functions
-	pEmployeeObj->delete = deleteEmployeeDriver;
-	pEmployeeObj->print = printEmployeeDriver;
-	pEmployeeObj->writeBFile = writeDriverToBFile;
-	pEmployeeObj->readBFile = readDriverFromBFile;
-	pEmployeeObj->writeTFile = writeDriverToTxtFile;
-	pEmployeeObj->readTFile = readDriverFromTxtFile;
+	Employee* e = newEmployeeDriver((*pEmployeeObj)->name, (*pEmployeeObj)->id, (*pEmployeeObj)->age, (*pEmployeeObj)->type,
+		(*pEmployeeObj)->seniority, license);
+	(*pEmployeeObj)->delete((*pEmployeeObj));//free the old 
+	*pEmployeeObj = e;//the new employeeDriver
 	return 1;
 }
 
@@ -154,8 +141,6 @@ int readDriverFromTxtFile(FILE* fp, Employee* pEmployeeObj)
 	pEmployeeObj->delete = deleteEmployeeDriver;
 	pEmployeeObj->print = printEmployeeDriver;
 	pEmployeeObj->writeBFile = writeDriverToBFile;
-	pEmployeeObj->readBFile = readDriverFromBFile;
 	pEmployeeObj->writeTFile = writeDriverToTxtFile;
-	pEmployeeObj->readTFile = readDriverFromTxtFile;
 	return 1;
 }

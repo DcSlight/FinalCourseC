@@ -11,7 +11,9 @@
 #include "List.h"
 
 int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName);
+int createEmployeesArr(CocaColaFactory* pFactory);
 int createSuppliersArr(CocaColaFactory* pFactory);
+int readEmployeesArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int readSuppliersArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int createTruckArr(CocaColaFactory* pFactory);
 int readTruckArrFromBFile(CocaColaFactory* pFactory, FILE* fp);

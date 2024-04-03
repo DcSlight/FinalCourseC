@@ -26,7 +26,7 @@ void deleteEmployeeDriver(Employee* const pEmployeeObj);	//destructor
 void printEmployeeDriver(Employee* const pEmployeeObj);
 
 int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj);
-int readDriverFromBFile(FILE* fp, Employee* pEmployeeObj);
+int readDriverFromBFile(FILE* fp, Employee** pEmployeeObj);
 int writeDriverToTxtFile(FILE* fp, Employee* const pEmployeeObj);
 int readDriverFromTxtFile(FILE* fp, Employee* pEmployeeObj);
 
