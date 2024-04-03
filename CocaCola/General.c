@@ -83,3 +83,16 @@ void generalArrayFunction(void* arr, int size, int typeSize, void(*func)(void* e
 		func((char*)(arr)+i * typeSize);
 
 }
+
+void printCharAsBinary(unsigned char ch)
+{
+	int i;
+	unsigned char temp;
+	for (i = 0; i < 8; i++)
+	{
+		temp = ch << i;
+		temp = temp >> 7;
+		printf("%d", (int)temp);
+	}
+
+}

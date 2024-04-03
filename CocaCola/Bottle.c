@@ -83,3 +83,36 @@ int readBottleFromTxtFile(FILE* fp, Bottle* pBottle)
 		return 0;
 	return 1;
 }
+
+int writeBottleToBFileCompress(FILE* fp, const Bottle* pBottle)
+{
+	BYTE data[4];
+	data[0] = pBottle->flavor << 6;
+	data[0] |= pBottle->type << 4;
+	data[0] |= (pBottle->sugar >> 3);
+	data[1] = pBottle->sugar << 5;
+	data[1] |= pBottle->calories >> 5;
+	data[2] = pBottle->calories << 3;
+	data[2] |= pBottle->ml >> 8;
+	data[3] = pBottle->ml;
+	if (fwrite(data, sizeof(BYTE), 4, fp) != 4)
+		return 0;
+	if(!writeDateTimeToBFile(fp,&pBottle->expDate))
+		return 0;
+	return 1;
+}
+
+int readBottleFromBFileCompress(FILE* fp, Bottle* pBottle)
+{
+	BYTE data[4];
+	if (fread(data, sizeof(BYTE), 4, fp) != 4)
+		return 0;
+	pBottle->flavor = data[0] >> 6;
+	pBottle->type = (data[0] >> 4) & 0x3;
+	pBottle->sugar = ((data[0] & 0xF)<<3) | (data[1] >> 5);
+	pBottle->calories = ((data[1] & 0x1F)<<5) | (data[2] >> 3);
+	pBottle->ml = ((data[2] & 0x7)<<8) | (data[3]);
+	if (!readDateTimeFromBFile(fp, &pBottle->expDate))
+		return 0;
+	return 1;
+}

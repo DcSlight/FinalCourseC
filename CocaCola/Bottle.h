@@ -2,6 +2,7 @@
 #define __BOTTLE__
 
 #include "DateTime.h"
+#include "General.h"
 
 typedef enum {
 	eClassic, eZero, eLemon, eNonCaffein, eNofFlavorTypes
@@ -14,6 +15,8 @@ typedef enum {
 } eBottleType;
 
 static const char* BottleStr[eNofBottleTypes];
+
+typedef unsigned char BYTE;
 
 typedef struct
 {
@@ -33,5 +36,7 @@ void printBottle(const Bottle* pBottle);
 int writeBottleToTxtFile(FILE* fp, const Bottle* pBottle);
 int readBottleFromTxtFile(FILE* fp, Bottle* pBottle);
 
+int writeBottleToBFileCompress(FILE* fp, const Bottle* pBottle);
+int readBottleFromBFileCompress(FILE* fp, Bottle* pBottle);
 
 #endif /* __BOTTLE__ */
