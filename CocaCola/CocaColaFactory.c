@@ -224,3 +224,77 @@ void printTours(CocaColaFactory* pFactory)
 	}
 }
 
+eTourSort showSortMenu()
+{
+	int opt;
+	printf("Base on what field do you want to sort your tours?\n");
+	do {
+		for (int i = 1; i < eNofTourTypes; i++)
+			printf("Enter %d for %s\n", i, TourStr[i]);
+		scanf("%d", &opt);
+	} while (opt < 0 || opt >= eNofTourTypes);
+
+	return (eTourSort)opt;
+}
+
+void sortTours(CocaColaFactory* pFactory)
+{
+	pFactory->sortTour = showSortMenu();
+	int(*compare)(const void* tour1, const void* tour2) = NULL;
+
+	switch (pFactory->sortTour)
+	{
+	case eEmployeeGuide:
+		//TODO: compare tour by guide
+		break;
+	case eDuration:
+		compare = compareTourByDuration;
+		break;
+	case eDateTime:
+		compare = compareTourByDateTime;
+		break;
+	}
+
+	if (compare != NULL)
+		qsort(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), compare);
+}
+
+void findTour(const CocaColaFactory* pFactory)
+{
+	int(*compare)(const void* tour1, const void* tour2) = NULL;
+	CocaColaTour tour = { 0 };
+	CocaColaTour* pTour = &tour;
+
+	switch (pFactory->sortTour)
+	{
+	case eEmployeeGuide:
+		//TODO: get guide id
+		break;
+
+	case eDuration:
+		printf("Enter duration:\t");
+		scanf("%u", &pTour->duration);
+		compare = compareTourByDuration;
+		break;
+
+	case eDateTime:
+		initDateTime(&pTour->dateTime, 0);
+		compare = compareTourByDateTime;
+		break;
+	}
+
+	if (compare != NULL)
+	{
+		CocaColaTour** pToursArr = bsearch(&pTour, pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), compare);
+		if (pToursArr == NULL)
+			printf("Coca Cola Tour was not found\n");
+		else {
+			printf("Coca Cola Tour found:\n");
+			printCocaColaTour(pTour);
+		}
+	}
+	else {
+		printf("The search cannot be performed, array not sorted\n");
+	}
+}
+

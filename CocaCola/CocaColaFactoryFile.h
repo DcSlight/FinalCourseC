@@ -17,8 +17,10 @@ int createTruckArr(CocaColaFactory* pFactory);
 int readTruckArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int createToursArr(CocaColaFactory* pFactory);
 int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
-
 int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName);
+
+int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName);
+int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName);
 
 
 #endif /* __COCA_COLA_FACTORY_FILE__ */

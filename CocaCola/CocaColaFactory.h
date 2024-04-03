@@ -58,5 +58,8 @@ void printEmployeesArr(CocaColaFactory* pFactory);
 int addTour(CocaColaFactory* pFactory);
 void EnterTour(CocaColaFactory* pFactory);
 void printTours(CocaColaFactory* pFactory);
+eTourSort showSortMenu();
+void sortTours(CocaColaFactory* pFactory);
+
 
 #endif /* __COCA_COLA_FACTORY__ */

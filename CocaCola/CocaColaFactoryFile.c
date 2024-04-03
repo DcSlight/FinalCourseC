@@ -6,7 +6,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName)
 	fp = fopen(fileName, "rb");
 	if (!fp)
 	{
-		printf("Error open Coca Cola Factory file to read\n");
+		printf("Error open Coca Cola Factory binary file to read\n");
 		return 0;
 	}
 
@@ -215,7 +215,7 @@ int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName)
 	FILE* fp;
 	fp = fopen(fileName, "wb");
 	if (!fp) {
-		printf("Error open Coca Cola Factory file to write\n");
+		printf("Error open Coca Cola Factory binary file to write\n");
 		return 0;
 	}
 
@@ -275,6 +275,87 @@ int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName)
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{
 		if (!writeTourToBFile(fp, pFactory->tours[i]))
+		{
+			fclose(fp);
+			return 0;
+		}
+	}
+
+	fclose(fp);
+	return 1;
+}
+
+int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
+{
+	FILE* fp;
+	fp = fopen(fileName, "r");
+	if (!fp) {
+		printf("Error open Coca Cola Factory text file to read\n");
+		return 0;
+	}
+
+	//TODO: read seed
+
+	//-----------------------init all Employees------------------------------------
+
+	//-----------------------init all Suppliers-----------------------------------------
+
+	//----------------------------init all Trucks--------------------------------
+
+	//-------------------------init all Events---------------------------------
+
+	//-------------------------init all Tours---------------------------------
+
+
+	fclose(fp);
+	return 1;
+}
+
+int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
+{
+	FILE* fp;
+	fp = fopen(fileName, "w");
+	if (!fp) {
+		printf("Error open Coca Cola Factory text file to write\n");
+		return 0;
+	}
+
+	//TODO: write seed
+
+	//-------------------------write all Employees---------------------------------
+	//TODO: write employees to text file
+
+	//-------------------------write all Suppliers---------------------------------
+	fprintf(fp, "%d\n", pFactory->suppliersCount);
+	for (int i = 0; i < pFactory->suppliersCount; i++)
+	{
+		if (writeSupplierToTxtFile(fp, pFactory->suppliers[i]))
+		{
+			fclose(fp);
+			return 0;
+		}
+	}
+
+	//-------------------------write all Trucks---------------------------------
+	fprintf(fp, "%d\n", pFactory->trucksCount);
+	for (int i = 0; i < pFactory->trucksCount; i++)
+	{
+		if (writeTruckToTxtFile(fp, &pFactory->trucks[i]))
+		{
+			fclose(fp);
+			return 0;
+		}
+	}
+
+
+	//-------------------------write all Events---------------------------------
+	//TODO: write all historical events arr to text file
+
+	//-------------------------write all Tours---------------------------------
+	fprintf(fp, "%d\n", pFactory->toursCount);
+	for (int i = 0; i < pFactory->toursCount; i++)
+	{
+		if (writeTourToTxtFile(fp, pFactory->tours[i]))
 		{
 			fclose(fp);
 			return 0;
