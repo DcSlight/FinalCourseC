@@ -8,14 +8,14 @@ int main()
     srand((unsigned)time(NULL));
     printLOGO();
     cocaColaLinkWebsite();
-    Supplier s;
+    BottlePacking bp;
     FILE* fp;
 
-    fp = fopen("supplierTry.bin", "rb");
-    //initSupplier(&s, NULL, 0);
-    //writeSupplierToBFile(fp, &s);
-    readSupplierFromBFile(fp, &s);
-    printSupplier(&s);
+    fp = fopen("truckTry.bin", "rb");
+    //initBottlePacking(&bp);
+    //writeBottlePackingToBFile(fp, &bp);
+    readBottlePackingFromBFile(fp, &bp);
+    printBottlePacking(&bp);
 
    /* CocaColaFactory factory;
     initFactory(&factory);

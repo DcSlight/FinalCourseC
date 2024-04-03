@@ -78,3 +78,40 @@ void freeTruck(Truck* pTruck)
 	freeSupplier(pTruck->destSupplier);
 	free(pTruck->destSupplier);
 }
+
+int writeTruckToBFile(FILE* fp, const Truck* pTruck)
+{
+	if (!writeCharsToFile(pTruck->truckLicenseCode, LICENSE_LEN, fp, "Error Writing Truck License\n"))
+		return 0;
+	if (!writeIntToFile(pTruck->destSupplier->id, fp, "Error Writing Supplier Id\n"))
+		return 0;
+	if (!writeIntToFile(pTruck->driver->id, fp, "Error Writing Driver Id\n"))
+		return 0;
+	if (!writeIntToFile(pTruck->packAmount, fp, "Error Writing Packs Amount\n"))
+		return 0;
+	for (int i = 0; i < pTruck->packAmount; i++)
+	{
+		if (!writeBottlePackingToBFile(fp, &pTruck->packs[i]))
+			return 0;
+	}
+	return 1;
+}
+
+int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
+{
+	if (!readCharsFromFile(pTruck->truckLicenseCode, LICENSE_LEN, fp, "Error reading truck license\n"))
+		return 0;
+	if (!readIntFromFile(supplierId, fp, "Error reading supplier id\n"))
+		return 0;
+	if (!readIntFromFile(driverId, fp, "Error reading driver id\n"))
+		return 0;
+	if (!readIntFromFile(&pTruck->packAmount, fp, "Error reading packs amount\n"))
+		return 0;
+	for (int i = 0; i < pTruck->packAmount; i++)
+	{
+		if (!readBottlePackingFromBFile(fp, &pTruck->packs[i]))
+			return 0;
+	}
+	
+	return 1;
+}

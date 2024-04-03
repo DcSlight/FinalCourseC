@@ -227,3 +227,32 @@ int compareTourByDateTime(const void* t1, const void* t2)
 	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
 	return compareDateTime(&pTour1->dateTime, &pTour2->dateTime);
 }
+
+int writeTourToBFile(FILE* fp, const CocaColaTour* pTour)
+{
+	if (!writeDateTimeToBFile(fp, &pTour->dateTime))
+		return 0;
+	if (!writeIntToFile(pTour->guide->id, fp, "Error writing guide id\n"))
+		return 0;
+	if (!writeIntToFile(pTour->duration, fp, "Error writing tour duration\n"))
+		return 0;
+	if (!writeIntToFile(pTour->visitorAmount, fp, "Error writing visitors amount\n"))
+		return 0;
+
+	return 1;
+}
+
+int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId)
+{
+	if (!readDateTimeFromBFile(fp, &pTour->dateTime))
+		return 0;
+	if (!readIntFromFile(guideId, fp, "Error reading guide id\n"))
+		return 0;
+	if (!readIntFromFile(&pTour->duration, fp, "Error reading tour duration\n"))
+		return 0;
+	if (!readIntFromFile(&pTour->visitorAmount, fp, "Error reading visitors amount\n"))
+		return 0;
+	//TODO: fill events from b file // filename is coca cola historical events file
+
+	return 1;
+}

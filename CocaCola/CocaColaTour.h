@@ -36,4 +36,8 @@ void startTour(CocaColaTour* pTour);
 int	compareTourByDuration(const void* t1, const void* t2);
 int	compareTourByDateTime(const void* t1, const void* t2);
 
+int writeTourToBFile(FILE* fp, const CocaColaTour* pTour);
+int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId);
+
+
 #endif
