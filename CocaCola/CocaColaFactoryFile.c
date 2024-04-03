@@ -229,7 +229,11 @@ int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName)
 	}
 	for (int i = 0; i < pFactory->employeesCount; i++)
 	{
-		//TODO: write employee to b file
+		if (!pFactory->employees[i]->writeBFile(fp, pFactory->employees[i]))
+		{
+			fclose(fp);
+			return 0;
+		}
 	}
 
 	//-------------------------write all Suppliers---------------------------------
@@ -323,13 +327,21 @@ int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
 	//TODO: write seed
 
 	//-------------------------write all Employees---------------------------------
-	//TODO: write employees to text file
+	fprintf(fp, "%d\n", pFactory->employeesCount);
+	for (int i = 0; i < pFactory->employeesCount; i++)
+	{
+		if (!pFactory->employees[i]->writeTFile(fp, pFactory->employees[i]))
+		{
+			fclose(fp);
+			return 0;
+		}
+	}
 
 	//-------------------------write all Suppliers---------------------------------
 	fprintf(fp, "%d\n", pFactory->suppliersCount);
 	for (int i = 0; i < pFactory->suppliersCount; i++)
 	{
-		if (writeSupplierToTxtFile(fp, pFactory->suppliers[i]))
+		if (!writeSupplierToTxtFile(fp, pFactory->suppliers[i]))
 		{
 			fclose(fp);
 			return 0;
@@ -340,7 +352,7 @@ int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
 	fprintf(fp, "%d\n", pFactory->trucksCount);
 	for (int i = 0; i < pFactory->trucksCount; i++)
 	{
-		if (writeTruckToTxtFile(fp, &pFactory->trucks[i]))
+		if (!writeTruckToTxtFile(fp, &pFactory->trucks[i]))
 		{
 			fclose(fp);
 			return 0;
@@ -355,7 +367,7 @@ int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
 	fprintf(fp, "%d\n", pFactory->toursCount);
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{
-		if (writeTourToTxtFile(fp, pFactory->tours[i]))
+		if (!writeTourToTxtFile(fp, pFactory->tours[i]))
 		{
 			fclose(fp);
 			return 0;

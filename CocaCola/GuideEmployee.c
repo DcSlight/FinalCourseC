@@ -137,7 +137,7 @@ int writeGuideToTxtFile(FILE* fp, Employee* const pEmployeeObj)
 		return 0;
 	EmployeeGuide* pEmpGuideObj;
 	pEmpGuideObj = pEmployeeObj->pDerivedObj;
-	fprintf(fp, "%d", pEmpGuideObj->educationLevel);
+	fprintf(fp, "%d\n", pEmpGuideObj->educationLevel);
 	return 1;
 }
 

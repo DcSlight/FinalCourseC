@@ -78,6 +78,7 @@ int addTruck(CocaColaFactory* pFactory)
 		printf("There is no driver employees in company\n");
 		return 0;
 	}
+	printf("\nAdd a truck\n");
 	Supplier* pSupplier = getSupplier(pFactory);
 	Employee* pEmployee = getEmployee(pFactory, eDriver);
 	pFactory->trucks = (Truck*)realloc(pFactory->trucks, (pFactory->trucksCount + 1) * sizeof(Truck));
@@ -94,8 +95,9 @@ Supplier* getSupplier(CocaColaFactory* pFactory)
 {
 	Supplier* pSupplier;
 	int id;
-	printf("Choose a supplier from list, type its id\n");
-	printSuppliersArr(pFactory);
+	printf("--------------------------------------------\n");
+	printSuppliersArr(pFactory->suppliers,pFactory->suppliersCount);
+	printf("\nChoose a supplier from list, type its id\n");
 	do {
 		scanf("%d", &id);
 		pSupplier = findSupplierById(pFactory->suppliers, pFactory->suppliersCount, id);
@@ -131,13 +133,14 @@ Employee* getEmployee(CocaColaFactory* pFactory, eEmployeeType type)
 {
 	Employee* pEmployee;
 	int id;
+	printf("\n--------------------------------------------\n");
+	printEmployeesArr(pFactory->employees,pFactory->employeesCount);//TODO: print void* generalFunc
 	printf("Choose a %s employee from list, type its id\n", EmployeeStr[type]);
-	printEmployeesArr(pFactory);
 	do {
 		scanf("%d", &id);
 		pEmployee = findEmployeeById(pFactory->employees, pFactory->employeesCount, id, type);
 		if (!pEmployee)
-			printf("No employee with that id! Try again!\n");
+			printf("No %s employee with that id! Try again!\n", EmployeeStr[type]);
 	} while (pEmployee == NULL);
 
 	return pEmployee;
@@ -154,31 +157,37 @@ Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, e
 	return NULL;
 }
 
-void printTrucksArr(CocaColaFactory* pFactory)
+void printFactory(const CocaColaFactory* pFactory)
 {
-	printf("There are %d trucks\n", pFactory->trucksCount);
-	for (int i = 0; i < pFactory->trucksCount; i++)
+	printf(ANSI_COLOR_RED "Coca Cola Factory" ANSI_COLOR_RESET);
+	
+}
+
+void printTrucksArr(const Truck* trucksArr, int trucksCount)
+{
+	printf("There are %d trucks\n", trucksCount);
+	for (int i = 0; i < trucksCount; i++)
 	{
-		printTruck(&pFactory->trucks[i]);
+		printTruck(&trucksArr[i]);
 		printf("\n");
 	}
 }
 
-void printSuppliersArr(CocaColaFactory* pFactory)
+void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount)
 {
-	printf("The are %d suppliers\n", pFactory->suppliersCount);
-	for (int i = 0; i < pFactory->suppliersCount; i++)
+	printf("The are %d suppliers\n", suppliersCount);
+	for (int i = 0; i < suppliersCount; i++)
 	{
-		printSupplier(pFactory->suppliers[i]);
+		printSupplier(suppliersArr[i]);
 		printf("\n");
 	}
 }
 
-void printEmployeesArr(CocaColaFactory* pFactory)
+void printEmployeesArr( Employee** const employeesArr, int employeesCount)
 {
-	for (int i = 0; i < pFactory->employeesCount; i++)
+	for (int i = 0; i < employeesCount; i++)
 	{
-		pFactory->employees[i]->print(pFactory->employees[i]);
+		employeesArr[i]->print(employeesArr[i]);
 	}
 }
 
@@ -204,7 +213,7 @@ int addTour(CocaColaFactory* pFactory)
 	return 1;
 }
 
-void EnterTour(CocaColaFactory* pFactory)
+void EnterTour(const CocaColaFactory* pFactory)
 {
 	int index;
 	printf("There are %d tours\n", pFactory->toursCount);
@@ -216,11 +225,11 @@ void EnterTour(CocaColaFactory* pFactory)
 	startTour(pFactory->tours[index - 1]);
 }
 
-void printTours(CocaColaFactory* pFactory)
+void printTours(const CocaColaTour** toursArr, int toursCount)
 {
-	for (int i = 0; i < pFactory->toursCount; i++)
+	for (int i = 0; i < toursCount; i++)
 	{
-		printCocaColaTour(pFactory->tours[i]);
+		printCocaColaTour(toursArr[i]);
 	}
 }
 

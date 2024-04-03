@@ -130,7 +130,7 @@ int writeDriverToTxtFile(FILE* fp, Employee* const pEmployeeObj)
 		return 0;
 	EmployeeDriver* pEmpDriverObj;
 	pEmpDriverObj = pEmployeeObj->pDerivedObj;
-	fprintf(fp,"%d", pEmpDriverObj->licenseType);
+	fprintf(fp,"%d\n", pEmpDriverObj->licenseType);
 	return 1;
 }
 
