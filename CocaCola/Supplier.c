@@ -8,8 +8,7 @@ void initSupplier(Supplier* pSupplier, Supplier** allSuppliers,int suppliersCoun
 {
 	getSupplierId(pSupplier, allSuppliers, suppliersCount);
 	pSupplier->name = getStrExactName("Enter supplier name:");
-	printf("Enter a phone number:\t");
-	scanf("%s", pSupplier->phoneNo);
+	getSupplierPhone(pSupplier->phoneNo);
 	initAddress(&pSupplier->address);
 }
 
@@ -29,6 +28,34 @@ void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCo
 	} while (!flag);
 
 	pSupplier->id = id;
+}
+
+void getSupplierPhone(char* phoneNumber)
+{
+	char temp[MAX_STR_LEN];
+	int ok = 1;
+	do {
+		ok = 1;
+		printf("Enter a phone number - %d digits:\t", PHONE_LEN);
+		myGets(temp, MAX_STR_LEN, stdin);
+		if (strlen(temp) != PHONE_LEN)
+		{
+			printf("code should be %d digits\n", PHONE_LEN);
+			ok = 0;
+		}
+		else {
+			for (int i = 0; i < PHONE_LEN; i++)
+			{
+				if (isdigit(temp[i]) == 0)
+				{
+					printf("Need to be upper digits\n");
+					ok = 0;
+					break;
+				}
+			}
+		}
+	} while (!ok);
+	strcpy(phoneNumber, temp);
 }
 
 void printSupplier(const Supplier* pSupplier)
@@ -92,6 +119,40 @@ int readSupplierFromBFile(FILE* fp, Supplier* pSupplier)
 		fclose(fp);
 		return 0;
 	}
+	return 1;
+}
+
+int writeSupplierToTxtFile(FILE* fp, const Supplier* pSupplier)
+{
+	if (!pSupplier)
+		return 0;
+	fprintf(fp, "%d\n", pSupplier->id);
+	fprintf(fp, "%s\n", pSupplier->name);
+	fprintf(fp, "%s\n", pSupplier->phoneNo);
+	if (!writeAddressToTxtFile(fp, &pSupplier->address))
+		return 0;
+	return 1;
+}
+
+int readSupplierFromTxtFile(FILE* fp, Supplier* pSupplier)
+{
+	char temp[MAX_STR_LEN];
+	if (!pSupplier)
+		return 0;
+
+	int tempId;
+	if (fscanf(fp, "%d", &tempId) != 1)
+		return 0;
+	pSupplier->id = tempId;
+
+	myGets(temp, MAX_STR_LEN, fp);
+	pSupplier->name = getDynStr(temp);
+
+	myGets(pSupplier->phoneNo, PHONE_LEN+1, fp);
+	
+	if (!readAddressFromTxtFile(fp, &pSupplier->address))
+		return 0;
+
 	return 1;
 }
 
