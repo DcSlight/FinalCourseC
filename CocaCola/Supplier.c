@@ -74,51 +74,29 @@ void freeSupplier(Supplier* pSupplier)
 int writeSupplierToBFile(FILE* fp, const Supplier* pSupplier)
 {
 	if (!writeIntToFile(pSupplier->id, fp, "Error Writing Supplier Id\n"))
-	{
-		fclose(fp);
 		return 0;
-	}
 	if (!writeStringToFile(pSupplier->name, fp, "Error Writing Supploer Name\n"))
-	{
-		fclose(fp);
 		return 0;
-	}
 	if (!writeCharsToFile(pSupplier->phoneNo, PHONE_LEN, fp, "Error Writing Phone Number\n"))
-	{
-		fclose(fp);
 		return 0;
-	}
 	if (!writeAddressToBFile(fp, &pSupplier->address))
-	{
-		fclose(fp);
 		return 0;
-	}
+
 	return 1;
 }
 
 int readSupplierFromBFile(FILE* fp, Supplier* pSupplier)
 {
 	if (!readIntFromFile(&pSupplier->id, fp, "Error reading supplier id\n"))
-	{
-		fclose(fp);
 		return 0;
-	}
 	pSupplier->name = readStringFromFile(fp, "Error reading supplier name\n");
 	if (!pSupplier->name)
-	{
-		fclose(fp);
 		return 0;
-	}
 	if (!readCharsFromFile(pSupplier->phoneNo, PHONE_LEN, fp, "Error reading supplier phone number\n"))
-	{
-		fclose(fp);
 		return 0;
-	}
 	if (!readAddressFromBFile(fp, &pSupplier->address))
-	{
-		fclose(fp);
 		return 0;
-	}
+
 	return 1;
 }
 

@@ -16,7 +16,7 @@ typedef struct
 {
 	Supplier* destSupplier;
 	BottlePacking packs[MAX_PACKS];
-	char truckLicenseCode[LICENSE_LEN];
+	char truckLicenseCode[LICENSE_LEN+1];
 	Employee* driver;
 	int packAmount;
 } Truck;
@@ -30,5 +30,7 @@ void freeTruck(Truck* pTruck);
 
 int writeTruckToBFile(FILE* fp, const Truck* pTruck);
 int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId);
+int writeTruckToTxtFile(FILE* fp, const Truck* pTruck);
+int readTruckFromTxtFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId);
 
 #endif /* __TRUCK__ */

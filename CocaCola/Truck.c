@@ -115,3 +115,37 @@ int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
 	
 	return 1;
 }
+
+int writeTruckToTxtFile(FILE* fp, const Truck* pTruck)
+{
+	if (!pTruck)
+		return 0;
+	fprintf(fp, "%s\n", pTruck->truckLicenseCode);
+	fprintf(fp, "%d\n", pTruck->driver->id);
+	fprintf(fp, "%d\n", pTruck->destSupplier->id);
+	fprintf(fp, "%d\n", pTruck->packAmount);
+	for (int i = 0; i < pTruck->packAmount; i++)
+	{
+		if (!writeBottlePackingToTxtFile(fp, &pTruck->packs[i]))
+			return 0;
+	}
+	return 1;
+}
+
+int readTruckFromTxtFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
+{
+	myGets(pTruck->truckLicenseCode, LICENSE_LEN + 1, fp); //TODO: check
+
+	if (fscanf(fp, "%d", driverId) != 1)
+		return 0;
+	if (fscanf(fp, "%d", supplierId) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pTruck->packAmount) != 1)
+		return 0;
+	for (int i = 0; i < pTruck->packAmount; i++)
+	{
+		if (!readBottlePackingFromTxtFile(fp, &pTruck->packs[i]))
+			return 0;
+	}
+	return 1;
+}
