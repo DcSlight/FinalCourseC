@@ -81,3 +81,8 @@ void printEmployeeDriver(Employee* const pEmployeeObj)
 	pEmpDriverObj = pEmployeeObj->pDerivedObj;
 	printf("\nLicense: %s\n", licenseStr[pEmpDriverObj->licenseType]);
 }
+
+int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj)
+{
+	return 0;
+}

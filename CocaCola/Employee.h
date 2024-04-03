@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "General.h"
+#include "FileHelper.h"
 
 typedef enum {
 	eDriver, eGuide, eNofEmployeeTypes
@@ -17,6 +18,10 @@ typedef struct _Employee Employee;
 
 typedef void	(*fptrPrintEmployee)(Employee*);
 typedef void	(*fptrFree)(Employee*);
+typedef void	(*fptrWriteBFile)(FILE*,Employee* const);
+typedef void	(*fptrReadBFile)(FILE*,Employee*);
+typedef void	(*fptrWriteTFile)(FILE*,Employee* const);
+typedef void	(*fptrReadTFile)(FILE*,Employee*);
 
 typedef struct _Employee
 {
@@ -24,16 +29,24 @@ typedef struct _Employee
 	void* pDerivedObj;
 	char* name;
 	int age;
-	eEmployeeType type; //TODO: check to delete
+	eEmployeeType type;
 	int seniority;
 	//interface to access member functions
 	fptrPrintEmployee print;
 	fptrFree delete;
+	fptrWriteBFile writeBFile;
+	fptrReadBFile readBFile;
+	fptrWriteTFile writeTFile;
+	fptrReadTFile readTFile;
 }Employee;
 
 Employee* newEmployee(const char* pName, const int id, const int age, const eEmployeeType type, int seniority);	//constructor
 eEmployeeType getEmployeeType();
 void freeEmployee(Employee* const pEmployeeObj);	//destructor
 void printEmployee(Employee* const pEmployeeObj);
+int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj);
+int readEmployeeFromBFile(FILE* fp, Employee* pEmployeeObj);
+int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj);
+int readEmployeeFromTxtFile(FILE* fp, Employee* pEmployeeObj);
 
 #endif /* __EMPLOYEE__ */

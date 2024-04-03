@@ -25,4 +25,9 @@ Employee* newEmployeeDriver(const char* pName,const int id, const int age, const
 void deleteEmployeeDriver(Employee* const pEmployeeObj);	//destructor
 void printEmployeeDriver(Employee* const pEmployeeObj);
 
+int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj);
+int readDriverFromBFile(FILE* fp, Employee* pEmployeeObj);
+int writeDriverToTxtFile(FILE* fp, Employee* const pEmployeeObj);
+int readDriverFromTxtFile(FILE* fp, Employee* pEmployeeObj);
+
 #endif /* __EMPLOYEE_DRIVER__ */

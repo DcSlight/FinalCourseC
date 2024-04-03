@@ -75,7 +75,7 @@ int writeSupplierToBFile(FILE* fp, const Supplier* pSupplier)
 {
 	if (!writeIntToFile(pSupplier->id, fp, "Error Writing Supplier Id\n"))
 		return 0;
-	if (!writeStringToFile(pSupplier->name, fp, "Error Writing Supploer Name\n"))
+	if (!writeStringToFile(pSupplier->name, fp, "Error Writing Supplier Name\n"))
 		return 0;
 	if (!writeCharsToFile(pSupplier->phoneNo, PHONE_LEN, fp, "Error Writing Phone Number\n"))
 		return 0;
