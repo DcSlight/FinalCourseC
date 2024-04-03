@@ -18,4 +18,7 @@ void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCo
 void printSupplier(const Supplier* pSupplier);
 void freeSupplier(Supplier* pSupplier);
 
+int writeSupplierToBFile(FILE* fp, const Supplier* pSupplier);
+int readSupplierFromBFile(FILE* fp, Supplier* pSupplier);
+
 #endif /* __SUPPLIER__ */
