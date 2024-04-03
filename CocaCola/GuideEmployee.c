@@ -64,6 +64,10 @@ Employee* newEmployeeGuide(const char* pName,const int id, const int age, const 
 	//Changing base class interface to access derived class functions
 	pObj->delete = deleteEmployeeGuide;
 	pObj->print = printEmployeeGuide;
+	pObj->writeBFile = writeGuideToBFile;
+	pObj->readBFile = readGuideFromBFile;
+	pObj->writeTFile = writeGuideToTxtFile;
+	pObj->readTFile = readGuideFromTxtFile;
 	pEmpObj->tellFact = tellFact;
 	return pObj;
 }
@@ -85,4 +89,81 @@ void printEmployeeGuide(Employee* const pEmployeeObj)
 void tellFact(Employee* const pEmployeeObj,HistoricalEvent* pEvent)
 {
 	printHistoricalEvent(pEvent);
+}
+
+
+int writeGuideToBFile(FILE* fp, Employee* const pEmployeeObj)
+{
+	if (!writeEmployeeToBFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeGuide* pEmpGuideObj;
+	pEmpGuideObj = pEmployeeObj->pDerivedObj;
+	if (!writeIntToFile(pEmpGuideObj->educationLevel, fp, "Error Writing Education Level Type\n"))
+		return 0;
+	return 1;
+}
+
+int readGuideFromBFile(FILE* fp, Employee* pEmployeeObj)
+{
+	if (!readEmployeeFromBFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeGuide* pEmpGuideObj;
+	pEmpGuideObj = malloc(sizeof(EmployeeGuide));
+	if (pEmpGuideObj == NULL)
+	{
+		pEmployeeObj->delete(pEmployeeObj);
+		return 0;
+	}
+	int tmp;
+	if (!readIntFromFile(&tmp, fp, "Error reading Education Level Type\n"))
+		return 0;
+
+	pEmployeeObj->pDerivedObj = pEmpGuideObj;
+	pEmpGuideObj->educationLevel = tmp;
+	//Changing base class interface to access derived class functions
+	pEmployeeObj->delete = deleteEmployeeGuide;
+	pEmployeeObj->print = printEmployeeGuide;
+	pEmployeeObj->writeBFile = writeGuideToBFile;
+	pEmployeeObj->readBFile = readGuideFromBFile;
+	pEmployeeObj->writeTFile = writeGuideToTxtFile;
+	pEmployeeObj->readTFile = readGuideFromTxtFile;
+	pEmpGuideObj->tellFact = tellFact;
+	return 1;
+}
+
+int writeGuideToTxtFile(FILE* fp, Employee* const pEmployeeObj)
+{
+	if (!writeEmployeeToTxtFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeGuide* pEmpGuideObj;
+	pEmpGuideObj = pEmployeeObj->pDerivedObj;
+	fprintf(fp, "%d", pEmpGuideObj->educationLevel);
+	return 1;
+}
+
+int readGuideFromTxtFile(FILE* fp, Employee* pEmployeeObj)
+{
+	if (!readEmployeeFromTxtFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeGuide* pEmpGuideObj;
+	pEmpGuideObj = malloc(sizeof(EmployeeGuide));
+	if (pEmpGuideObj == NULL)
+	{
+		pEmployeeObj->delete(pEmployeeObj);
+		return 0;
+	}
+	int tempInt;
+	if (fscanf(fp, "%d", &tempInt) != 1)
+		return 0;
+	pEmployeeObj->pDerivedObj = pEmpGuideObj;
+	pEmpGuideObj->educationLevel = tempInt;
+	//Changing base class interface to access derived class functions
+	pEmployeeObj->delete = deleteEmployeeGuide;
+	pEmployeeObj->print = printEmployeeGuide;
+	pEmployeeObj->writeBFile = writeGuideToBFile;
+	pEmployeeObj->readBFile = readGuideFromBFile;
+	pEmployeeObj->writeTFile = writeGuideToTxtFile;
+	pEmployeeObj->readTFile = readGuideFromTxtFile;
+	pEmpGuideObj->tellFact = tellFact;
+	return 1;
 }
