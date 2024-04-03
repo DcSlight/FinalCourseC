@@ -65,6 +65,10 @@ Employee* newEmployeeDriver(const char* pName,const int id, const int age, const
 	//Changing base class interface to access derived class functions
 	pObj->delete = deleteEmployeeDriver;
 	pObj->print = printEmployeeDriver;
+	pObj->writeBFile = writeDriverToBFile;
+	pObj->readBFile = readDriverFromBFile;
+	pObj->writeTFile = writeDriverToTxtFile;
+	pObj->readTFile = readDriverFromTxtFile;
 	return pObj;
 }
 
@@ -84,5 +88,74 @@ void printEmployeeDriver(Employee* const pEmployeeObj)
 
 int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj)
 {
-	return 0;
+	if (!writeEmployeeToBFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeDriver* pEmpDriverObj;
+	pEmpDriverObj = pEmployeeObj->pDerivedObj;
+	if (!writeIntToFile(pEmpDriverObj->licenseType, fp, "Error Writing Driver License Type\n"))
+		return 0;
+	return 1;
+}
+
+int readDriverFromBFile(FILE* fp, Employee* pEmployeeObj)
+{
+	if (!readEmployeeFromBFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeDriver* pEmpDriverObj;
+	pEmpDriverObj = malloc(sizeof(EmployeeDriver));
+	if (pEmpDriverObj == NULL)
+	{
+		pEmployeeObj->delete(pEmployeeObj);
+		return 0;
+	}
+	int tmp;
+	if (!readIntFromFile(&tmp, fp, "Error reading Driver License Type\n"))
+		return 0;
+
+	pEmployeeObj->pDerivedObj = pEmpDriverObj;
+	pEmpDriverObj->licenseType = tmp;
+	//Changing base class interface to access derived class functions
+	pEmployeeObj->delete = deleteEmployeeDriver;
+	pEmployeeObj->print = printEmployeeDriver;
+	pEmployeeObj->writeBFile = writeDriverToBFile;
+	pEmployeeObj->readBFile = readDriverFromBFile;
+	pEmployeeObj->writeTFile = writeDriverToTxtFile;
+	pEmployeeObj->readTFile = readDriverFromTxtFile;
+	return 1;
+}
+
+int writeDriverToTxtFile(FILE* fp, Employee* const pEmployeeObj)
+{
+	if (!writeEmployeeToTxtFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeDriver* pEmpDriverObj;
+	pEmpDriverObj = pEmployeeObj->pDerivedObj;
+	fprintf(fp,"%d", pEmpDriverObj->licenseType);
+	return 1;
+}
+
+int readDriverFromTxtFile(FILE* fp, Employee* pEmployeeObj)
+{
+	if (!readEmployeeFromTxtFile(fp, pEmployeeObj))
+		return 0;
+	EmployeeDriver* pEmpDriverObj;
+	pEmpDriverObj = malloc(sizeof(EmployeeDriver));
+	if (pEmpDriverObj == NULL)
+	{
+		pEmployeeObj->delete(pEmployeeObj);
+		return 0;
+	}
+	int tempInt;
+	if (fscanf(fp, "%d", &tempInt) != 1)
+		return 0;
+	pEmployeeObj->pDerivedObj = pEmpDriverObj;
+	pEmpDriverObj->licenseType = tempInt;
+	//Changing base class interface to access derived class functions
+	pEmployeeObj->delete = deleteEmployeeDriver;
+	pEmployeeObj->print = printEmployeeDriver;
+	pEmployeeObj->writeBFile = writeDriverToBFile;
+	pEmployeeObj->readBFile = readDriverFromBFile;
+	pEmployeeObj->writeTFile = writeDriverToTxtFile;
+	pEmployeeObj->readTFile = readDriverFromTxtFile;
+	return 1;
 }

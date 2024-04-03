@@ -18,10 +18,10 @@ typedef struct _Employee Employee;
 
 typedef void	(*fptrPrintEmployee)(Employee*);
 typedef void	(*fptrFree)(Employee*);
-typedef void	(*fptrWriteBFile)(FILE*,Employee* const);
-typedef void	(*fptrReadBFile)(FILE*,Employee*);
-typedef void	(*fptrWriteTFile)(FILE*,Employee* const);
-typedef void	(*fptrReadTFile)(FILE*,Employee*);
+typedef int	(*fptrWriteBFile)(FILE*,Employee* const);
+typedef int	(*fptrReadBFile)(FILE*,Employee*);
+typedef int	(*fptrWriteTFile)(FILE*,Employee* const);
+typedef int	(*fptrReadTFile)(FILE*,Employee*);
 
 typedef struct _Employee
 {
