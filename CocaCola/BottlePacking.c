@@ -18,23 +18,21 @@ void printBottlePacking(const BottlePacking* pBottlePack)
 
 int writeBottlePackingToBFile(FILE* fp, const BottlePacking* pBottlePacking)
 {
-	//TODO: write Bottle compressed
-	if (!writeIntToFile(pBottlePacking->quantity, fp, "Error Writing Bottle Quantity\n"))
-	{
-		fclose(fp);
+	if (!writeBottleToBFileCompress(fp, &pBottlePacking->bottle))
 		return 0;
-	}
+	if (!writeIntToFile(pBottlePacking->quantity, fp, "Error Writing Bottle Quantity\n"))
+		return 0;
+
 	return 1;
 }
 
 int readBottlePackingFromBFile(FILE* fp, BottlePacking* pBottlePacking)
 {
-	//TODO: read bottle compressed
-	if (!readIntFromFile(&pBottlePacking->quantity, fp, "Error reading bottle quantity\n"))
-	{
-		fclose(fp);
+	if (!readBottleFromBFileCompress(fp, &pBottlePacking->bottle))
 		return 0;
-	}
+	if (!readIntFromFile(&pBottlePacking->quantity, fp, "Error reading bottle quantity\n"))
+		return 0;
+
 	return 1;
 }
 
