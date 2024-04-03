@@ -36,7 +36,22 @@ int writeAddressToTxtFile(FILE* fp, const Address* pAddress)
 
 int writeAddressToBFile(FILE* fp, const Address* pAddress)
 {
-	return 0;
+	if (!writeStringToFile(pAddress->city, fp, "Error Writing City\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!writeStringToFile(pAddress->street, fp, "Error Writing Street\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!writeIntToFile(pAddress->houseNo, fp, "Error Writing House Number\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
+	return 1;
 }
 
 int readAddressFromTxtFile(FILE* fp, Address* pAddress)
@@ -55,6 +70,28 @@ int readAddressFromTxtFile(FILE* fp, Address* pAddress)
 	if (fscanf(fp, "%d", &tempHouseNo) != 1)
 		return 0;
 	pAddress->houseNo = tempHouseNo;
+	return 1;
+}
+
+int readAddressFromBFile(FILE* fp, Address* pAddress)
+{
+	pAddress->city = readStringFromFile(fp, "Error reading city\n");
+	if (!pAddress->city)
+	{
+		fclose(fp);
+		return 0;
+	}
+	pAddress->street = readStringFromFile(fp, "Error reading street\n");
+	if (!pAddress->street)
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!readIntFromFile(&pAddress->houseNo, fp, "Error reading house number\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
 	return 1;
 }
 

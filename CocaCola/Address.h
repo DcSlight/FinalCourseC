@@ -1,6 +1,8 @@
 #ifndef __ADDRESS__
 #define __ADDRESS__
 
+#include "FileHelper.h"
+
 typedef struct
 {
 	char* city;
@@ -15,8 +17,8 @@ void freeAddress(Address* pAddress);
 int writeAddressToTxtFile(FILE* fp, const Address* pAddress);
 int writeAddressToBFile(FILE* fp, const Address* pAddress);
 
-
 int readAddressFromTxtFile(FILE* fp, Address* pAddress);
+int readAddressFromBFile(FILE* fp, Address* pAddress);
 
 
 #endif /* __ADDRESS__ */

@@ -8,11 +8,20 @@ int main()
     srand((unsigned)time(NULL));
     printLOGO();
     cocaColaLinkWebsite();
-    CocaColaFactory factory;
+    Address a;
+    FILE* fp;
+
+    fp = fopen("addressTry.bin", "rb");
+    //initAddress(&a);
+    //writeAddressToBFile(fp, &a);
+    readAddressFromBFile(fp, &a);
+    printAddress(&a);
+
+   /* CocaColaFactory factory;
     initFactory(&factory);
     addEmployee(&factory);
     addEventToFactory(&factory);
-    addTour(&factory);
+    addTour(&factory);*/
 
 
     /*printf("------------------------\n");
