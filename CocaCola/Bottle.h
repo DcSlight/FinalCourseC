@@ -30,5 +30,8 @@ eFlavorType getFlavorType();
 eBottleType getBottleType();
 void printBottle(const Bottle* pBottle);
 
+int writeBottleToTxtFile(FILE* fp, const Bottle* pBottle);
+int readBottleFromTxtFile(FILE* fp, Bottle* pBottle);
+
 
 #endif /* __BOTTLE__ */

@@ -38,4 +38,21 @@ int readBottlePackingFromBFile(FILE* fp, BottlePacking* pBottlePacking)
 	return 1;
 }
 
+int writeBottlePackingToTxtFile(FILE* fp, const BottlePacking* pBottlePacking)
+{
+	if (!writeBottleToTxtFile(fp, &pBottlePacking->bottle))
+		return 0;
+	fprintf(fp, "%d\n", pBottlePacking->quantity);
+	return 1;
+}
+
+int readBottlePackingFromTxtFile(FILE* fp, BottlePacking* pBottlePacking)
+{
+	if (!readBottleFromTxtFile(fp, &pBottlePacking->bottle))
+		return 0;
+	if (fscanf(fp, "%d", &pBottlePacking->quantity) != 1)
+		return 0;
+	return 1;
+}
+
 

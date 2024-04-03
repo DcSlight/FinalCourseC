@@ -16,4 +16,7 @@ void printBottlePacking(const BottlePacking* pBottlePack);
 int writeBottlePackingToBFile(FILE* fp, const BottlePacking* pBottlePacking);
 int readBottlePackingFromBFile(FILE* fp, BottlePacking* pBottlePacking);
 
+int writeBottlePackingToTxtFile(FILE* fp, const BottlePacking* pBottlePacking);
+int readBottlePackingFromTxtFile(FILE* fp, BottlePacking* pBottlePacking);
+
 #endif /* __BOTTLE_PACKING__ */

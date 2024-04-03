@@ -54,3 +54,32 @@ void printBottle(const Bottle* pBottle)
 	printDateTime(&pBottle->expDate);
 	printf("Sugar: %d\nCalories: %d\nMl: %d\n", pBottle->sugar, pBottle->calories, pBottle->ml);
 }
+
+int writeBottleToTxtFile(FILE* fp, const Bottle* pBottle)
+{
+	if (!writeDateTimeToTxtFile(fp, &pBottle->expDate))
+		return 0;
+	fprintf(fp, "%d\n", pBottle->flavor);
+	fprintf(fp, "%d\n", pBottle->type);
+	fprintf(fp, "%d\n", pBottle->sugar);
+	fprintf(fp, "%d\n", pBottle->calories);
+	fprintf(fp, "%d\n", pBottle->ml);
+	return 1;
+}
+
+int readBottleFromTxtFile(FILE* fp, Bottle* pBottle)
+{
+	if (!readDateTimeFromTxtFile(fp, &pBottle->expDate))
+		return 0;
+	if (fscanf(fp, "%d", &pBottle->flavor) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pBottle->type) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pBottle->sugar) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pBottle->calories) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pBottle->ml) != 1)
+		return 0;
+	return 1;
+}

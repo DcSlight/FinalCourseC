@@ -256,3 +256,32 @@ int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId)
 
 	return 1;
 }
+
+int writeTourToTxtFile(FILE* fp, const CocaColaTour* pTour)
+{
+	if (!pTour)
+		return 0;
+	if (!writeDateTimeToTxtFile(fp, &pTour->dateTime))
+		return 0;
+	fprintf(fp, "%d\n", pTour->guide->id);
+	fprintf(fp, "%d\n", pTour->duration);
+	fprintf(fp, "%d\n", pTour->visitorAmount);
+	return 1;
+}
+
+int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour)
+{
+	if (!pTour)
+		return 0;
+	if (!readDateTimeFromTxtFile(fp, &pTour->dateTime))
+		return 0;
+	if (fscanf(fp, "%d", &pTour->guide->id) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pTour->duration) != 1)
+		return 0;
+	if (fscanf(fp, "%d", &pTour->visitorAmount) != 1)
+		return 0;
+	//TODO: fill events from b file // filename is coca cola historical events file
+
+	return 1;
+}
