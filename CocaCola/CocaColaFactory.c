@@ -42,7 +42,10 @@ int addEventToFactory(CocaColaFactory* pFactory)
 	initHistoricalEvent(event);
 	const NODE* pNode = L_find(pFactory->allEvents.head.next, event, compareEventByDescription);
 	if (pNode)//ensure that we don't have duplication
+	{
+		printf("Event already exist in factory\n");
 		return 0;
+	}
 	pNode = L_insert_sorted(&pFactory->allEvents, event, compareEventByDateTime);//add event by dateTime
 	if (!pNode)
 		return 0;
@@ -158,7 +161,7 @@ Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, e
 }
 
 void printFactory(const CocaColaFactory* pFactory)
-{
+{//print factory will not print the listEvents - have a seperated function
 	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
 	printf(ANSI_COLOR_CYAN "\t\tCoca Cola Factory\n" ANSI_COLOR_RESET);
 	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);

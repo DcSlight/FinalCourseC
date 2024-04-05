@@ -55,7 +55,8 @@ Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, e
 void printFactory(const CocaColaFactory* pFactory);
 void printTrucksArr(const Truck* trucksArr,int trucksCount);//TODO: print void*
 void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount);//TODO: print void*
-void printEmployeesArr( Employee** const employeesArr, int employeesCount);
+void printEmployeesArr( Employee** const employeesArr, int employeesCount); //TODO :print void*
+
 int addTour(CocaColaFactory* pFactory);
 void EnterTour(const CocaColaFactory* pFactory);
 void printTours(const CocaColaTour** toursArr, int toursCount);

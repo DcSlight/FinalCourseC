@@ -10,9 +10,18 @@ int main()
     printLOGO();
     cocaColaLinkWebsite();
     CocaColaFactory f;
-     initFactoryFromBFile(&f, "fac.bin");
-    printFactory(&f); 
-    /*   initFactory(&f);
+   // initFactory(&f);
+   // initFactoryFromBFile(&f, "fac.bin");
+  //  printFactory(&f); 
+   // addEventToFactory(&f);
+   // addEventToFactory(&f);
+  //  addEventToFactory(&f);
+  //  writeEventsListToBFile(&f, "allEventsB.bin");
+    readEventsListFromBFile(&f, "allEventsB.bin");
+    L_print(&f.allEvents, printHistoricalEvent);
+
+
+    /*initFactory(&f);
     addEmployee(&f);
     addEmployee(&f);
     addSupplier(&f);

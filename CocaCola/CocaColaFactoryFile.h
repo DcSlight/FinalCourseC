@@ -10,7 +10,7 @@
 #include "CocaColaTour.h"
 #include "List.h"
 
-int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName);
+int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName);
 int createEmployeesArr(CocaColaFactory* pFactory);
 int createSuppliersArr(CocaColaFactory* pFactory);
 int readEmployeesArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
@@ -20,6 +20,10 @@ int readTruckArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int createToursArr(CocaColaFactory* pFactory);
 int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName);
+int writeEventsListToBFile(CocaColaFactory* pFactory, const char* eventsFileName);
+int writeEventsListToTxtFile(CocaColaFactory* pFactory, const char* eventsFileName);
+int readEventsListFromTxtFile(CocaColaFactory* pFactory, const char* eventsFileName);
+int readEventsListFromBFile(CocaColaFactory* pFactory, const char* eventsFileName);
 
 int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName);
 int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName);

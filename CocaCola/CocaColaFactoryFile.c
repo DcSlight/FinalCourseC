@@ -1,6 +1,6 @@
 #include "CocaColaFactoryFile.h"
 
-int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName)
+int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName)
 {
 	FILE* fp;
 	fp = fopen(fileName, "rb");
@@ -77,13 +77,12 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName)
 	}
 
 	//-------------------------init all Events---------------------------------
-	int eventsCount = 0;
-	if (!readIntFromFile(&eventsCount, fp, "Error reading events count\n"))
+	if (!readEventsListFromBFile(pFactory, eventsFileName))
 	{
-		fclose(fp);
+		//TODO: free
+		L_free(&pFactory->allEvents, freeHistoricalEvent);
 		return 0;
 	}
-	//TODO: read all historical events arr from b file
 
 	//-------------------------init all Tours---------------------------------
 	pFactory->tours = NULL;
@@ -344,6 +343,141 @@ int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName)
 		}
 	}
 
+	fclose(fp);
+	return 1;
+}
+
+int writeEventsListToBFile(CocaColaFactory* pFactory, const char* eventsFileName)
+{
+	FILE* fp;
+	fp = fopen(eventsFileName, "wb");
+	if (!fp) {
+		printf("Error open historical events binary file.\n");
+		return 0;
+	}
+	int size = L_length(&pFactory->allEvents);
+	if (!writeIntToFile(size, fp, "Error writing Events amount"))
+	{
+		fclose(fp);
+		return 0;
+	}
+	NODE* pNode = pFactory->allEvents.head.next;
+	while (pNode)
+	{
+		if (!writeEventToBFile(fp, pNode->key))
+		{
+			fclose(fp);
+			return 0;
+		}
+		pNode = pNode->next;
+	}
+	fclose(fp);
+	return 1;
+}
+
+int writeEventsListToTxtFile(CocaColaFactory* pFactory, const char* eventsFileName)
+{
+	FILE* fp;
+	fp = fopen(eventsFileName, "w");
+	if (!fp) {
+		printf("Error open historical events text file.\n");
+		return 0;
+	}
+	int size = L_length(&pFactory->allEvents);
+	fprintf(fp, "%d\n", size);
+	NODE* pNode = pFactory->allEvents.head.next;
+	while (pNode)
+	{
+		if (!writeEventToTxtFile(fp, pNode->key))
+		{
+			fclose(fp);
+			return 0;
+		}
+		pNode = pNode->next;
+	}
+	fclose(fp);
+	return 1;
+}
+
+int readEventsListFromTxtFile(CocaColaFactory* pFactory, const char* eventsFileName)
+{
+	FILE* fp;
+
+	fp = fopen(eventsFileName, "r");
+	if (!fp)
+	{
+		printf("Error open historical events text file\n");
+		return 0;
+	}
+
+	L_init(&pFactory->allEvents);
+	int count;
+	fscanf(fp, "%d", &count);
+	//clean the buffer
+	fgetc(fp);
+
+	HistoricalEvent* pEvent;
+	for (int i = 0; i < count; i++)
+	{
+		pEvent = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));
+		if (!pEvent)
+			break;
+		if (!readEventFromTxtFile(fp, pEvent))
+		{
+			printf("Error read event from file\n");
+			fclose(fp);
+			return 0;
+		}
+		NODE* pNode;
+		pNode = L_insert_sorted(&pFactory->allEvents, pEvent, compareEventByDateTime);//add event by dateTime
+		if (!pNode)
+		{
+			fclose(fp);
+			return 0;
+		}
+	}
+	fclose(fp);
+	return 1;
+}
+
+int readEventsListFromBFile(CocaColaFactory* pFactory, const char* eventsFileName)
+{
+	FILE* fp;
+
+	fp = fopen(eventsFileName, "rb");
+	if (!fp)
+	{
+		printf("Error open historical events binary file\n");
+		return 0;
+	}
+
+	L_init(&pFactory->allEvents);
+	int count;
+	if (!readIntFromFile(&count, fp, "Error reading events amount.\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
+	HistoricalEvent* pEvent;
+	for (int i = 0; i < count; i++)
+	{
+		pEvent = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));
+		if (!pEvent)
+			break;
+		if (!readEventFromBFile(fp, pEvent))
+		{
+			printf("Error read event from file\n");
+			fclose(fp);
+			return 0;
+		}
+		NODE* pNode;
+		pNode = L_insert_sorted(&pFactory->allEvents, pEvent, compareEventByDateTime);//add event by dateTime
+		if (!pNode)
+		{
+			fclose(fp);
+			return 0;
+		}
+	}
 	fclose(fp);
 	return 1;
 }

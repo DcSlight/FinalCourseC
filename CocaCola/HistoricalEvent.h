@@ -13,7 +13,6 @@ typedef struct
 {
 	DateTime eventDate;
 	char* description;
-	
 } HistoricalEvent;
 
 void initHistoricalEvent(HistoricalEvent* pHistory);

@@ -9,6 +9,8 @@
 
 
 /*** Definitions ***/
+#define		EMPTY	0x7FFFFFFF
+
 typedef void* DATA;
 
 typedef enum { False, True } BOOL;	// a boolean type
