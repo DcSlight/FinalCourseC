@@ -11,9 +11,18 @@ int main()
     cocaColaLinkWebsite();
     CocaColaFactory f;
 
-    initFactoryFromTxtFile(&f, "factoryTry.txt", "eventTry.txt");
+    /*initFactory(&f);
+    addEventToFactory(&f);
+    addEventToFactory(&f);
+    addEmployee(&f);
+    addTour(&f);
+    saveFactoryToBFile(&f, "factoryTry.bin", "eventsTry.bin");*/
+    initFactoryFromBFile(&f, "factoryTry.bin", "eventsTry.bin");
     printFactory(&f);
-    //initFactory(&f);
+    EnterTour(&f);
+
+
+
     //addEmployee(&f);
     //saveFactoryToTxtFile(&f, "factoryTry.txt", "eventTry.txt");
    // initFactoryFromBFile(&f, "fac.bin");

@@ -121,6 +121,12 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEven
 			freeHistoricalEvent(event);
 			return 0;
 		}
+		const NODE* pNodeTour = L_find(pTour->events.head.next, event, compareEventByDescription);
+		if (pNodeTour)//check if exist in Tour
+		{
+			freeHistoricalEvent(event);
+			return 0;
+		}
 	}
 	else
 	{//from Factory event List
@@ -130,13 +136,12 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEven
 			freeHistoricalEvent(event);
 			return 0;
 		}
-	}
-
-	const NODE* pNodeTour = L_find(pTour->events.head.next, event, compareEventByDescription);
-	if (pNodeTour)//check if exist in Tour
-	{
-		freeHistoricalEvent(event);
-		return 0;
+		const NODE* pNodeTour = L_find(pTour->events.head.next, pNodeFactory->key, compareEventByDescription);
+		if (pNodeTour)//check if exist in Tour
+		{
+			freeHistoricalEvent(event);
+			return 0;
+		}
 	}
 
 	freeHistoricalEvent(event);
@@ -146,7 +151,7 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEven
 }
 
 
-int fillEventsFromBFile(CocaColaTour* pTour,char* fileName,const LIST* allEvents)
+int fillEventsFromBFile(CocaColaTour* pTour, const char* fileName,const LIST* allEvents)
 {
 	int eventsAmount = pTour->duration / EVENT_TIME;
 	int i = 0;
@@ -253,7 +258,7 @@ int writeTourToBFile(FILE* fp, const CocaColaTour* pTour)
 	return 1;
 }
 
-int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId)
+int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId, const char* eventsFileName, LIST* allEvents)
 {
 	if (!readDateTimeFromBFile(fp, &pTour->dateTime))
 		return 0;
@@ -264,6 +269,8 @@ int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId)
 	if (!readIntFromFile(&pTour->visitorAmount, fp, "Error reading visitors amount\n"))
 		return 0;
 	//TODO: fill events from b file // filename is coca cola historical events file
+	if (!fillEventsFromBFile(pTour, eventsFileName, allEvents))
+		return 0;
 
 	return 1;
 }

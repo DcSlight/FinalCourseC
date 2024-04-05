@@ -30,7 +30,7 @@ void freeCocaColaTour(CocaColaTour* pTour);
 void printCocaColaTour(const CocaColaTour* pTour);
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent);
 int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEvents);
-int fillEventsFromBFile(CocaColaTour* pTour, char* fileName,const LIST* allEvents);
+int fillEventsFromBFile(CocaColaTour* pTour, const char* fileName,const LIST* allEvents);
 int fillEventsFromFactory(CocaColaTour* pTour,const LIST* allEvents);
 void startTour(CocaColaTour* pTour);
 int	compareTourByDuration(const void* t1, const void* t2);
@@ -38,7 +38,7 @@ int	compareTourByDateTime(const void* t1, const void* t2);
 int	compareTourByGuide(const void* t1, const void* t2);
 
 int writeTourToBFile(FILE* fp, const CocaColaTour* pTour);
-int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId);
+int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId, const char* eventsFileName, LIST* allEvents);
 
 int writeTourToTxtFile(FILE* fp, const CocaColaTour* pTour);
 int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId);

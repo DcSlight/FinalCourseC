@@ -105,7 +105,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 		fclose(fp);
 		return 0;
 	}
-	if (!readToursArrFromBFile(pFactory, fp))
+	if (!readToursArrFromBFile(pFactory, fp, eventsFileName, &pFactory->allEvents))
 	{
 		//TODO: free employees arr
 		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
@@ -261,12 +261,12 @@ int createToursArr(CocaColaFactory* pFactory)
 	return 1;
 }
 
-int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp)
+int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp, const char* eventsFileName, LIST* allEvents)
 {
 	int guideId;
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{
-		if (!readTourFromBFile(fp, pFactory->tours[i], &guideId))
+		if (!readTourFromBFile(fp, pFactory->tours[i], &guideId, eventsFileName, allEvents))
 			return 0;
 		
 		pFactory->tours[i]->guide = findEmployeeById(pFactory->employees, pFactory->employeesCount, guideId, eGuide);

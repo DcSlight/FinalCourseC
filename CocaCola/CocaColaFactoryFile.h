@@ -18,7 +18,7 @@ int readSuppliersArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int createTruckArr(CocaColaFactory* pFactory);
 int readTruckArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int createToursArr(CocaColaFactory* pFactory);
-int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
+int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp, const char* eventsFileName, LIST* allEvents);
 int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName);
 int writeEventsListToBFile(CocaColaFactory* pFactory, const char* eventsFileName);
 int writeEventsListToTxtFile(CocaColaFactory* pFactory, const char* eventsFileName);
