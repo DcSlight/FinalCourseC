@@ -76,6 +76,12 @@ void printCocaColaTour(const CocaColaTour* pTour)
 	printf("Visitor Amount: %u\n", pTour->visitorAmount);
 }
 
+void printCocaColaTourPtr(void* pTourPtr)
+{
+	const CocaColaTour* temp = *(CocaColaTour**)pTourPtr;
+	printCocaColaTour(temp);
+}
+
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent)
 {
 	long offset = sizeof(int);//firstInt

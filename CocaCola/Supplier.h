@@ -18,7 +18,9 @@ void initSupplier(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCou
 void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCount);
 void getSupplierPhone(char* phoneNumber);
 void printSupplier(const Supplier* pSupplier);
+void printSupplierPtr(void* pSupplierPtr);
 void freeSupplier(Supplier* pSupplier);
+void freeSupplierPtr(void* pSupplierPtr);
 
 int writeSupplierToBFile(FILE* fp, const Supplier* pSupplier);
 int readSupplierFromBFile(FILE* fp, Supplier* pSupplier);

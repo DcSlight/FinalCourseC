@@ -66,9 +66,21 @@ void printSupplier(const Supplier* pSupplier)
 	printAddress(&pSupplier->address);
 }
 
+void printSupplierPtr(void* pSupplierPtr)
+{
+	const Supplier* temp = *(Supplier**)pSupplierPtr;
+	printSupplier(temp);
+}
+
 void freeSupplier(Supplier* pSupplier)
 {
 	free(pSupplier->name);
+}
+
+void freeSupplierPtr(void* pSupplierPtr)
+{
+	Supplier* temp = *(Supplier**)pSupplierPtr;
+	freeSupplier(temp);
 }
 
 int writeSupplierToBFile(FILE* fp, const Supplier* pSupplier)

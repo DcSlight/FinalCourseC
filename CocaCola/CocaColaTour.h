@@ -28,6 +28,7 @@ int getMaxDurationFromBFile(char* fileName);
 void getDuration(int maxDuration, CocaColaTour* pTour);
 void freeCocaColaTour(CocaColaTour* pTour);
 void printCocaColaTour(const CocaColaTour* pTour);
+void printCocaColaTourPtr(void* pTourPtr);
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent);
 int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEvents);
 int fillEventsFromBFile(CocaColaTour* pTour, const char* fileName,const LIST* allEvents);

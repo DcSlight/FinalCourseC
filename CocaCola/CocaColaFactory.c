@@ -186,15 +186,12 @@ void printTrucksArr(const Truck* trucksArr, int trucksCount)
 void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount)
 {
 	printf("The are %d suppliers\n", suppliersCount);
-	for (int i = 0; i < suppliersCount; i++)
-	{
-		printSupplier(suppliersArr[i]);
-		printf("\n");
-	}
+	generalArrayFunction(suppliersArr, suppliersCount, sizeof(Supplier*), printSupplierPtr);
 }
 
 void printEmployeesArr( Employee** const employeesArr, int employeesCount)
 {
+	printf("The are %d employees\n", employeesCount);
 	for (int i = 0; i < employeesCount; i++)
 	{
 		employeesArr[i]->print(employeesArr[i]);
@@ -237,10 +234,8 @@ void EnterTour(const CocaColaFactory* pFactory)
 
 void printTours(const CocaColaTour** toursArr, int toursCount)
 {
-	for (int i = 0; i < toursCount; i++)
-	{
-		printCocaColaTour(toursArr[i]);
-	}
+	printf("There are %d tours\n", toursCount);
+	generalArrayFunction(toursArr, toursCount, sizeof(CocaColaTour*), printCocaColaTourPtr);
 }
 
 eTourSort showSortMenu()
