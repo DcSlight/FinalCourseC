@@ -84,44 +84,35 @@ int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj)
 {
 	if (!pEmployeeObj)
 		return 0;
+	fprintf(fp, "%d\n", pEmployeeObj->type);
 	fprintf(fp, "%d\n", pEmployeeObj->id);
 	fprintf(fp, "%s\n", pEmployeeObj->name);
 	fprintf(fp, "%d\n", pEmployeeObj->age);
-	fprintf(fp, "%d\n", pEmployeeObj->type);
 	fprintf(fp, "%d\n", pEmployeeObj->seniority);
 	return 1;
 }
 
-int readEmployeeFromTxtFile(FILE* fp, Employee* pEmployeeObj)
+int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type)
 {
 	char tempString[MAX_STR_LEN];
 	if (!pEmployeeObj)
 		return 0;
 
-	int tempInt;
-	if (fscanf(fp, "%d", &tempInt) != 1)
+	int id, age,seniority;
+	char* name;
+	if (fscanf(fp, "%d", &id) != 1)
 		return 0;
-	pEmployeeObj->id = tempInt;
 
 	myGets(tempString, MAX_STR_LEN, fp);
-	pEmployeeObj->name = getDynStr(tempString);
+	name = getDynStr(tempString);
 
-	if (fscanf(fp, "%d", &tempInt) != 1)
+	if (fscanf(fp, "%d", &age) != 1)
 		return 0;
-	pEmployeeObj->age = tempInt;
 
-	if (fscanf(fp, "%d", &tempInt) != 1)
+	if (fscanf(fp, "%d", &seniority) != 1)
 		return 0;
-	pEmployeeObj->type = tempInt;
 
-	if (fscanf(fp, "%d", &tempInt) != 1)
-		return 0;
-	pEmployeeObj->seniority = tempInt;
-	pEmployeeObj->pDerivedObj = NULL;
-	pEmployeeObj->print = printEmployee;
-	pEmployeeObj->delete = freeEmployee;
-	pEmployeeObj->writeBFile = writeEmployeeToBFile;
-	pEmployeeObj->writeTFile = writeEmployeeToTxtFile;
+	*pEmployeeObj = newEmployee(name, id, age, type, seniority);
 	return 1;
 }
 

@@ -127,27 +127,19 @@ int writeGuideToTxtFile(FILE* fp, Employee* const pEmployeeObj)
 	return 1;
 }
 
-int readGuideFromTxtFile(FILE* fp, Employee* pEmployeeObj)
+int readGuideFromTxtFile(FILE* fp, Employee** pEmployeeObj) 
 {
-	if (!readEmployeeFromTxtFile(fp, pEmployeeObj))
+	if (!pEmployeeObj)
 		return 0;
-	EmployeeGuide* pEmpGuideObj;
-	pEmpGuideObj = malloc(sizeof(EmployeeGuide));
-	if (pEmpGuideObj == NULL)
-	{
-		pEmployeeObj->delete(pEmployeeObj);
+	int educationLevel;
+	if (!readEmployeeFromTxtFile(fp, pEmployeeObj, eGuide))
 		return 0;
-	}
-	int tempInt;
-	if (fscanf(fp, "%d", &tempInt) != 1)
+	if (fscanf(fp, "%d", &educationLevel) != 1)
 		return 0;
-	pEmployeeObj->pDerivedObj = pEmpGuideObj;
-	pEmpGuideObj->educationLevel = tempInt;
-	//Changing base class interface to access derived class functions
-	pEmployeeObj->delete = deleteEmployeeGuide;
-	pEmployeeObj->print = printEmployeeGuide;
-	pEmployeeObj->writeBFile = writeGuideToBFile;
-	pEmployeeObj->writeTFile = writeGuideToTxtFile;
-	pEmpGuideObj->tellFact = tellFact;
+	Employee* e = newEmployeeGuide((*pEmployeeObj)->name, (*pEmployeeObj)->id, (*pEmployeeObj)->age, (*pEmployeeObj)->type,
+		(*pEmployeeObj)->seniority, educationLevel);
+	(*pEmployeeObj)->delete((*pEmployeeObj));//free the old 
+	*pEmployeeObj = e;//the new employeeGuide
+
 	return 1;
 }

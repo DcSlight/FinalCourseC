@@ -19,14 +19,18 @@ int createTruckArr(CocaColaFactory* pFactory);
 int readTruckArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
 int createToursArr(CocaColaFactory* pFactory);
 int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp);
-int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName);
+int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName);
 int writeEventsListToBFile(CocaColaFactory* pFactory, const char* eventsFileName);
 int writeEventsListToTxtFile(CocaColaFactory* pFactory, const char* eventsFileName);
 int readEventsListFromTxtFile(CocaColaFactory* pFactory, const char* eventsFileName);
 int readEventsListFromBFile(CocaColaFactory* pFactory, const char* eventsFileName);
 
-int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName);
-int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName);
+int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName);
+int readEmployeesArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp);
+int readSuppliersArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp);
+int readTruckArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp);
+int readToursArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp);
+int saveFactoryToTxtFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName);
 
 
 #endif /* __COCA_COLA_FACTORY_FILE__ */

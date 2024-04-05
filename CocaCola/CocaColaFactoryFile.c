@@ -63,14 +63,16 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!createTruckArr(pFactory))
 	{
 		//TODO: free employees arr
-		//TODO: free suppliers arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
 		fclose(fp);
 		return 0;
 	}
 	if (!readTruckArrFromBFile(pFactory, fp))
 	{
 		//TODO: free employees arr
-		//TODO: free suppliers arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
 		free(pFactory->trucks);
 		fclose(fp);
 		return 0;
@@ -79,7 +81,10 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	//-------------------------init all Events---------------------------------
 	if (!readEventsListFromBFile(pFactory, eventsFileName))
 	{
-		//TODO: free
+		//TODO: free employees arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		free(pFactory->trucks);
 		L_free(&pFactory->allEvents, freeHistoricalEvent);
 		return 0;
 	}
@@ -94,19 +99,20 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!createToursArr(pFactory))
 	{
 		//TODO: free employees arr
-		//TODO: free suppliers arr
-		//TODO: free events arr
-		//TODO: free tours arr - (free all tours and tours array)
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		free(pFactory->trucks);
 		fclose(fp);
 		return 0;
 	}
 	if (!readToursArrFromBFile(pFactory, fp))
 	{
 		//TODO: free employees arr
-		//TODO: free suppliers arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
 		L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
-		//TODO: free tours arr - (free all tours and tours array)
 		free(pFactory->trucks);
+		free(pFactory->tours);
 		fclose(fp);
 		return 0;
 	}
@@ -268,7 +274,7 @@ int readToursArrFromBFile(CocaColaFactory* pFactory, FILE* fp)
 	return 1;
 }
 
-int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName)
+int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName)
 {
 	FILE* fp;
 	fp = fopen(fileName, "wb");
@@ -325,8 +331,8 @@ int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName)
 	}
 
 	//-------------------------write all Events---------------------------------
-	//TODO: write all historical events arr to b file
-
+	if (!writeEventsListToBFile(pFactory, eventsFileName))
+		return 0;
 
 	//-------------------------write all Tours---------------------------------
 	if (!writeIntToFile(pFactory->toursCount, fp, "Error write tours count\n"))
@@ -482,7 +488,7 @@ int readEventsListFromBFile(CocaColaFactory* pFactory, const char* eventsFileNam
 	return 1;
 }
 
-int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
+int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName)
 {
 	FILE* fp;
 	fp = fopen(fileName, "r");
@@ -494,21 +500,179 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
 	//TODO: read seed
 
 	//-----------------------init all Employees------------------------------------
+	pFactory->employees = NULL;
+	if (fscanf(fp, "%d", &pFactory->employeesCount) != 1)
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!createEmployeesArr(pFactory))
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!readEmployeesArrFromTxtFile(pFactory, fp)) // TODO: check
+	{
+		//TODO: free employees arr
+		free(pFactory->employees);
+		fclose(fp);
+		return 0;
+	}
 
 	//-----------------------init all Suppliers-----------------------------------------
+	pFactory->suppliers = NULL;
+	if (fscanf(fp, "%d", &pFactory->suppliersCount) != 1)
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!createSuppliersArr(pFactory))
+	{
+		//TODO: free employees arr
+		fclose(fp);
+		return 0;
+	}
+	if (!readSuppliersArrFromBFile(pFactory, fp))
+	{
+		//TODO: free employees arr
+		free(pFactory->suppliers);
+		fclose(fp);
+		return 0;
+	}
 
 	//----------------------------init all Trucks--------------------------------
+	pFactory->trucks = NULL;
+	if (fscanf(fp, "%d", &pFactory->trucksCount) != 1)
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!createTruckArr(pFactory))
+	{
+		//TODO: free employees arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		fclose(fp);
+		return 0;
+	}
+	if (!readTruckArrFromTxtFile(pFactory, fp))
+	{
+		//TODO: free employees arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		free(pFactory->trucks);
+		fclose(fp);
+		return 0;
+	}
 
 	//-------------------------init all Events---------------------------------
+	if (!readEventsListFromTxtFile(pFactory, eventsFileName))
+	{
+		//TODO: free employees arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		L_free(&pFactory->allEvents, freeHistoricalEvent);
+		return 0;
+	}
 
 	//-------------------------init all Tours---------------------------------
+	pFactory->tours = NULL;
+	if (fscanf(fp, "%d", &pFactory->toursCount) != 1)
+	{
+		fclose(fp);
+		return 0;
+	}
+	if (!createToursArr(pFactory))
+	{
+		//TODO: free employees arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
+		free(pFactory->trucks);
+		fclose(fp);
+		return 0;
+	}
+	if (!readToursArrFromTxtFile(pFactory, fp))
+	{
+		//TODO: free employees arr
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplier);
+		free(pFactory->suppliers);
+		L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
+		free(pFactory->trucks);
+		free(pFactory->tours);
+		fclose(fp);
+		return 0;
+	}
 
+	pFactory->sortTour = -1;//not sorted
 
 	fclose(fp);
 	return 1;
 }
 
-int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
+int readEmployeesArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp)
+{
+	int type;
+	for (int i = 0; i < pFactory->employeesCount; i++)
+	{
+		if (fscanf(fp, "%d", &type) != 1)
+			return 0;
+		switch (type) {
+		case eDriver:
+			if (!readDriverFromTxtFile(fp, &pFactory->employees[i]))
+				return 0;
+			break;
+		case eGuide:
+			if (!readGuideFromTxtFile(fp, &pFactory->employees[i]))
+				return 0;
+			break;
+		default:
+			printf("Error type value");
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int readSuppliersArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp)
+{
+	for (int i = 0; i < pFactory->suppliersCount; i++)
+	{
+		if (!readSupplierFromTxtFile(fp, pFactory->suppliers[i]))
+			return 0;
+	}
+	return 1;
+}
+
+int readTruckArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp)
+{
+	int supplierId, driverId;
+
+	for (int i = 0; i < pFactory->trucksCount; i++)
+	{
+		if (!readTruckFromTxtFile(fp, &pFactory->trucks[i], &supplierId, &driverId))
+			return 0;
+
+		pFactory->trucks[i].destSupplier = findSupplierById(pFactory->suppliers, pFactory->suppliersCount, supplierId);
+		pFactory->trucks[i].driver = findEmployeeById(pFactory->employees, pFactory->employeesCount, driverId, eDriver);
+	}
+	return 1;
+}
+
+int readToursArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp)
+{
+	int guideId;
+	for (int i = 0; i < pFactory->toursCount; i++)
+	{
+		if (!readTourFromTxtFile(fp, pFactory->tours[i], &guideId))
+			return 0;
+
+		pFactory->tours[i]->guide = findEmployeeById(pFactory->employees, pFactory->employeesCount, guideId, eGuide);
+	}
+	return 1;
+}
+
+int saveFactoryToTxtFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName)
 {
 	FILE* fp;
 	fp = fopen(fileName, "w");
@@ -554,7 +718,8 @@ int saveFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName)
 
 
 	//-------------------------write all Events---------------------------------
-	//TODO: write all historical events arr to text file
+	if (!writeEventsListToTxtFile(pFactory, eventsFileName))
+		return 0;
 
 	//-------------------------write all Tours---------------------------------
 	fprintf(fp, "%d\n", pFactory->toursCount);

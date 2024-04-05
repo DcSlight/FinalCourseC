@@ -121,26 +121,19 @@ int writeDriverToTxtFile(FILE* fp, Employee* const pEmployeeObj)
 	return 1;
 }
 
-int readDriverFromTxtFile(FILE* fp, Employee* pEmployeeObj)
+int readDriverFromTxtFile(FILE* fp, Employee** pEmployeeObj)
 {
-	if (!readEmployeeFromTxtFile(fp, pEmployeeObj))
+	if (!pEmployeeObj)
 		return 0;
-	EmployeeDriver* pEmpDriverObj;
-	pEmpDriverObj = malloc(sizeof(EmployeeDriver));
-	if (pEmpDriverObj == NULL)
-	{
-		pEmployeeObj->delete(pEmployeeObj);
+	int license;
+	if (!readEmployeeFromTxtFile(fp, pEmployeeObj, eGuide))
 		return 0;
-	}
-	int tempInt;
-	if (fscanf(fp, "%d", &tempInt) != 1)
+	if (fscanf(fp, "%d", &license) != 1)
 		return 0;
-	pEmployeeObj->pDerivedObj = pEmpDriverObj;
-	pEmpDriverObj->licenseType = tempInt;
-	//Changing base class interface to access derived class functions
-	pEmployeeObj->delete = deleteEmployeeDriver;
-	pEmployeeObj->print = printEmployeeDriver;
-	pEmployeeObj->writeBFile = writeDriverToBFile;
-	pEmployeeObj->writeTFile = writeDriverToTxtFile;
+	Employee* e = newEmployeeDriver((*pEmployeeObj)->name, (*pEmployeeObj)->id, (*pEmployeeObj)->age, (*pEmployeeObj)->type,
+		(*pEmployeeObj)->seniority, license);
+	(*pEmployeeObj)->delete((*pEmployeeObj));//free the old 
+	*pEmployeeObj = e;//the new employeeGuide
+
 	return 1;
 }

@@ -280,13 +280,13 @@ int writeTourToTxtFile(FILE* fp, const CocaColaTour* pTour)
 	return 1;
 }
 
-int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour)
+int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId)
 {
 	if (!pTour)
 		return 0;
 	if (!readDateTimeFromTxtFile(fp, &pTour->dateTime))
 		return 0;
-	if (fscanf(fp, "%d", &pTour->guide->id) != 1)
+	if (fscanf(fp, "%d", guideId) != 1)
 		return 0;
 	if (fscanf(fp, "%d", &pTour->duration) != 1)
 		return 0;

@@ -9,13 +9,13 @@ int main()
     srand((unsigned)time(NULL));
     printLOGO();
     cocaColaLinkWebsite();
-  //  CocaColaFactory f;
+    CocaColaFactory f;
 
-
-    findSecretReceipt();
-
-
-   // initFactory(&f);
+    initFactoryFromTxtFile(&f, "factoryTry.txt", "eventTry.txt");
+    printFactory(&f);
+    //initFactory(&f);
+    //addEmployee(&f);
+    //saveFactoryToTxtFile(&f, "factoryTry.txt", "eventTry.txt");
    // initFactoryFromBFile(&f, "fac.bin");
   //  printFactory(&f); 
    // addEventToFactory(&f);

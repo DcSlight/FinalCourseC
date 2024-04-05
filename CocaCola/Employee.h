@@ -43,6 +43,6 @@ void printEmployee(Employee* const pEmployeeObj);
 int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj);
 int readEmployeeFromBFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type);
 int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj);
-int readEmployeeFromTxtFile(FILE* fp, Employee* pEmployeeObj);
+int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type);
 
 #endif /* __EMPLOYEE__ */
