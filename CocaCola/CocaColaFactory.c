@@ -262,7 +262,7 @@ void sortTours(CocaColaFactory* pFactory)
 	switch (pFactory->sortTour)
 	{
 	case eEmployeeGuide:
-		//TODO: compare tour by guide
+		compare = compareTourByGuide;
 		break;
 	case eDuration:
 		compare = compareTourByDuration;
@@ -281,11 +281,14 @@ void findTour(const CocaColaFactory* pFactory)
 	int(*compare)(const void* tour1, const void* tour2) = NULL;
 	CocaColaTour tour = { 0 };
 	CocaColaTour* pTour = &tour;
-
+	int id;
 	switch (pFactory->sortTour)
 	{
 	case eEmployeeGuide:
-		//TODO: get guide id
+		printf("Enter guide id:\t");
+		scanf("%d", &id);
+		pTour->guide=newEmployeeGuide(NULL, id, 0, eGuide, 0, 0);
+		compare = compareTourByGuide;
 		break;
 
 	case eDuration:

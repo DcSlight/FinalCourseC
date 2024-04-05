@@ -228,6 +228,17 @@ int compareTourByDateTime(const void* t1, const void* t2)
 	return compareDateTime(&pTour1->dateTime, &pTour2->dateTime);
 }
 
+int compareTourByGuide(const void* t1, const void* t2)
+{
+	const CocaColaTour* pTour1 = (const CocaColaTour*)t1;
+	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
+	if (pTour1->guide->id > pTour1->guide->id)
+		return 1;
+	if (pTour1->guide->id < pTour1->guide->id)
+		return -1;
+	return 0;
+}
+
 int writeTourToBFile(FILE* fp, const CocaColaTour* pTour)
 {
 	if (!writeDateTimeToBFile(fp, &pTour->dateTime))

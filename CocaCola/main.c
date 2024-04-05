@@ -9,7 +9,12 @@ int main()
     srand((unsigned)time(NULL));
     printLOGO();
     cocaColaLinkWebsite();
-    CocaColaFactory f;
+  //  CocaColaFactory f;
+
+
+    findSecretReceipt();
+
+
    // initFactory(&f);
    // initFactoryFromBFile(&f, "fac.bin");
   //  printFactory(&f); 
@@ -17,8 +22,8 @@ int main()
    // addEventToFactory(&f);
   //  addEventToFactory(&f);
   //  writeEventsListToBFile(&f, "allEventsB.bin");
-    readEventsListFromBFile(&f, "allEventsB.bin");
-    L_print(&f.allEvents, printHistoricalEvent);
+   // readEventsListFromBFile(&f, "allEventsB.bin");
+  //  L_print(&f.allEvents, printHistoricalEvent);
 
 
     /*initFactory(&f);

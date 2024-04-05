@@ -15,6 +15,11 @@
 
 void printLOGO();
 void cocaColaLinkWebsite();
-
+void findSecretReceipt();
+void pinkKey(char* str);
+void blueKey(char* str);
+void greenKey(char* str);
+void yellowKey(char* str);
+void redKey(char* str);
 
 #endif /* __COCA_COLA_FUNCTIONS__ */
