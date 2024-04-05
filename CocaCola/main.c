@@ -6,12 +6,14 @@
 
 int main()
 {
-    srand((unsigned)time(NULL));
+    //srand((unsigned)time(NULL));
+    /*unsigned seed = (unsigned)time(NULL);
+    srand(seed);*/
     printLOGO();
     cocaColaLinkWebsite();
     CocaColaFactory f;
 
-    /*initFactory(&f);
+   /* initFactory(&f);
     addEventToFactory(&f);
     addEventToFactory(&f);
     addEmployee(&f);

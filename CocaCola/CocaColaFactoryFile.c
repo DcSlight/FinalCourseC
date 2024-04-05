@@ -10,7 +10,12 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 		return 0;
 	}
 
-	//TODO: read seed
+	if (!readIntFromFile(&pFactory->seed, fp, "Error reading employees count\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
+	srand(pFactory->seed);
 
 	//-----------------------init all Employees------------------------------------
 	pFactory->employees = NULL;
@@ -283,7 +288,11 @@ int saveFactoryToBFile(CocaColaFactory* pFactory, const char* fileName, const ch
 		return 0;
 	}
 
-	//TODO: write seed
+	if (!writeIntToFile(pFactory->seed, fp, "Error write seed\n"))
+	{
+		fclose(fp);
+		return 0;
+	}
 
 	//-------------------------write all Employees---------------------------------
 	if (!writeIntToFile(pFactory->employeesCount, fp, "Error write employees count\n"))
@@ -497,7 +506,12 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 		return 0;
 	}
 
-	//TODO: read seed
+	if (fscanf(fp, "%d", &pFactory->seed) != 1)
+	{
+		fclose(fp);
+		return 0;
+	}
+	srand(pFactory->seed);
 
 	//-----------------------init all Employees------------------------------------
 	pFactory->employees = NULL;
@@ -681,7 +695,7 @@ int saveFactoryToTxtFile(CocaColaFactory* pFactory, const char* fileName, const 
 		return 0;
 	}
 
-	//TODO: write seed
+	fprintf(fp, "%d\n", pFactory->seed);
 
 	//-------------------------write all Employees---------------------------------
 	fprintf(fp, "%d\n", pFactory->employeesCount);

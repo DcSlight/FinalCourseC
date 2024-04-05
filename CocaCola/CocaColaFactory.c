@@ -14,7 +14,9 @@ int initFactory(CocaColaFactory* pFactory)
 	pFactory->suppliers = NULL;
 	pFactory->suppliersCount = 0;
 	pFactory->tours = NULL;
-	pFactory->toursCount = 0;	
+	pFactory->toursCount = 0;
+	pFactory->seed = (unsigned)time(NULL);
+	srand(pFactory->seed);
 	return 1;
 }
 

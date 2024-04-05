@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "Employee.h"
 #include "GuideEmployee.h"
 #include "DriverEmployee.h"
@@ -40,6 +41,7 @@ typedef struct
 	int toursCount;
 	LIST allEvents;
 	eTourSort sortTour;
+	unsigned seed;
 }CocaColaFactory;
 
 int initFactory(CocaColaFactory* pFactory);
