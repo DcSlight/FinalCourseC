@@ -68,7 +68,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!createTruckArr(pFactory))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		fclose(fp);
 		return 0;
@@ -76,7 +76,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!readTruckArrFromBFile(pFactory, fp))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		free(pFactory->trucks);
 		fclose(fp);
@@ -87,7 +87,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!readEventsListFromBFile(pFactory, eventsFileName))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		free(pFactory->trucks);
 		L_free(&pFactory->allEvents, freeHistoricalEvent);
@@ -104,7 +104,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!createToursArr(pFactory))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		free(pFactory->trucks);
 		fclose(fp);
@@ -113,7 +113,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 	if (!readToursArrFromBFile(pFactory, fp, eventsFileName, &pFactory->allEvents))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
 		free(pFactory->trucks);
@@ -564,7 +564,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	if (!createTruckArr(pFactory))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		fclose(fp);
 		return 0;
@@ -572,7 +572,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	if (!readTruckArrFromTxtFile(pFactory, fp))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		free(pFactory->trucks);
 		fclose(fp);
@@ -583,7 +583,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	if (!readEventsListFromTxtFile(pFactory, eventsFileName))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		L_free(&pFactory->allEvents, freeHistoricalEvent);
 		return 0;
@@ -599,7 +599,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	if (!createToursArr(pFactory))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
 		free(pFactory->trucks);
@@ -609,7 +609,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	if (!readToursArrFromTxtFile(pFactory, fp))
 	{
 		//TODO: free employees arr
-		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier), freeSupplierPtr);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 		free(pFactory->suppliers);
 		L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
 		free(pFactory->trucks);

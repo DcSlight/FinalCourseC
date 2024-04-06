@@ -39,7 +39,7 @@ int main()
             printFactory(&factory);
             break;
         case eFindSecretRecipe:
-            findSecretReceipt();
+            findSecretRecipe();
             break;
         case EXIT:
             printf("Bye bye\n");
@@ -51,8 +51,16 @@ int main()
         }
     } while (!stop);
 
-    
+    if (!saveFactoryToBFile(&factory, FACTORY_B_FILE_NAME, EVENTS_B_FILE_NAME))
+    {
+        printf("Error saving factory to binary file\n");
+    }
+    if (!saveFactoryToTxtFile(&factory, FACTORY_TXT_FILE_NAME, EVENTS_TXT_FILE_NAME))
+    {
+        printf("Error saving factory to text file\n");
+    }
 
+    freeFactory(&factory);
 
     return 0;
 }

@@ -15,7 +15,7 @@
 
 void printLOGO();
 void cocaColaLinkWebsite();
-void findSecretReceipt();
+void findSecretRecipe();
 void pinkKey(char* str);
 void blueKey(char* str);
 void greenKey(char* str);

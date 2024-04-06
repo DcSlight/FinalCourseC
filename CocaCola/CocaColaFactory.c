@@ -231,7 +231,7 @@ void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount)
 
 void printEmployeesArr( Employee** const employeesArr, int employeesCount)
 {
-	printf("\nThe are %d employees\n", employeesCount);
+	printf("\nThere are %d employees\n", employeesCount);
 	for (int i = 0; i < employeesCount; i++)
 	{
 		employeesArr[i]->print(employeesArr[i]);
@@ -354,5 +354,25 @@ void findTour(const CocaColaFactory* pFactory)
 	else {
 		printf("The search cannot be performed, array not sorted\n");
 	}
+}
+
+void freeEmployeesArr(CocaColaFactory* pFactory)
+{
+	for (int i = 0; i < pFactory->employeesCount; i++)
+	{
+		pFactory->employees[i]->delete(pFactory->employees[i]);
+	}
+	free(pFactory->employees);
+}
+
+void freeFactory(CocaColaFactory* pFactory)
+{
+	freeEmployeesArr(pFactory);
+	generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
+	free(pFactory->suppliers);
+	L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
+	free(pFactory->trucks);
+	generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTour);//TODO: check if working
+	free(pFactory->tours);
 }
 

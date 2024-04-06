@@ -72,12 +72,6 @@ void printTruckContent(const Truck* pTruck)
 	}
 }
 
-void freeTruck(Truck* pTruck)
-{
-	pTruck->driver->delete(pTruck->driver);
-	freeSupplier(pTruck->destSupplier);
-	free(pTruck->destSupplier);
-}
 
 int writeTruckToBFile(FILE* fp, const Truck* pTruck)
 {

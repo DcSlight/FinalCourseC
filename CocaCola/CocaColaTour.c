@@ -64,7 +64,6 @@ int getMaxDurationFromBFile(char* fileName)
 void freeCocaColaTour(CocaColaTour* pTour)
 {
 	L_free(&pTour->events,NULL);//free only the NODES, we don't want to free Factory data
-	pTour->guide->delete(pTour->guide);
 }
 
 void printCocaColaTour(const CocaColaTour* pTour)

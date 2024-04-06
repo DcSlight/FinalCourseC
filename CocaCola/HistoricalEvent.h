@@ -7,7 +7,7 @@
 #include "General.h"
 #include "FileHelper.h"
 
-#define MIN_HISTORY_YEAR 1892 //date of founding CocaCola Company
+#define MIN_HISTORY_YEAR 1886 //date of inventing CocaCola Formula
 
 typedef struct
 {

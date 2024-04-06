@@ -57,6 +57,8 @@ void printTours(const CocaColaTour** toursArr, int toursCount);
 eTourSort showSortMenu();
 void sortTours(CocaColaFactory* pFactory);
 void findTour(const CocaColaFactory* pFactory);
+void freeEmployeesArr(CocaColaFactory* pFactory);
+void freeFactory(CocaColaFactory* pFactory);
 
 
 #endif /* __COCA_COLA_FACTORY__ */
