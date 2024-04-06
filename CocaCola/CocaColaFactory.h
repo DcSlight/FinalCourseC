@@ -18,8 +18,6 @@ typedef enum {
 
 static const char* TourStr[eNofTourTypes];
 
-#define FACTORY_EVENTS_FILE_B "CocaColaEvents.bin"
-
 typedef struct
 {
 	Employee** employees;
