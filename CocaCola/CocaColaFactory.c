@@ -110,14 +110,14 @@ Truck* chooseTruck(CocaColaFactory* pFactory)
 
 int addPackToTruck(CocaColaFactory* pFactory)
 {
-	Truck t;
+	Truck* t;
 	if (pFactory->trucksCount == 0)
 	{
 		printf("\nThere are no trucks in the factory\n\n");
 		return 0;
 	}
-	t = *chooseTruck(pFactory);
-	addPack(&t);
+	t = chooseTruck(pFactory);
+	addPack(t);
 	return 1;
 }
 

@@ -16,8 +16,42 @@ void initBottle(Bottle* pBottle)
 	pBottle->type = getBottleType();
 	printf("Enter expiration date and time of the bottle\n");
 	initDateTime(&pBottle->expDate,0);
-	printf("Enter sugar, calories and ml\n");
-	scanf("%d%d%d", &pBottle->sugar, &pBottle->calories, &pBottle->ml);
+	pBottle->sugar = getSugar();
+	pBottle->calories = getCalories();
+	pBottle->ml = getMl();
+}
+
+int getSugar()
+{
+	int sugar;
+	do
+	{
+		printf("Enter sugar between %d and %d:\t", MIN_VALUE, MAX_SUGAR);
+		scanf("%d", &sugar);
+	} while (sugar > MAX_SUGAR || sugar < MIN_VALUE);
+	return sugar;
+}
+
+int getCalories()
+{
+	int calories;
+	do
+	{
+		printf("Enter calories between %d and %d:\t", MIN_VALUE, MAX_CALORIES);
+		scanf("%d", &calories);
+	} while (calories > MAX_CALORIES || calories < MIN_VALUE);
+	return calories;
+}
+
+int getMl()
+{
+	int ml;
+	do
+	{
+		printf("Enter ml between %d and %d:\t", MIN_VALUE, MAX_ML);
+		scanf("%d", &ml);
+	} while (ml > MAX_ML || ml < MIN_VALUE);
+	return ml;
 }
 
 eFlavorType getFlavorType()

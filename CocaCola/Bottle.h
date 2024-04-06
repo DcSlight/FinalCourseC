@@ -18,6 +18,11 @@ static const char* BottleStr[eNofBottleTypes];
 
 typedef unsigned char BYTE;
 
+#define MIN_VALUE 0
+#define MAX_SUGAR 127
+#define MAX_CALORIES 1023
+#define MAX_ML 2000
+
 typedef struct
 {
 	DateTime expDate;
@@ -29,6 +34,9 @@ typedef struct
 } Bottle;
 
 void initBottle(Bottle* pBottle);
+int getSugar();
+int getCalories();
+int getMl();
 eFlavorType getFlavorType();
 eBottleType getBottleType();
 void printBottle(const Bottle* pBottle);

@@ -78,10 +78,10 @@ void deleteEmployeeDriver(Employee* const pEmployeeObj)
 void printEmployeeDriver(Employee* const pEmployeeObj)
 {
 	printEmployee(pEmployeeObj);
-	printf("Type: Driver\t");
+	printf("\t\tType: Driver\t");
 	EmployeeDriver* pEmpDriverObj;
 	pEmpDriverObj = pEmployeeObj->pDerivedObj;
-	printf("\nLicense: %s\n", licenseStr[pEmpDriverObj->licenseType]);
+	printf("\tLicense: %-10s\n", licenseStr[pEmpDriverObj->licenseType]);
 }
 
 int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj)

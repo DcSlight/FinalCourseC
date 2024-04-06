@@ -43,9 +43,9 @@ eEmployeeType getEmployeeType()
 
 void printEmployee(Employee* const pEmp)
 {
-	printf("ID:%d\n", pEmp->id);
-	printf("Name: %s \nAge: %d\n", pEmp->name, pEmp->age);
-	printf("Seniority: %d\n", pEmp->seniority);
+	printf("ID:%-10d\t", pEmp->id);
+	printf("Name: %-15s \tAge: %-20d\t", pEmp->name, pEmp->age);
+	printf("Seniority: %-10d\n", pEmp->seniority);
 }
 
 int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj)
