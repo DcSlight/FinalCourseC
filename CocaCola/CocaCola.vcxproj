@@ -163,6 +163,7 @@
     <ClInclude Include="GuideEmployee.h" />
     <ClInclude Include="HistoricalEvent.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Supplier.h" />
     <ClInclude Include="Truck.h" />
   </ItemGroup>

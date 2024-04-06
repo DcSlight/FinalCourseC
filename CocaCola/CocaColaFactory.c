@@ -96,6 +96,44 @@ int addTruck(CocaColaFactory* pFactory)
 	return 1;
 }
 
+Truck* chooseTruck(CocaColaFactory* pFactory)
+{
+	int option;
+	do
+	{
+		printTrucksArr(pFactory->trucks, pFactory->trucksCount);
+		printf("\nChoose a number of truck:\t");
+		scanf("%d", &option);
+	} while (option < 0 || option > pFactory->trucksCount);
+	return &pFactory->trucks[option - 1];
+}
+
+int addPackToTruck(CocaColaFactory* pFactory)
+{
+	Truck t;
+	if (pFactory->trucksCount == 0)
+	{
+		printf("\nThere are no trucks in the factory\n\n");
+		return 0;
+	}
+	t = *chooseTruck(pFactory);
+	addPack(&t);
+	return 1;
+}
+
+int doPrintTruckContent(CocaColaFactory* pFactory)
+{
+	Truck t;
+	if (pFactory->trucksCount == 0)
+	{
+		printf("\nThere are no trucks in the factory\n\n");
+		return 0;
+	}
+	t = *chooseTruck(pFactory);
+	printTruckContent(&t);
+	return 1;
+}
+
 Supplier* getSupplier(CocaColaFactory* pFactory)
 {
 	Supplier* pSupplier;
@@ -175,9 +213,10 @@ void printFactory(const CocaColaFactory* pFactory)
 
 void printTrucksArr(const Truck* trucksArr, int trucksCount)
 {
-	printf("There are %d trucks\n", trucksCount);
+	printf("\nThere are %d trucks\n", trucksCount);
 	for (int i = 0; i < trucksCount; i++)
 	{
+		printf("Truck %d:\n", i+1);
 		printTruck(&trucksArr[i]);
 		printf("\n");
 	}
@@ -185,17 +224,19 @@ void printTrucksArr(const Truck* trucksArr, int trucksCount)
 
 void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount)
 {
-	printf("The are %d suppliers\n", suppliersCount);
+	printf("\nThere are %d suppliers\n", suppliersCount);
 	generalArrayFunction(suppliersArr, suppliersCount, sizeof(Supplier*), printSupplierPtr);
+	printf("\n");
 }
 
 void printEmployeesArr( Employee** const employeesArr, int employeesCount)
 {
-	printf("The are %d employees\n", employeesCount);
+	printf("\nThe are %d employees\n", employeesCount);
 	for (int i = 0; i < employeesCount; i++)
 	{
 		employeesArr[i]->print(employeesArr[i]);
 	}
+	printf("\n");
 }
 
 int addTour(CocaColaFactory* pFactory)

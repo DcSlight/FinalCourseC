@@ -28,10 +28,10 @@ void findSecretReceipt()
 	int option;
 	char str[] = { 0xb6 , 0x8b,0xdf,0x96,0x8c,0xdf,0x8c,0x8b,0x96,0x93,0x93,0xdf,0x9e,0xdf,0x8c,0x9a,0x9c,0x8d,0x9a,0x8b,0x00};
 	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf("Do you to be the first to find the secret receipt of Coca Cola?\n");
+	printf("Do you want to be the first to find the secret receipt of Coca Cola?\n");
 	printf("John Stith Pemberton invented the CocaCola formula in 1886.\n");
-	printf("The encrypted secret is: |%s|\n", str);
-	printf("To decrypt the secret please pick a key\n");
+	printf("\nThe encrypted secret is: |%s|\n", str);
+	printf("\nTo decrypt the secret please pick a key\n");
 	printf(ANSI_COLOR_YELLOW"For yellow key press 1\n"ANSI_COLOR_RESET);
 	printf(ANSI_COLOR_RED"For red key press 2\n"ANSI_COLOR_RESET);
 	printf(ANSI_COLOR_BLUE"For blue key press 3\n"ANSI_COLOR_RESET);
