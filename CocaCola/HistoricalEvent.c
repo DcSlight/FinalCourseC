@@ -17,6 +17,7 @@ void printHistoricalEvent(const HistoricalEvent* pHistory)
 void freeHistoricalEvent(const void* val)
 {
 	HistoricalEvent* e = (HistoricalEvent*)val;
+	free(e->description);
 	free(e);
 }
 

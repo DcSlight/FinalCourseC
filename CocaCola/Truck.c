@@ -128,7 +128,7 @@ int writeTruckToTxtFile(FILE* fp, const Truck* pTruck)
 
 int readTruckFromTxtFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
 {
-	myGets(pTruck->truckLicenseCode, LICENSE_LEN + 1, fp); //TODO: check
+	myGets(pTruck->truckLicenseCode, LICENSE_LEN + 1, fp);
 
 	if (fscanf(fp, "%d", driverId) != 1)
 		return 0;

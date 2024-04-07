@@ -141,16 +141,6 @@ int createEmployeesArr(CocaColaFactory* pFactory)
 	}
 	else
 		pFactory->employees = NULL;
-
-	//for (int i = 0; i < pFactory->employeesCount; i++)
-	//{
-	//	pFactory->employees[i] = (Employee*)calloc(1, sizeof(Employee));
-	//	if (!pFactory->employees[i])
-	//	{
-	//		printf("Alocation error\n");
-	//		return 0;
-	//	}
-	//}
 	return 1;
 }
 
@@ -546,7 +536,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 		fclose(fp);
 		return 0;
 	}
-	if (!readSuppliersArrFromBFile(pFactory, fp))
+	if (!readSuppliersArrFromTxtFile(pFactory, fp))
 	{
 		//TODO: free employees arr
 		free(pFactory->suppliers);

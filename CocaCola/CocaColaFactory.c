@@ -265,6 +265,8 @@ void EnterTour(const CocaColaFactory* pFactory)
 {
 	int index;
 	printf("There are %d tours\n", pFactory->toursCount);
+	if (pFactory->toursCount == 0)
+		return;
 	do
 	{
 		printf("Pick a tour to start\n");
@@ -365,14 +367,25 @@ void freeEmployeesArr(CocaColaFactory* pFactory)
 	free(pFactory->employees);
 }
 
+#include <crtdbg.h>
+
 void freeFactory(CocaColaFactory* pFactory)
 {
 	freeEmployeesArr(pFactory);
+	_CrtDumpMemoryLeaks();
 	generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 	free(pFactory->suppliers);
+	_CrtDumpMemoryLeaks();
 	L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
+	_CrtDumpMemoryLeaks();
 	free(pFactory->trucks);
-	generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTour);//TODO: check if working
+	_CrtDumpMemoryLeaks();
+	for (int i = 0; i < pFactory->toursCount; i++)
+	{
+		freeCocaColaTour(pFactory->tours[i]);
+	}
+	//generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTour);//TODO: check if working
 	free(pFactory->tours);
+	_CrtDumpMemoryLeaks();
 }
 

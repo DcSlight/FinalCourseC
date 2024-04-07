@@ -15,15 +15,19 @@ void initSupplier(Supplier* pSupplier, Supplier** allSuppliers,int suppliersCoun
 void getSupplierId(Supplier* pSupplier, Supplier** allSuppliers, int suppliersCount)
 {
 	int id;
-	int flag = 1;
+	int flag;
 	do
 	{
 		printf("Enter unique Id:\t");
 		scanf("%d",&id);
+		flag = 1;
 		for (int i = 0; i < suppliersCount; i++)
 		{
 			if (allSuppliers[i]->id == id)
+			{
 				flag = 0;
+				break;
+			}
 		}
 	} while (!flag);
 
@@ -75,6 +79,7 @@ void printSupplierPtr(void* pSupplierPtr)
 void freeSupplier(Supplier* pSupplier)
 {
 	free(pSupplier->name);
+	freeAddress(&pSupplier->address);
 }
 
 void freeSupplierPtr(void* pSupplierPtr)

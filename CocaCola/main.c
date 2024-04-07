@@ -3,13 +3,14 @@
 #include "main.h"
 #include "CocaColaFunctions.h"
 #include "CocaColaFactoryFile.h"
+#include <crtdbg.h>
 
 int main()
 {
     printLOGO();
     cocaColaLinkWebsite();
     CocaColaFactory factory;
-
+    _CrtDumpMemoryLeaks();
     initCocaColaFactory(&factory);
 
     int option;
@@ -61,7 +62,8 @@ int main()
     }
 
     freeFactory(&factory);
-
+    printf("before DUMP\n");
+ 
     return 0;
 }
 
@@ -235,7 +237,7 @@ void ToursMenu(CocaColaFactory* pFactory)
     {
         printf("\nPlease choose one of the following options\n");
         printf("1 - Add a Tour\n");
-        printf("2 - Enter a Tour\n");
+        printf("2 - Start a Tour\n");
         printf("3 - Print all tours\n");
         printf("4 - Sort tours\n");
         printf("5 - Find a tour\n");

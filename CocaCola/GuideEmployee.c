@@ -72,7 +72,11 @@ Employee* newEmployeeGuide(const char* pName,const int id, const int age, const 
 
 void deleteEmployeeGuide(Employee* const pEmployeeObj)
 {
-	freeEmployee(pEmployeeObj);
+	EmployeeGuide* pEmpGuide;
+	pEmpGuide = pEmployeeObj->pDerivedObj;
+	free(pEmployeeObj->name);
+	free(pEmployeeObj);
+	//freeEmployee(pEmpGuide->pBaseObj);
 }
 
 void printEmployeeGuide(Employee* const pEmployeeObj)
@@ -106,13 +110,13 @@ int readGuideFromBFile(FILE* fp, Employee** pEmployeeObj)
 	if (!pEmployeeObj)
 		return 0;
 	int educationLevel;
-	if (!readEmployeeFromBFile(fp, pEmployeeObj, eGuide))
+	int id, age, seniority;
+	char* name;
+	if (!readEmployeeFromBFile(fp,&id,&age,&seniority,&name))
 		return 0;
 	if (!readIntFromFile(&educationLevel, fp, "Error reading Guide Education Level Type\n"))
 		return 0;
-	Employee* e = newEmployeeGuide((*pEmployeeObj)->name, (*pEmployeeObj)->id, (*pEmployeeObj)->age, (*pEmployeeObj)->type,
-		(*pEmployeeObj)->seniority, educationLevel);
-	(*pEmployeeObj)->delete((*pEmployeeObj));//free the old 
+	Employee* e = newEmployeeGuide(name,id,age, eGuide,seniority, educationLevel);
 	*pEmployeeObj = e;//the new employeeGuide
 	return 1;
 }

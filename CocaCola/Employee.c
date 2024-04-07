@@ -63,20 +63,17 @@ int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj)
 	return 1;
 }
 
-int readEmployeeFromBFile(FILE* fp, Employee** pEmployeeObj,eEmployeeType type)
+int readEmployeeFromBFile(FILE* fp,int* id,int* age, int* seniority, char** name)
 {
-	int id, age, seniority;
-	char* name;
-	if (!readIntFromFile(&id, fp, "Error reading Employee id\n"))
+	if (!readIntFromFile(id, fp, "Error reading Employee id\n"))
 		return 0;
-	name = readStringFromFile(fp, "Error reading Employee name\n");
-	if (!name)
+	*name = readStringFromFile(fp, "Error reading Employee name\n");
+	if (!*name)
 		return 0;
-	if (!readIntFromFile(&age, fp, "Error reading Employee Age\n"))
+	if (!readIntFromFile(age, fp, "Error reading Employee Age\n"))
 		return 0;
-	if (!readIntFromFile(&seniority, fp, "Error reading Employee Seniority\n"))
+	if (!readIntFromFile(seniority, fp, "Error reading Employee Seniority\n"))
 		return 0;
-	*pEmployeeObj = newEmployee(name, id, age, type, seniority);
 	return 1;
 }
 
@@ -119,6 +116,7 @@ int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType typ
 void freeEmployee(Employee* pEmp)
 {
 	free(pEmp->name);
+	free(pEmp);
 }
 
 
