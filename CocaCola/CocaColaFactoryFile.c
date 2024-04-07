@@ -1,4 +1,6 @@
 #include "CocaColaFactoryFile.h"
+#include <crtdbg.h> //TODO: delete
+
 
 int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName)
 {
@@ -16,7 +18,6 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 		return 0;
 	}
 	srand(pFactory->seed);
-
 	//-----------------------init all Employees------------------------------------
 	pFactory->employees = NULL;
 	if (!readIntFromFile(&pFactory->employeesCount, fp, "Error reading employees count\n"))
@@ -36,7 +37,11 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 		fclose(fp);
 		return 0;
 	}
-	
+	_CrtDumpMemoryLeaks();//TODO:delete
+	freeEmployeesArr(pFactory);//TODO:delete
+	_CrtDumpMemoryLeaks();//TODO:delete
+
+
 	//-----------------------init all Suppliers-----------------------------------------
 	pFactory->suppliers = NULL;
 	if (!readIntFromFile(&pFactory->suppliersCount, fp, "Error reading suppliers count\n"))

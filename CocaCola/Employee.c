@@ -1,7 +1,6 @@
 #include "Employee.h"
 
 
-
 Employee* newEmployee(const char* pName,const int id, const int age, const eEmployeeType type, int seniority)
 {
 	Employee* pObj = NULL;
@@ -109,7 +108,7 @@ int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType typ
 	if (fscanf(fp, "%d", &seniority) != 1)
 		return 0;
 
-	*pEmployeeObj = newEmployee(name, id, age, type, seniority);
+	*pEmployeeObj = newEmployee(name, id, age, type, seniority); //TODO: change
 	return 1;
 }
 

@@ -371,21 +371,19 @@ void freeEmployeesArr(CocaColaFactory* pFactory)
 
 void freeFactory(CocaColaFactory* pFactory)
 {
-	freeEmployeesArr(pFactory);
-	_CrtDumpMemoryLeaks();
+	
 	generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 	free(pFactory->suppliers);
-	_CrtDumpMemoryLeaks();
 	L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
-	_CrtDumpMemoryLeaks();
 	free(pFactory->trucks);
-	_CrtDumpMemoryLeaks();
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{
 		freeCocaColaTour(pFactory->tours[i]);
 	}
 	//generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTour);//TODO: check if working
 	free(pFactory->tours);
+	_CrtDumpMemoryLeaks();
+	freeEmployeesArr(pFactory);
 	_CrtDumpMemoryLeaks();
 }
 

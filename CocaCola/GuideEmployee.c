@@ -54,6 +54,7 @@ Employee* newEmployeeGuide(const char* pName,const int id, const int age, const 
 	pObj = newEmployee(pName,id, age, type, seniority);	//calling base class constructor
 	//allocating memory
 	pEmpObj = malloc(sizeof(EmployeeGuide));
+	printf("The pEmpObj guide of x is %p\n", &pEmpObj);//TODO: delete
 	if (pEmpObj == NULL)
 	{
 		pObj->delete(pObj);
@@ -72,11 +73,20 @@ Employee* newEmployeeGuide(const char* pName,const int id, const int age, const 
 
 void deleteEmployeeGuide(Employee* const pEmployeeObj)
 {
+
+	//freeEmployee(pEmployeeObj); //license is char and doesn't need free
 	EmployeeGuide* pEmpGuide;
 	pEmpGuide = pEmployeeObj->pDerivedObj;
-	free(pEmployeeObj->name);
-	free(pEmployeeObj);
-	//freeEmployee(pEmpGuide->pBaseObj);
+	//destroy derived obj
+	free(pEmpGuide);
+	//destroy base Obj
+	freeEmployee(pEmployeeObj);
+
+	//EmployeeGuide* pEmpGuide;
+	//pEmpGuide = pEmployeeObj->pDerivedObj;
+	//free(pEmployeeObj->name);
+	//free(pEmployeeObj);
+	////freeEmployee(pEmpGuide->pBaseObj);
 }
 
 void printEmployeeGuide(Employee* const pEmployeeObj)
@@ -117,6 +127,7 @@ int readGuideFromBFile(FILE* fp, Employee** pEmployeeObj)
 	if (!readIntFromFile(&educationLevel, fp, "Error reading Guide Education Level Type\n"))
 		return 0;
 	Employee* e = newEmployeeGuide(name,id,age, eGuide,seniority, educationLevel);
+	free(name);
 	*pEmployeeObj = e;//the new employeeGuide
 	return 1;
 }

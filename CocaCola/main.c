@@ -7,10 +7,25 @@
 
 int main()
 {
+    /*_CrtDumpMemoryLeaks();
+    Employee** arr = (Employee**)malloc(2 * sizeof(Employee*));
+    Employee* e1 = newEmployeeDriver("guideIdan", 1, 20, eDriver, 1, eC);
+    Employee* e2 = newEmployeeDriver("driverIdan", 1, 25, eGuide, 2, eAcademic);
+    arr[0] = e1;
+    arr[1] = e2;
+    _CrtDumpMemoryLeaks();
+    arr[0]->delete(arr[0]);
+    _CrtDumpMemoryLeaks();
+    arr[1]->delete(arr[1]);
+    _CrtDumpMemoryLeaks();
+    free(arr);
+    _CrtDumpMemoryLeaks();*/
+
+
+
     printLOGO();
     cocaColaLinkWebsite();
     CocaColaFactory factory;
-    _CrtDumpMemoryLeaks();
     initCocaColaFactory(&factory);
 
     int option;
