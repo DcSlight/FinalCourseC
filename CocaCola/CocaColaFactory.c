@@ -384,11 +384,10 @@ void freeFactory(CocaColaFactory* pFactory)
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{
 		freeCocaColaTour(pFactory->tours[i]);
+		free(pFactory->tours[i]);
 	}
 	//generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTour);//TODO: check if working
 	free(pFactory->tours);
-	_CrtDumpMemoryLeaks();
 	freeEmployeesArr(pFactory);
-	_CrtDumpMemoryLeaks();
 }
 
