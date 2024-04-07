@@ -40,7 +40,6 @@ char* readStringFromFile(FILE* fp, const char* msg)
 	if (!readIntFromFile(&length, fp, msg))
 		return NULL;
 	str = (char*)malloc((length) * sizeof(char));
-	printf("The address of str is %p\n", str);//TODO:delete
 	if (!str)
 	{
 		puts(msg);

@@ -54,7 +54,6 @@ Employee* newEmployeeGuide(const char* pName,const int id, const int age, const 
 	pObj = newEmployee(pName,id, age, type, seniority);	//calling base class constructor
 	//allocating memory
 	pEmpObj = malloc(sizeof(EmployeeGuide));
-	printf("The pEmpObj guide of x is %p\n", &pEmpObj);//TODO: delete
 	if (pEmpObj == NULL)
 	{
 		pObj->delete(pObj);

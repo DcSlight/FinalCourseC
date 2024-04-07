@@ -37,10 +37,6 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 		fclose(fp);
 		return 0;
 	}
-	_CrtDumpMemoryLeaks();//TODO:delete
-	freeEmployeesArr(pFactory);//TODO:delete
-	_CrtDumpMemoryLeaks();//TODO:delete
-
 
 	//-----------------------init all Suppliers-----------------------------------------
 	pFactory->suppliers = NULL;
@@ -228,7 +224,6 @@ int readTruckArrFromBFile(CocaColaFactory* pFactory, FILE* fp)
 	{
 		if (!readTruckFromBFile(fp, &pFactory->trucks[i], &supplierId, &driverId))
 			return 0;
-
 		pFactory->trucks[i].destSupplier = findSupplierById(pFactory->suppliers, pFactory->suppliersCount, supplierId);
 		pFactory->trucks[i].driver = findEmployeeById(pFactory->employees, pFactory->employeesCount, driverId, eDriver);
 	}

@@ -375,6 +375,11 @@ void freeFactory(CocaColaFactory* pFactory)
 	generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 	free(pFactory->suppliers);
 	L_free(&pFactory->allEvents, freeHistoricalEvent); //TODO: check if working
+	//generalArrayFunction(pFactory->trucks, pFactory->trucksCount, sizeof(Truck), freeTruckPtr);
+	for (int i = 0; i < pFactory->trucksCount; i++)
+	{
+		freeTruck(&pFactory->trucks[i]);
+	}
 	free(pFactory->trucks);
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{

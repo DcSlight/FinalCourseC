@@ -3,7 +3,7 @@
 static const char* licenseStr[eNofLicenseTypes]
 = { "B", "C1", "C", "E" };
 
-void initEmployeeDriver(Employee** pEmp) //TODO: modify to pObj
+void initEmployeeDriver(Employee** pEmp)
 {
 	char* name;
 	int age, seniority,id;
@@ -47,8 +47,6 @@ eLicenseType getLicenseType()
 	return (eLicenseType)option;
 }
 
-#include <crtdbg.h>
-
 
 Employee* newEmployeeDriver(const char* pName,const int id, const int age, const eEmployeeType type, int seniority, eLicenseType license)
 {
@@ -57,8 +55,6 @@ Employee* newEmployeeDriver(const char* pName,const int id, const int age, const
 	pObj = newEmployee(pName,id,age,type,seniority);	//calling base class construtor
 	//allocating memory
 	pEmpObj = malloc(sizeof(EmployeeDriver));
-	_CrtDumpMemoryLeaks();//TODO: delete
-	printf("The pEmpObj is %p\n", pEmpObj);//TODO: delete
 	if (pEmpObj == NULL)
 	{
 		pObj->delete(pObj);
@@ -110,8 +106,6 @@ int writeDriverToBFile(FILE* fp, Employee* const pEmployeeObj)
 	return 1;
 }
 
-#include <crtdbg.h>
-
 int readDriverFromBFile(FILE* fp, Employee** pEmployeeObj)
 {
 	if (!pEmployeeObj)
@@ -125,8 +119,7 @@ int readDriverFromBFile(FILE* fp, Employee** pEmployeeObj)
 	if (!readIntFromFile(&license, fp, "Error reading Driver License Type\n"))
 		return 0;
 	*pEmployeeObj = newEmployeeDriver(name,id,age,eDriver,seniority, license);
-	_CrtDumpMemoryLeaks();//TODO: delete
-	free(name); //TODO: check if need
+	free(name);
 	return 1;
 }
 

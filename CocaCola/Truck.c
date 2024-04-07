@@ -72,6 +72,17 @@ void printTruckContent(const Truck* pTruck)
 	}
 }
 
+void freeTruck(Truck* pTruck)
+{
+	free(pTruck->destSupplier);
+}
+
+void freeTruckPtr(void* pTruckPtr)
+{
+	Truck* temp = *(Truck**)pTruckPtr;
+	freeTruck(temp);
+}
+
 
 int writeTruckToBFile(FILE* fp, const Truck* pTruck)
 {
@@ -91,6 +102,9 @@ int writeTruckToBFile(FILE* fp, const Truck* pTruck)
 	return 1;
 }
 
+#include <crtdbg.h> //TODO: delete
+
+
 int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
 {
 	if (!readCharsFromFile(pTruck->truckLicenseCode, LICENSE_LEN+1, fp, "Error reading truck license\n"))
@@ -106,7 +120,6 @@ int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
 		if (!readBottlePackingFromBFile(fp, &pTruck->packs[i]))
 			return 0;
 	}
-	
 	return 1;
 }
 
