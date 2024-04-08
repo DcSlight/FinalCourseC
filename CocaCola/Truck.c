@@ -79,8 +79,7 @@ void freeTruck(Truck* pTruck)
 
 void freeTruckPtr(void* pTruckPtr)
 {
-	Truck* temp = *(Truck**)pTruckPtr;
-	freeTruck(temp);
+	freeTruck((Truck*)pTruckPtr);
 }
 
 
