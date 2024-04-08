@@ -26,11 +26,11 @@ int addEmployee(CocaColaFactory* pFactory)
 	pFactory->employees = (Employee**)realloc(pFactory->employees, (pFactory->employeesCount + 1) * sizeof(Employee*));
 	if (employeeType == eDriver)
 	{// Driver
-		initEmployeeDriver(&pFactory->employees[pFactory->employeesCount]);
+		initEmployeeDriver(&pFactory->employees[pFactory->employeesCount],pFactory->employees,pFactory->employeesCount);
 	}
 	else
 	{// Guide
-		initEmployeeGuide(&pFactory->employees[pFactory->employeesCount]);
+		initEmployeeGuide(&pFactory->employees[pFactory->employeesCount], pFactory->employees, pFactory->employeesCount);
 	}
 	pFactory->employeesCount++;
 	return 1;

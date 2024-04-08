@@ -45,4 +45,7 @@ int readEmployeeFromBFile(FILE* fp, int* id, int* age, int* seniority, char** na
 int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj);
 int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type);
 
+int getUniqueId(Employee** allEmployees, int employeesAmount);
+int isIdExist(Employee** allEmployees, int employeesAmount, int id);
+
 #endif /* __EMPLOYEE__ */

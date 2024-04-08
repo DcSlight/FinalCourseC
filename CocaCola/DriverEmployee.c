@@ -3,14 +3,13 @@
 static const char* licenseStr[eNofLicenseTypes]
 = { "B", "C1", "C", "E" };
 
-void initEmployeeDriver(Employee** pEmp)
+void initEmployeeDriver(Employee** pEmp , Employee** allEmployees, int employeesCount)
 {
 	char* name;
 	int age, seniority,id;
 	eLicenseType license;
 	printf("Driver:\n");
-	printf("Enter employee id:\t");
-	scanf("%d", &id);
+	id=getUniqueId(allEmployees,employeesCount);
 	name = getStrExactName("Enter employee name:");
 	printf("Enter employee age - minimum %d:\t", MIN_AGE);
 	do {

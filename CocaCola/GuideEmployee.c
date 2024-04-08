@@ -4,14 +4,15 @@
 static const char* EducationLevelStr[eNofEducationLevel]
 = { "High School", "Academic", "Course" };
 
-void initEmployeeGuide(Employee** pEmp)//TODO: modify to pObj
+void initEmployeeGuide(Employee** pEmp, Employee** allEmployees, int employeesCount)//TODO: modify to pObj
 {
 	char* name;
 	int age, seniority,id;
 	eEducationLevel educationLevel;
 	printf("Guide:\n");
-	printf("Enter employee id:\t");
-	scanf("%d", &id);
+	id = getUniqueId(allEmployees, employeesCount);
+	/*printf("Enter employee id:\t");
+	scanf("%d", &id);*/
 	name = getStrExactName("Enter employee name:");
 	printf("Enter employee age - minimum %d:\t", MIN_AGE);
 	do {

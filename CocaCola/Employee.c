@@ -112,6 +112,29 @@ int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType typ
 	return 1;
 }
 
+int getUniqueId(Employee** allEmployees, int employeesAmount)
+{
+	int id;
+	do
+	{
+		printf("Enter unique id for employee:\t");
+		scanf("%d", &id);
+		if (!isIdExist(allEmployees, employeesAmount, id))
+			return 1;
+		printf("ID already exist, try again\n");
+	} while (1);
+}
+
+int isIdExist(Employee** allEmployees, int employeesAmount, int id)
+{
+	for (int i = 0; i < employeesAmount; i++)
+	{
+		if (id == allEmployees[i]->id)
+			return 1;//exist
+	}
+	return 0;//not exist
+}
+
 void freeEmployee(Employee* pEmp)
 {
 	free(pEmp->name);

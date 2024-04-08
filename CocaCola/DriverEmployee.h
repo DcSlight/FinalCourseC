@@ -19,7 +19,8 @@ typedef struct _EmployeeDriver
 	eLicenseType licenseType;
 }EmployeeDriver;
 
-void initEmployeeDriver(Employee** pEmp);
+void initEmployeeDriver(Employee** pEmp, Employee** allEmployees, int employeesCount);
+int getUniqueId(Employee** allEmployees, int employeesAmount);
 eLicenseType getLicenseType();
 Employee* newEmployeeDriver(const char* pName,const int id, const int age, const eEmployeeType type, int seniority, eLicenseType license);//constructor
 void deleteEmployeeDriver(Employee* const pEmployeeObj);	//destructor
