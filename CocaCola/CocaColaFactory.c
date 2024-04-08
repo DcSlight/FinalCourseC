@@ -377,8 +377,6 @@ void freeEmployeesArr(CocaColaFactory* pFactory)
 	free(pFactory->employees);
 }
 
-#include <crtdbg.h>
-
 void freeFactory(CocaColaFactory* pFactory)
 {
 	
@@ -387,14 +385,8 @@ void freeFactory(CocaColaFactory* pFactory)
 	L_free(&pFactory->allEvents, freeHistoricalEvent);
 	generalArrayFunction(pFactory->trucks, pFactory->trucksCount, sizeof(Truck), freeTruckPtr);
 	free(pFactory->trucks);
-	for (int i = 0; i < pFactory->toursCount; i++)
-	{
-		freeCocaColaTour(pFactory->tours[i]);
-		free(pFactory->tours[i]);
-	}
-	//generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTour);//TODO: check if working
+	generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTourPtr);
 	free(pFactory->tours);
 	freeEmployeesArr(pFactory);
-	_CrtDumpMemoryLeaks();
 }
 

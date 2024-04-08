@@ -26,7 +26,10 @@ typedef struct
 int initCocaColaTour(CocaColaTour* pTour, Employee* theGuide, char* fileName,const LIST* allEvents);
 int getMaxDurationFromBFile(char* fileName);
 void getDuration(int maxDuration, CocaColaTour* pTour);
+
 void freeCocaColaTour(CocaColaTour* pTour);
+void freeCocaColaTourPtr(void* pTourPtr);
+
 void printCocaColaTour(const CocaColaTour* pTour);
 void printCocaColaTourPtr(void* pTourPtr);
 int getEventFromFileBySeek(FILE* fp, int index, HistoricalEvent* pEvent);

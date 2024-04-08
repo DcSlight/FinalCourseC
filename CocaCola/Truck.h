@@ -29,6 +29,7 @@ void printTruckContent(const Truck* pTruck);
 void freeTruck(Truck* pTruck);
 void freeTruckPtr(void* pTruckPtr);
 
+
 int writeTruckToBFile(FILE* fp, const Truck* pTruck);
 int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId);
 int writeTruckToTxtFile(FILE* fp, const Truck* pTruck);

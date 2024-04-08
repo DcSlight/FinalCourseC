@@ -61,7 +61,6 @@ int main()
     }
 
     freeFactory(&factory);
-    printf("before DUMP\n");
  
     return 0;
 }
