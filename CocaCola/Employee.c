@@ -88,27 +88,22 @@ int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj)
 	return 1;
 }
 
-int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type)
+int readEmployeeFromTxtFile(FILE* fp, int* id, int* age, int* seniority, char** name)
 {
 	char tempString[MAX_STR_LEN];
-	if (!pEmployeeObj)
+	int idT, ageT, seniorityT;
+	if (fscanf(fp, "%d", &idT) != 1)
 		return 0;
-
-	int id, age,seniority;
-	char* name;
-	if (fscanf(fp, "%d", &id) != 1)
-		return 0;
-
+	*id = idT;
 	myGets(tempString, MAX_STR_LEN, fp);
-	name = getDynStr(tempString);
+	*name = getDynStr(tempString);
 
-	if (fscanf(fp, "%d", &age) != 1)
+	if (fscanf(fp, "%d", &ageT) != 1)
 		return 0;
-
-	if (fscanf(fp, "%d", &seniority) != 1)
+	*age = ageT;
+	if (fscanf(fp, "%d", &seniorityT) != 1)
 		return 0;
-
-	*pEmployeeObj = newEmployee(name, id, age, type, seniority); //TODO: change
+	*seniority = seniorityT;
 	return 1;
 }
 

@@ -43,7 +43,7 @@ void printEmployee(Employee* const pEmployeeObj);
 int writeEmployeeToBFile(FILE* fp, Employee* const pEmployeeObj);
 int readEmployeeFromBFile(FILE* fp, int* id, int* age, int* seniority, char** name);
 int writeEmployeeToTxtFile(FILE* fp, Employee* const pEmployeeObj);
-int readEmployeeFromTxtFile(FILE* fp, Employee** pEmployeeObj, eEmployeeType type);
+int readEmployeeFromTxtFile(FILE* fp, int* id, int* age, int* seniority, char** name);
 
 int getUniqueId(Employee** allEmployees, int employeesAmount);
 int isIdExist(Employee** allEmployees, int employeesAmount, int id);

@@ -137,14 +137,13 @@ int readDriverFromTxtFile(FILE* fp, Employee** pEmployeeObj)
 	if (!pEmployeeObj)
 		return 0;
 	int license;
-	if (!readEmployeeFromTxtFile(fp, pEmployeeObj, eDriver))
+	int id, age, seniority;
+	char* name;
+	if (!readEmployeeFromTxtFile(fp, &id, &age, &seniority, &name))
 		return 0;
 	if (fscanf(fp, "%d", &license) != 1)
 		return 0;
-	Employee* e = newEmployeeDriver((*pEmployeeObj)->name, (*pEmployeeObj)->id, (*pEmployeeObj)->age, (*pEmployeeObj)->type,
-		(*pEmployeeObj)->seniority, license);
-	(*pEmployeeObj)->delete((*pEmployeeObj));//free the old 
-	*pEmployeeObj = e;//the new employeeGuide
-
+	*pEmployeeObj = newEmployeeDriver(name, id, age, eDriver, seniority, license);
+	free(name);
 	return 1;
 }

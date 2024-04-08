@@ -147,14 +147,14 @@ int readGuideFromTxtFile(FILE* fp, Employee** pEmployeeObj)
 	if (!pEmployeeObj)
 		return 0;
 	int educationLevel;
-	if (!readEmployeeFromTxtFile(fp, pEmployeeObj, eGuide))
+	int id, age, seniority;
+	char* name;
+	if (!readEmployeeFromTxtFile(fp, &id, &age, &seniority, &name))
 		return 0;
 	if (fscanf(fp, "%d", &educationLevel) != 1)
 		return 0;
-	Employee* e = newEmployeeGuide((*pEmployeeObj)->name, (*pEmployeeObj)->id, (*pEmployeeObj)->age, (*pEmployeeObj)->type,
-		(*pEmployeeObj)->seniority, educationLevel);
-	(*pEmployeeObj)->delete((*pEmployeeObj));//free the old 
+	Employee* e = newEmployeeGuide(name, id, age, eGuide, seniority, educationLevel);
+	free(name);
 	*pEmployeeObj = e;//the new employeeGuide
-
 	return 1;
 }
