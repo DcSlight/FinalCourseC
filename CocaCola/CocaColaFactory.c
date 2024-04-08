@@ -177,7 +177,7 @@ Employee* getEmployee(CocaColaFactory* pFactory, eEmployeeType type)
 	Employee* pEmployee;
 	int id;
 	printf("\n--------------------------------------------\n");
-	printEmployeesArr(pFactory->employees,pFactory->employeesCount);//TODO: print void* generalFunc
+	printEmployeesArrByType(pFactory->employees, pFactory->employeesCount, type);
 	printf("Choose a %s employee from list, type its id\n", EmployeeStr[type]);
 	do {
 		scanf("%d", &id);
@@ -239,6 +239,16 @@ void printEmployeesArr( Employee** const employeesArr, int employeesCount)
 	printf("\n");
 }
 
+void printEmployeesArrByType(Employee** const employeesArr, int employeesCount, eEmployeeType type)
+{
+	for (int i = 0; i < employeesCount; i++)
+	{
+		if (employeesArr[i]->type == type)
+			employeesArr[i]->print(employeesArr[i]);
+	}
+	printf("\n");
+}
+
 int addTour(CocaColaFactory* pFactory)
 {
 	Employee* pGuide;
@@ -269,7 +279,7 @@ void EnterTour(const CocaColaFactory* pFactory)
 		return;
 	do
 	{
-		printf("Pick a tour to start\n");
+		printf("Pick a tour to start between 1 to %d\n",pFactory->toursCount);
 		scanf("%d", &index);
 	} while (index <= 0 || index > pFactory->toursCount);
 	startTour(pFactory->tours[index - 1]);

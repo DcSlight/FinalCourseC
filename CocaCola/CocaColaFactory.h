@@ -50,6 +50,7 @@ void printFactory(const CocaColaFactory* pFactory);
 void printTrucksArr(const Truck* trucksArr,int trucksCount);//TODO: print void*
 void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount);//TODO: print void*
 void printEmployeesArr( Employee** const employeesArr, int employeesCount); //TODO :print void*
+void printEmployeesArrByType( Employee** const employeesArr, int employeesCount,eEmployeeType type); //TODO :print void*
 
 int addTour(CocaColaFactory* pFactory);
 void EnterTour(const CocaColaFactory* pFactory);
