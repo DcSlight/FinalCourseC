@@ -117,11 +117,11 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEven
 	int upper_bound = length-1;
 	int lower_bound = 0;
 	int index = rand() % (upper_bound - lower_bound + 1) + lower_bound;	
-	HistoricalEvent* event = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));
-	if (!event)
-		return 0;
 	if (fp)//from Binary file - using SEEK
 	{
+		HistoricalEvent* event = (HistoricalEvent*)malloc(sizeof(HistoricalEvent));//new
+		if (!event)
+			return 0;
 		if (!getEventFromFileBySeek(fp, index, event))
 		{
 			freeHistoricalEvent(event);
@@ -145,18 +145,14 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEven
 		pNodeFactory = L_find_By_Index(allEvents->head.next, index);
 		if (!pNodeFactory)
 		{
-			freeHistoricalEvent(event);
 			return 0;
 		}
 		const NODE* pNodeTour = L_find(pTour->events.head.next, pNodeFactory->key, compareEventByDescription);
 		if (pNodeTour)//check if exist in Tour
 		{
-			freeHistoricalEvent(event);
 			return 0;
 		}
 	}
-
-	freeHistoricalEvent(event);
 	if(!L_insert_sorted(&pTour->events, pNodeFactory->key,compareEventByDateTime))//add event by dateTime
 		return 0;
 	return 1;

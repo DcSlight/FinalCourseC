@@ -11,8 +11,6 @@ void initEmployeeGuide(Employee** pEmp, Employee** allEmployees, int employeesCo
 	eEducationLevel educationLevel;
 	printf("Guide:\n");
 	id = getUniqueId(allEmployees, employeesCount);
-	/*printf("Enter employee id:\t");
-	scanf("%d", &id);*/
 	name = getStrExactName("Enter employee name:");
 	printf("Enter employee age - minimum %d:\t", MIN_AGE);
 	do {

@@ -296,7 +296,7 @@ eTourSort showSortMenu()
 	int opt;
 	printf("Base on what field do you want to sort your tours?\n");
 	do {
-		for (int i = 1; i < eNofTourTypes; i++)
+		for (int i = 0; i < eNofTourTypes; i++)
 			printf("Enter %d for %s\n", i, TourStr[i]);
 		scanf("%d", &opt);
 	} while (opt < 0 || opt >= eNofTourTypes);
