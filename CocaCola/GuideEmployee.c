@@ -31,6 +31,7 @@ void initEmployeeGuide(Employee** pEmp, Employee** allEmployees, int employeesCo
 	printf("\n");
 	educationLevel = getEducationLevel();
 	*pEmp = newEmployeeGuide(name,id, age, eGuide, seniority, educationLevel);
+	free(name);
 }
 
 eEducationLevel getEducationLevel()

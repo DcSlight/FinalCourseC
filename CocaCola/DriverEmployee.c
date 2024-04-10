@@ -31,6 +31,7 @@ void initEmployeeDriver(Employee** pEmp , Employee** allEmployees, int employees
 	license = getLicenseType();
 	printf("\n");
 	*pEmp = newEmployeeDriver(name,id,age,eDriver,seniority,license);
+	free(name);
 }
 
 eLicenseType getLicenseType()

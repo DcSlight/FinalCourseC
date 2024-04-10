@@ -4,11 +4,14 @@
 #include "Supplier.h"
 #include "General.h"
 
+
+#include <crtdbg.h>//TODO: delete
 void initSupplier(Supplier* pSupplier, Supplier** allSuppliers,int suppliersCount)
 {
 	getSupplierId(pSupplier, allSuppliers, suppliersCount);
 	pSupplier->name = getStrExactName("Enter supplier name:");
 	getSupplierPhone(pSupplier->phoneNo);
+	_CrtDumpMemoryLeaks();//TODO: delete
 	initAddress(&pSupplier->address);
 }
 
@@ -60,6 +63,7 @@ void getSupplierPhone(char* phoneNumber)
 		}
 	} while (!ok);
 	strcpy(phoneNumber, temp);
+	
 }
 
 void printSupplier(const Supplier* pSupplier)
@@ -80,6 +84,7 @@ void freeSupplier(Supplier* pSupplier)
 {
 	free(pSupplier->name);
 	freeAddress(&pSupplier->address);
+	free(pSupplier);
 }
 
 void freeSupplierPtr(void* pSupplierPtr)

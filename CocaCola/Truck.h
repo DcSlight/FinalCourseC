@@ -27,8 +27,6 @@ void getLicenseCode(char* code);
 int addPack(Truck* pTruck);
 void printTruck(const Truck* pTruck);
 void printTruckContent(const Truck* pTruck);
-void freeTruck(Truck* pTruck);
-void freeTruckPtr(void* pTruckPtr);
 
 
 int writeTruckToBFile(FILE* fp, const Truck* pTruck);
