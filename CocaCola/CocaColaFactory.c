@@ -287,6 +287,9 @@ void EnterTour(const CocaColaFactory* pFactory)
 
 void printTours(const CocaColaTour** toursArr, int toursCount)
 {
+	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "\t\t  All Tours\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
 	printf("There are %d tours\n", toursCount);
 	generalArrayFunction(toursArr, toursCount, sizeof(CocaColaTour*), printCocaColaTourPtr);
 }
@@ -306,6 +309,9 @@ eTourSort showSortMenu()
 
 void sortTours(CocaColaFactory* pFactory)
 {
+	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "\t\t  Sort Tours\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
 	pFactory->sortTour = showSortMenu();
 	int(*compare)(const void* tour1, const void* tour2) = NULL;
 
@@ -328,6 +334,9 @@ void sortTours(CocaColaFactory* pFactory)
 
 void findTour(const CocaColaFactory* pFactory)
 {
+	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "\t\t  Find Tours\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
 	int(*compare)(const void* tour1, const void* tour2) = NULL;
 	CocaColaTour tour = { 0 };
 	CocaColaTour* pTour = &tour;
@@ -337,7 +346,7 @@ void findTour(const CocaColaFactory* pFactory)
 	case eEmployeeGuide:
 		printf("Enter guide id:\t");
 		scanf("%d", &id);
-		pTour->guide=newEmployeeGuide("", id, 0, eGuide, 0, 0);//TODO: need to free
+		pTour->guide=newEmployeeGuide("", id, 0, eGuide, 0, 0);
 		compare = compareTourByGuide;
 		break;
 
@@ -362,6 +371,11 @@ void findTour(const CocaColaFactory* pFactory)
 			printf("Coca Cola Tour found:\n");
 			printCocaColaTour(*pToursArr);
 		}
+		if (pFactory->sortTour == eEmployeeGuide)
+		{//free the guide
+			pTour->guide->delete(pTour->guide);
+		}
+		
 	}
 	else {
 		printf("The search cannot be performed, array not sorted\n");

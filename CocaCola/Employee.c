@@ -42,7 +42,7 @@ eEmployeeType getEmployeeType()
 
 void printEmployee(Employee* const pEmp)
 {
-	printf("ID:%-10d\t", pEmp->id);
+	printf("ID:%-20d\t", pEmp->id);
 	printf("Name: %-15s \tAge: %-20d\t", pEmp->name, pEmp->age);
 	printf("Seniority: %-10d\n", pEmp->seniority);
 }

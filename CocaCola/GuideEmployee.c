@@ -90,7 +90,7 @@ void deleteEmployeeGuide(Employee* const pEmployeeObj)
 void printEmployeeGuide(Employee* const pEmployeeObj)
 {
 	printEmployee(pEmployeeObj);
-	printf("\t\tType: Guide\t");
+	printf("\t\t\tType: Guide\t");
 	EmployeeGuide* pEmpGuideObj;
 	pEmpGuideObj = pEmployeeObj->pDerivedObj;
 	printf("\tEducation: %-15s\n", EducationLevelStr[pEmpGuideObj->educationLevel]);

@@ -88,7 +88,7 @@ void deleteEmployeeDriver(Employee* const pEmployeeObj)
 void printEmployeeDriver(Employee* const pEmployeeObj)
 {
 	printEmployee(pEmployeeObj);
-	printf("\t\tType: Driver\t");
+	printf("\t\t\tType: Driver\t");
 	EmployeeDriver* pEmpDriverObj;
 	pEmpDriverObj = pEmployeeObj->pDerivedObj;
 	printf("\tLicense: %-10s\n", licenseStr[pEmpDriverObj->licenseType]);

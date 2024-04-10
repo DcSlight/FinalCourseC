@@ -75,11 +75,12 @@ void freeCocaColaTourPtr(void* pTourPtr)
 
 void printCocaColaTour(const CocaColaTour* pTour)
 {
-	printf("Tour:\n");
+	printf(ANSI_COLOR_YELLOW"\nTour:\n"ANSI_COLOR_RESET);
 	printDateTime(&pTour->dateTime);
-	printEmployeeGuide(pTour->guide);
-	printf("Duration: %u\n", pTour->duration);
+	printf("Duration: %-10u\t", pTour->duration);
 	printf("Visitor Amount: %u\n", pTour->visitorAmount);
+	printf("Guide:\n");
+	printEmployeeGuide(pTour->guide);
 }
 
 void printCocaColaTourPtr(void* pTourPtr)
@@ -139,6 +140,7 @@ int addRandomEvent(FILE* fp, int length, CocaColaTour* pTour,const LIST* allEven
 			freeHistoricalEvent(event);
 			return 0;
 		}
+		freeHistoricalEvent(event);
 	}
 	else
 	{//from Factory event List
