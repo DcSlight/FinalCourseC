@@ -225,8 +225,8 @@ void startTour(CocaColaTour* pTour)
 
 int compareTourByDuration(const void* t1, const void* t2)
 {
-	const CocaColaTour* pTour1 = (const CocaColaTour*)t1;
-	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
+	const CocaColaTour* pTour1 = *(const CocaColaTour**)t1;
+	const CocaColaTour* pTour2 = *(const CocaColaTour**)t2;
 	if (pTour1->duration > pTour2->duration)
 		return 1;
 	if (pTour1->duration < pTour2->duration)
@@ -236,18 +236,18 @@ int compareTourByDuration(const void* t1, const void* t2)
 
 int compareTourByDateTime(const void* t1, const void* t2)
 {
-	const CocaColaTour* pTour1 = (const CocaColaTour*)t1;
-	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
+	const CocaColaTour* pTour1 = *(const CocaColaTour**)t1;
+	const CocaColaTour* pTour2 = *(const CocaColaTour**)t2;
 	return compareDateTime(&pTour1->dateTime, &pTour2->dateTime);
 }
 
 int compareTourByGuide(const void* t1, const void* t2)
 {
-	const CocaColaTour* pTour1 = (const CocaColaTour*)t1;
-	const CocaColaTour* pTour2 = (const CocaColaTour*)t2;
-	if (pTour1->guide->id > pTour1->guide->id)
+	const CocaColaTour* pTour1 = *(const CocaColaTour**)t1;
+	const CocaColaTour* pTour2 = *(const CocaColaTour**)t2;
+	if (pTour1->guide->id > pTour2->guide->id)
 		return 1;
-	if (pTour1->guide->id < pTour1->guide->id)
+	if (pTour1->guide->id < pTour2->guide->id)
 		return -1;
 	return 0;
 }

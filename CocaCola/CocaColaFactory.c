@@ -337,7 +337,7 @@ void findTour(const CocaColaFactory* pFactory)
 	case eEmployeeGuide:
 		printf("Enter guide id:\t");
 		scanf("%d", &id);
-		pTour->guide=newEmployeeGuide(NULL, id, 0, eGuide, 0, 0);
+		pTour->guide=newEmployeeGuide("", id, 0, eGuide, 0, 0);//TODO: need to free
 		compare = compareTourByGuide;
 		break;
 
@@ -360,7 +360,7 @@ void findTour(const CocaColaFactory* pFactory)
 			printf("Coca Cola Tour was not found\n");
 		else {
 			printf("Coca Cola Tour found:\n");
-			printCocaColaTour(pTour);
+			printCocaColaTour(*pToursArr);
 		}
 	}
 	else {
