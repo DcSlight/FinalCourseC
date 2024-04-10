@@ -82,11 +82,11 @@ eBottleType getBottleType()
 
 void printBottle(const Bottle* pBottle)
 {
-	printf("Bottle details:\n");
-	printf("Flavor: %s\nType: %s\n", FlavorStr[pBottle->flavor], BottleStr[pBottle->type]);
-	printf("Expiration: ");
+	printf("\nBottle details:\n");
+	printf("Expiration ");
 	printDateTime(&pBottle->expDate);
-	printf("Sugar: %d\nCalories: %d\nMl: %d\n", pBottle->sugar, pBottle->calories, pBottle->ml);
+	printf("Flavor: %-10s\tType: %-7s\t", FlavorStr[pBottle->flavor], BottleStr[pBottle->type]);
+	printf("Sugar: %-7d\tCalories: %-7d\tMl: %-7d\n", pBottle->sugar, pBottle->calories, pBottle->ml);
 }
 
 int writeBottleToTxtFile(FILE* fp, const Bottle* pBottle)

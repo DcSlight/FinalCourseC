@@ -52,13 +52,13 @@ int addPack(Truck* pTruck)
 
 void printTruck(const Truck* pTruck)
 {
-	printf("\nTruck License: %s\n", pTruck->truckLicenseCode);
-	printf("\nDriver:\n");
-	pTruck->driver->print(pTruck->driver);
-	printf("\n");
-	printSupplier(pTruck->destSupplier);
-	printf("\n");
+	printf("Truck License: %s\n", pTruck->truckLicenseCode);
 	printf("The truck has %d packs of Coca Cola bottles\n\n", pTruck->packAmount);
+	printf("Driver:\n");
+	pTruck->driver->print(pTruck->driver);
+	printf("Supplier:\n");
+	printSupplier(pTruck->destSupplier);
+	
 }
 
 void printTruckContent(const Truck* pTruck)
@@ -66,7 +66,7 @@ void printTruckContent(const Truck* pTruck)
 	printf("The truck has %d packs of Coca Cola bottles\n", pTruck->packAmount);
 	for (int i = 0; i < pTruck->packAmount; i++)
 	{
-		printf("\nPack %d\n", i+1);
+		printf(ANSI_COLOR_YELLOW"\nPack %d:\n"ANSI_COLOR_RESET, i+1);
 		printBottlePacking(&pTruck->packs[i]);
 		printf("\n");
 	}

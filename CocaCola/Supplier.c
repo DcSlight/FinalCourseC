@@ -64,7 +64,7 @@ void getSupplierPhone(char* phoneNumber)
 
 void printSupplier(const Supplier* pSupplier)
 {
-	printf("ID: %-10d\t", pSupplier->id);
+	printf("ID: %-15d\t", pSupplier->id);
 	printf("Name: %-15s\t", pSupplier->name);
 	printf("Phone No: %-15s\t", pSupplier->phoneNo);
 	printAddress(&pSupplier->address);

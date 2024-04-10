@@ -71,20 +71,10 @@ Employee* newEmployeeGuide(const char* pName,const int id, const int age, const 
 
 void deleteEmployeeGuide(Employee* const pEmployeeObj)
 {
-
-	//freeEmployee(pEmployeeObj); //license is char and doesn't need free
 	EmployeeGuide* pEmpGuide;
 	pEmpGuide = pEmployeeObj->pDerivedObj;
-	//destroy derived obj
 	free(pEmpGuide);
-	//destroy base Obj
 	freeEmployee(pEmployeeObj);
-
-	//EmployeeGuide* pEmpGuide;
-	//pEmpGuide = pEmployeeObj->pDerivedObj;
-	//free(pEmployeeObj->name);
-	//free(pEmployeeObj);
-	////freeEmployee(pEmpGuide->pBaseObj);
 }
 
 void printEmployeeGuide(Employee* const pEmployeeObj)

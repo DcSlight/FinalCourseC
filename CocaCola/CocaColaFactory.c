@@ -98,12 +98,14 @@ int addTruck(CocaColaFactory* pFactory)
 
 Truck* chooseTruck(CocaColaFactory* pFactory)
 {
+	printTrucksArr(pFactory->trucks, pFactory->trucksCount);
 	int option;
 	do
 	{
-		printTrucksArr(pFactory->trucks, pFactory->trucksCount);
 		printf("\nChoose a number of truck:\t");
 		scanf("%d", &option);
+		if (option < 0 || option > pFactory->trucksCount)
+			printf("Try Again\n");
 	} while (option < 0 || option > pFactory->trucksCount);
 	return &pFactory->trucks[option - 1];
 }
@@ -123,6 +125,7 @@ int addPackToTruck(CocaColaFactory* pFactory)
 
 int doPrintTruckContent(CocaColaFactory* pFactory)
 {
+
 	Truck t;
 	if (pFactory->trucksCount == 0)
 	{
@@ -130,6 +133,9 @@ int doPrintTruckContent(CocaColaFactory* pFactory)
 		return 0;
 	}
 	t = *chooseTruck(pFactory);
+	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "\t\t  Packs In Truck\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
 	printTruckContent(&t);
 	return 1;
 }
@@ -213,10 +219,13 @@ void printFactory(const CocaColaFactory* pFactory)
 
 void printTrucksArr(const Truck* trucksArr, int trucksCount)
 {
+	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN "\t\t  All Trucks\n" ANSI_COLOR_RESET);
+	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
 	printf("\nThere are %d trucks\n", trucksCount);
 	for (int i = 0; i < trucksCount; i++)
 	{
-		printf("Truck %d:\n", i+1);
+		printf(ANSI_COLOR_YELLOW"Truck %d:\n"ANSI_COLOR_RESET, i+1);
 		printTruck(&trucksArr[i]);
 		printf("\n");
 	}
