@@ -29,7 +29,7 @@ int initCocaColaTour(CocaColaTour* pTour, Employee* theGuide, char* fileName, co
 		if (!fillEventsFromFactory(pTour, allEvents))
 			return 0;
 	}
-	printf("\nEnter visitor amount:\t");
+	printf("Enter visitor amount:\t");
 	scanf("%u", &pTour->visitorAmount);
 	printf("\n");
 	pTour->guide = theGuide;
