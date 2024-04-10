@@ -404,7 +404,6 @@ void freeEmployeesArr(CocaColaFactory* pFactory)
 
 void freeFactory(CocaColaFactory* pFactory)
 {
-	
 	generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
 	free(pFactory->suppliers);
 	L_free(&pFactory->allEvents, freeHistoricalEvent);
