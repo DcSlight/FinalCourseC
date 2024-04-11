@@ -83,7 +83,7 @@ int addTruck(CocaColaFactory* pFactory)
 		printf("There is no driver employees in company\n");
 		return 0;
 	}
-	printf("\nAdd a truck\n");
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t Add a truck");
 	Supplier* pSupplier = getSupplier(pFactory);
 	Employee* pEmployee = getEmployee(pFactory, eDriver);
 	pFactory->trucks = (Truck*)realloc(pFactory->trucks, (pFactory->trucksCount + 1) * sizeof(Truck));
@@ -133,9 +133,7 @@ int doPrintTruckContent(CocaColaFactory* pFactory)
 		return 0;
 	}
 	t = *chooseTruck(pFactory);
-	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "\t\t  Packs In Truck\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t Packs In Truck");
 	printTruckContent(&t);
 	return 1;
 }
@@ -144,7 +142,6 @@ Supplier* getSupplier(CocaColaFactory* pFactory)
 {
 	Supplier* pSupplier;
 	int id;
-	printf("--------------------------------------------\n");
 	printSuppliersArr(pFactory->suppliers,pFactory->suppliersCount);
 	printf("\nChoose a supplier from list, type its id\n");
 	do {
@@ -207,10 +204,8 @@ Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, e
 }
 
 void printFactory(const CocaColaFactory* pFactory)
-{//print factory will not print the listEvents - have a seperated function
-	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "\t\tCoca Cola Factory\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+{//print factory will not print the listEvents - have a separated function
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t  Cola Factory");
 	printEmployeesArr(pFactory->employees, pFactory->employeesCount);
 	printSuppliersArr(pFactory->suppliers, pFactory->suppliersCount);
 	printTrucksArr(pFactory->trucks, pFactory->trucksCount);
@@ -219,9 +214,7 @@ void printFactory(const CocaColaFactory* pFactory)
 
 void printTrucksArr(const Truck* trucksArr, int trucksCount)
 {
-	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "\t\t  All Trucks\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t  All Trucks");
 	printf("\nThere are %d trucks\n", trucksCount);
 	for (int i = 0; i < trucksCount; i++)
 	{
@@ -296,9 +289,7 @@ void EnterTour(const CocaColaFactory* pFactory)
 
 void printTours(const CocaColaTour** toursArr, int toursCount)
 {
-	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "\t\t  All Tours\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t  All Tours");
 	printf("There are %d tours\n", toursCount);
 	generalArrayFunction(toursArr, toursCount, sizeof(CocaColaTour*), printCocaColaTourPtr);
 }
@@ -318,9 +309,7 @@ eTourSort showSortMenu()
 
 void sortTours(CocaColaFactory* pFactory)
 {
-	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "\t\t  Sort Tours\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t  Sort Tours");
 	pFactory->sortTour = showSortMenu();
 	int(*compare)(const void* tour1, const void* tour2) = NULL;
 
@@ -343,9 +332,7 @@ void sortTours(CocaColaFactory* pFactory)
 
 void findTour(const CocaColaFactory* pFactory)
 {
-	printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN "\t\t  Find Tours\n" ANSI_COLOR_RESET);
-	printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+	PRINT_TITLE(ANSI_COLOR_CYAN, "\t  Find Tours");
 	int(*compare)(const void* tour1, const void* tour2) = NULL;
 	CocaColaTour tour = { 0 };
 	CocaColaTour* pTour = &tour;
@@ -400,8 +387,6 @@ void freeEmployeesArr(CocaColaFactory* pFactory)
 	free(pFactory->employees);
 }
 
-#include <crtdbg.h>//TODO: delete
-
 void freeFactory(CocaColaFactory* pFactory)
 {
 	generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
@@ -411,6 +396,5 @@ void freeFactory(CocaColaFactory* pFactory)
 	generalArrayFunction(pFactory->tours, pFactory->toursCount, sizeof(CocaColaTour*), freeCocaColaTourPtr);
 	free(pFactory->tours);
 	freeEmployeesArr(pFactory);
-	_CrtDumpMemoryLeaks();//TODO: delete
 }
 

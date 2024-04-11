@@ -11,6 +11,7 @@
 #include "CocaColaTour.h"
 #include "Supplier.h"
 #include "List.h"
+#include "Macros.h"
 
 typedef enum {
 	eEmployeeGuide, eDuration, eDateTime, eNofTourTypes

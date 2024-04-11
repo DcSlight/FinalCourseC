@@ -2,6 +2,7 @@
 #define __COCA_COLA_FUNCTIONS__
 
 #include <stdio.h>
+#include "Macros.h"
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"

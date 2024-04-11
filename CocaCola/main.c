@@ -3,7 +3,6 @@
 #include "main.h"
 #include "CocaColaFunctions.h"
 #include "CocaColaFactoryFile.h"
-#include <crtdbg.h>
 
 int main()
 {
@@ -72,9 +71,7 @@ int main()
 int initCocaColaFactory(CocaColaFactory* pFactory)
 {
     int option;
-    printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN "\t  Welcome To Coca Cola Factory\n" ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN"---------------------------------------------------\n\n"ANSI_COLOR_RESET);
+    PRINT_TITLE(ANSI_COLOR_CYAN, "Welcome To Coca Cola Factory");
     do
     {
         printf("Choose how to initial Coca Cola Factory\n");
@@ -107,9 +104,7 @@ int initCocaColaFactory(CocaColaFactory* pFactory)
 int mainMenu()
 {
     int option;
-    printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN "\t\t  Main Menu\n" ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN"---------------------------------------------------\n\n"ANSI_COLOR_RESET);
+    PRINT_TITLE(ANSI_COLOR_CYAN, "\t  Main Menu");
     printf("Please choose one of the following options\n");
     for (int i = 0; i < eNofOptions; i++)
         printf("%d - %s\n", i, str[i]);
@@ -125,9 +120,7 @@ void employeesMenu(CocaColaFactory* pFactory)
 {
     int option;
     int stop = 0;
-    printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN "\t\t  Employees Menu\n" ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+    PRINT_TITLE(ANSI_COLOR_CYAN, "\t Employees Menu");
     do
     {
         printf("\nPlease choose one of the following options\n");
@@ -159,9 +152,7 @@ void suppliersMenu(CocaColaFactory* pFactory)
 {
     int option;
     int stop = 0;
-    printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN "\t\t  Suppliers Menu\n" ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+    PRINT_TITLE(ANSI_COLOR_CYAN, "\t Suppliers Menu");
     do
     {
         printf("\nPlease choose one of the following options\n");
@@ -193,9 +184,7 @@ void TrucksMenu(CocaColaFactory* pFactory)
 {
     int option;
     int stop = 0;
-    printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN "\t\t  Trucks Menu\n" ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+    PRINT_TITLE(ANSI_COLOR_CYAN, "\t  Trucks Menu");
     do
     {
         printf("\nPlease choose one of the following options\n");
@@ -235,9 +224,7 @@ void ToursMenu(CocaColaFactory* pFactory)
 {
     int option;
     int stop = 0;
-    printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN "\t\t  Tours Menu\n" ANSI_COLOR_RESET);
-    printf(ANSI_COLOR_CYAN"---------------------------------------------------\n"ANSI_COLOR_RESET);
+    PRINT_TITLE(ANSI_COLOR_CYAN, "\t  Tours Menu");
     do
     {
         printf("\nPlease choose one of the following options\n");

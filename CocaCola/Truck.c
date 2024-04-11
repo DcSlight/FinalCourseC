@@ -87,8 +87,6 @@ int writeTruckToBFile(FILE* fp, const Truck* pTruck)
 	return 1;
 }
 
-#include <crtdbg.h> //TODO: delete
-
 
 int readTruckFromBFile(FILE* fp, Truck* pTruck, int* supplierId, int* driverId)
 {
