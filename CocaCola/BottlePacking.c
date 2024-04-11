@@ -12,8 +12,16 @@ void initBottlePacking(BottlePacking* pBottlePack)
 
 void printBottlePacking(const BottlePacking* pBottlePack)
 {
+	printf(ANSI_COLOR_YELLOW"\nPack:\n"ANSI_COLOR_RESET);
 	printf("In the pack there are %d bottles\n", pBottlePack->quantity);
 	printBottle(&pBottlePack->bottle);
+}
+
+
+void printBottlePackingPtr(void* pBottlePackPtr)
+{
+	const BottlePacking* temp = (BottlePacking*)pBottlePackPtr;
+	printBottlePacking(temp);
 }
 
 int writeBottlePackingToBFile(FILE* fp, const BottlePacking* pBottlePacking)

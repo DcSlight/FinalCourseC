@@ -3,6 +3,7 @@
 
 #include "Bottle.h"
 #include "FileHelper.h"
+#include "CocaColaFunctions.h"
 
 typedef struct
 {
@@ -12,6 +13,7 @@ typedef struct
 
 void initBottlePacking(BottlePacking* pBottlePack);
 void printBottlePacking(const BottlePacking* pBottlePack);
+void printBottlePackingPtr(void* pBottlePackPtr);
 
 int writeBottlePackingToBFile(FILE* fp, const BottlePacking* pBottlePacking);
 int readBottlePackingFromBFile(FILE* fp, BottlePacking* pBottlePacking);

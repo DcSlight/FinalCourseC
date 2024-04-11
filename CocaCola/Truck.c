@@ -64,12 +64,8 @@ void printTruck(const Truck* pTruck)
 void printTruckContent(const Truck* pTruck)
 {
 	printf("The truck has %d packs of Coca Cola bottles\n", pTruck->packAmount);
-	for (int i = 0; i < pTruck->packAmount; i++)
-	{
-		printf(ANSI_COLOR_YELLOW"\nPack %d:\n"ANSI_COLOR_RESET, i+1);
-		printBottlePacking(&pTruck->packs[i]);
-		printf("\n");
-	}
+	BottlePacking* allPacks = (BottlePacking* )pTruck->packs;
+	generalArrayFunction(allPacks, pTruck->packAmount, sizeof(BottlePacking), printBottlePackingPtr);
 }
 
 
