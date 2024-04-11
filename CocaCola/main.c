@@ -10,7 +10,11 @@ int main()
     printLOGO();
     cocaColaLinkWebsite();
     CocaColaFactory factory;
-    initCocaColaFactory(&factory);
+    if (!initCocaColaFactory(&factory))
+    {
+        printf("Error initial factory\n");
+        return 0;
+    }
 
     int option;
     int stop = 0;
@@ -65,7 +69,7 @@ int main()
     return 0;
 }
 
-void initCocaColaFactory(CocaColaFactory* pFactory)
+int initCocaColaFactory(CocaColaFactory* pFactory)
 {
     int option;
     printf(ANSI_COLOR_CYAN"\n---------------------------------------------------\n"ANSI_COLOR_RESET);
@@ -81,13 +85,15 @@ void initCocaColaFactory(CocaColaFactory* pFactory)
         switch (option)
         {
         case FROM_BIN_FILE:
-            initFactoryFromBFile(pFactory, FACTORY_B_FILE_NAME, EVENTS_B_FILE_NAME);
+            if (!initFactoryFromBFile(pFactory, FACTORY_B_FILE_NAME, EVENTS_B_FILE_NAME))
+                CHECK_CLOSE_RETURN(initFactory, pFactory);
             break;
         case FROM_TXT_FILE:
-            initFactoryFromTxtFile(pFactory, FACTORY_TXT_FILE_NAME, EVENTS_TXT_FILE_NAME);
+            if (!initFactoryFromTxtFile(pFactory, FACTORY_TXT_FILE_NAME, EVENTS_TXT_FILE_NAME))
+                CHECK_CLOSE_RETURN(initFactory, pFactory);
             break;
         case FROM_USER:
-            initFactory(pFactory);
+            CHECK_CLOSE_RETURN(initFactory, pFactory);
             break;
         default:
             option = ERROR;
@@ -95,6 +101,7 @@ void initCocaColaFactory(CocaColaFactory* pFactory)
             break;
         }
     } while (option == ERROR);
+    return 1;
 }
 
 int mainMenu()

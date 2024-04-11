@@ -11,7 +11,7 @@ int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const 
 		return 0;
 	}
 
-	if (!readIntFromFile(&pFactory->seed, fp, "Error reading employees count\n"))
+	if (!readIntFromFile(&pFactory->seed, fp, "Error reading seed\n"))
 	{
 		fclose(fp);
 		return 0;
@@ -486,31 +486,25 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 {
 	FILE* fp;
 	fp = fopen(fileName, "r");
-	if (!fp) {
+	if (!fp)
+	{
 		printf("Error open Coca Cola Factory text file to read\n");
 		return 0;
 	}
 
 	if (fscanf(fp, "%d", &pFactory->seed) != 1)
-	{
-		fclose(fp);
-		return 0;
-	}
+		CLOSE_FILE_RETURN(fp,"Error reading seed\n");
 	srand(pFactory->seed);
 
 	//-----------------------init all Employees------------------------------------
 	pFactory->employees = NULL;
 	if (fscanf(fp, "%d", &pFactory->employeesCount) != 1)
-	{
-		fclose(fp);
-		return 0;
-	}
+		CLOSE_FILE_RETURN(fp, "Error reading employees count\n");
+
 	if (!createEmployeesArr(pFactory))
-	{
-		fclose(fp);
-		return 0;
-	}
-	if (!readEmployeesArrFromTxtFile(pFactory, fp)) // TODO: check
+		CLOSE_FILE_RETURN(fp, "Error creating employees arr\n");
+
+	if (!readEmployeesArrFromTxtFile(pFactory, fp)) 
 	{
 		freeEmployeesArr(pFactory);
 		fclose(fp);
@@ -521,6 +515,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	pFactory->suppliers = NULL;
 	if (fscanf(fp, "%d", &pFactory->suppliersCount) != 1)
 	{
+		freeEmployeesArr(pFactory);
 		fclose(fp);
 		return 0;
 	}
@@ -543,6 +538,9 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	pFactory->trucks = NULL;
 	if (fscanf(fp, "%d", &pFactory->trucksCount) != 1)
 	{
+		freeEmployeesArr(pFactory);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
+		free(pFactory->suppliers);
 		fclose(fp);
 		return 0;
 	}
@@ -572,6 +570,7 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 		free(pFactory->suppliers);
 		free(pFactory->trucks);
 		L_free(&pFactory->allEvents, freeHistoricalEvent);
+		fclose(fp);
 		return 0;
 	}
 
@@ -579,6 +578,11 @@ int initFactoryFromTxtFile(CocaColaFactory* pFactory, const char* fileName, cons
 	pFactory->tours = NULL;
 	if (fscanf(fp, "%d", &pFactory->toursCount) != 1)
 	{
+		freeEmployeesArr(pFactory);
+		generalArrayFunction(pFactory->suppliers, pFactory->suppliersCount, sizeof(Supplier*), freeSupplierPtr);
+		free(pFactory->suppliers);
+		free(pFactory->trucks);
+		L_free(&pFactory->allEvents, freeHistoricalEvent);
 		fclose(fp);
 		return 0;
 	}

@@ -24,7 +24,7 @@ const char* str[eNofOptions] = { "Employees Menu","Suppliers Menu","Trucks Menu"
 								"Print Coca Cola Factory",
 								"Find Secret Recipe" };
 
-void initCocaColaFactory(CocaColaFactory* pFactory);
+int initCocaColaFactory(CocaColaFactory* pFactory);
 int mainMenu();
 void employeesMenu(CocaColaFactory* pFactory);
 void suppliersMenu(CocaColaFactory* pFactory);

@@ -9,6 +9,7 @@
 #include "Employee.h"
 #include "CocaColaTour.h"
 #include "List.h"
+#include "Macros.h"
 
 int initFactoryFromBFile(CocaColaFactory* pFactory, const char* fileName, const char* eventsFileName);
 int createEmployeesArr(CocaColaFactory* pFactory);
