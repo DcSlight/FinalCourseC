@@ -64,7 +64,6 @@ int main()
     }
 
     freeFactory(&factory);
- 
     return 0;
 }
 
@@ -83,14 +82,14 @@ int initCocaColaFactory(CocaColaFactory* pFactory)
         {
         case FROM_BIN_FILE:
             if (!initFactoryFromBFile(pFactory, FACTORY_B_FILE_NAME, EVENTS_B_FILE_NAME))
-                CHECK_CLOSE_RETURN(initFactory, pFactory);
+                CHECK_RETURN(initFactory, pFactory);
             break;
         case FROM_TXT_FILE:
             if (!initFactoryFromTxtFile(pFactory, FACTORY_TXT_FILE_NAME, EVENTS_TXT_FILE_NAME))
-                CHECK_CLOSE_RETURN(initFactory, pFactory);
+                CHECK_RETURN(initFactory, pFactory);
             break;
         case FROM_USER:
-            CHECK_CLOSE_RETURN(initFactory, pFactory);
+            CHECK_RETURN(initFactory, pFactory);
             break;
         default:
             option = ERROR;
@@ -242,7 +241,7 @@ void ToursMenu(CocaColaFactory* pFactory)
                 printf("Error adding a tour\n");
             break;
         case 2:
-            EnterTour(pFactory);
+            enterTour(pFactory);
             break;
         case 3:
             printTours(pFactory->tours, pFactory->toursCount);

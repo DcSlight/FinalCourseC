@@ -663,7 +663,7 @@ int readToursArrFromTxtFile(CocaColaFactory* pFactory, FILE* fp)
 	int guideId;
 	for (int i = 0; i < pFactory->toursCount; i++)
 	{
-		if (!readTourFromTxtFile(fp, pFactory->tours[i], &guideId))
+		if (!readTourFromTxtFile(fp, pFactory->tours[i], &guideId,&pFactory->allEvents))
 			return 0;
 
 		pFactory->tours[i]->guide = findEmployeeById(pFactory->employees, pFactory->employeesCount, guideId, eGuide);

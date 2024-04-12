@@ -45,7 +45,7 @@ int writeTourToBFile(FILE* fp, const CocaColaTour* pTour);
 int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId, const char* eventsFileName, LIST* allEvents);
 
 int writeTourToTxtFile(FILE* fp, const CocaColaTour* pTour);
-int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId);
+int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId, const LIST* allEvents);
 
 
 #endif

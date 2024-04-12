@@ -273,7 +273,7 @@ int addTour(CocaColaFactory* pFactory)
 	return 1;
 }
 
-void EnterTour(const CocaColaFactory* pFactory)
+void enterTour(const CocaColaFactory* pFactory)
 {
 	int index;
 	printf("There are %d tours\n", pFactory->toursCount);

@@ -114,9 +114,15 @@ int getUniqueId(Employee** allEmployees, int employeesAmount)
 	{
 		printf("Enter unique id for employee:\t");
 		scanf("%d", &id);
-		if (!isIdExist(allEmployees, employeesAmount, id))
-			return id;
-		printf("ID already exist, try again\n");
+		if (id < 0)
+		{
+			printf("ID need to be positive\n");
+		}
+		else {
+			if (!isIdExist(allEmployees, employeesAmount, id))
+				return id;
+			printf("ID already exist, try again\n");
+		}
 	} while (1);
 }
 

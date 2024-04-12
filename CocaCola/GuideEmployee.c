@@ -4,7 +4,7 @@
 static const char* EducationLevelStr[eNofEducationLevel]
 = { "High School", "Academic", "Course" };
 
-void initEmployeeGuide(Employee** pEmp, Employee** allEmployees, int employeesCount)//TODO: modify to pObj
+void initEmployeeGuide(Employee** pEmp, Employee** allEmployees, int employeesCount)
 {
 	char* name;
 	int age, seniority,id;

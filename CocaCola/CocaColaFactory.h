@@ -48,13 +48,13 @@ int countEmployeesByType(Employee** allEmployees, int employeeCount, eEmployeeTy
 Employee* getEmployee(CocaColaFactory* pFactory, eEmployeeType type);
 Employee* findEmployeeById(Employee** allEmployees, int employeeCount, int id, eEmployeeType type);
 void printFactory(const CocaColaFactory* pFactory);
-void printTrucksArr(const Truck* trucksArr,int trucksCount);//TODO: print void*
-void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount);//TODO: print void*
-void printEmployeesArr( Employee** const employeesArr, int employeesCount); //TODO :print void*
-void printEmployeesArrByType( Employee** const employeesArr, int employeesCount,eEmployeeType type); //TODO :print void*
+void printTrucksArr(const Truck* trucksArr,int trucksCount);
+void printSuppliersArr(const Supplier** suppliersArr, int suppliersCount);
+void printEmployeesArr( Employee** const employeesArr, int employeesCount);
+void printEmployeesArrByType( Employee** const employeesArr, int employeesCount,eEmployeeType type);
 
 int addTour(CocaColaFactory* pFactory);
-void EnterTour(const CocaColaFactory* pFactory);
+void enterTour(const CocaColaFactory* pFactory);
 void printTours(const CocaColaTour** toursArr, int toursCount);
 eTourSort showSortMenu();
 void sortTours(CocaColaFactory* pFactory);

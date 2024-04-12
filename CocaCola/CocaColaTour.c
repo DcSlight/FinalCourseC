@@ -278,7 +278,6 @@ int readTourFromBFile(FILE* fp, CocaColaTour* pTour, int* guideId, const char* e
 		return 0;
 	if (!readIntFromFile(&pTour->visitorAmount, fp, "Error reading visitors amount\n"))
 		return 0;
-	//TODO: fill events from b file // filename is coca cola historical events file
 	if (!fillEventsFromBFile(pTour, eventsFileName, allEvents))
 		return 0;
 
@@ -297,7 +296,7 @@ int writeTourToTxtFile(FILE* fp, const CocaColaTour* pTour)
 	return 1;
 }
 
-int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId)
+int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId,const LIST* allEvents)
 {
 	if (!pTour)
 		return 0;
@@ -309,7 +308,7 @@ int readTourFromTxtFile(FILE* fp, CocaColaTour* pTour, int* guideId)
 		return 0;
 	if (fscanf(fp, "%d", &pTour->visitorAmount) != 1)
 		return 0;
-	//TODO: fill events from b file // filename is coca cola historical events file
-
+	if (!fillEventsFromFactory(pTour, allEvents))
+		return 0;
 	return 1;
 }

@@ -16,7 +16,7 @@ void getLicenseCode(char* code)
 	int ok = 1;
 	do {
 		ok = 1;
-		printf("Enter truck license code  - %d UPPER CASE letters or numbers\t", LICENSE_LEN); //TODO: need to be unique
+		printf("Enter truck license code  - %d UPPER CASE letters or numbers\t", LICENSE_LEN);
 		myGets(temp, MAX_STR_LEN, stdin);
 		if (strlen(temp) != LICENSE_LEN)
 		{
