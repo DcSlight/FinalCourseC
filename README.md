@@ -11,16 +11,6 @@
 * Generic Functions - Creating and utilizing generic functions with void* for data structures, such as lists.
 
 For more information open the file : דוח פרוייקט - קוקה קולה.pdf
-<p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
-</p>
-
-
 
 ## How To Use
 
